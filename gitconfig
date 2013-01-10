@@ -1,0 +1,17 @@
+[user]
+	name = Azat Khuzhin
+	email = a3at.mail@gmail.com
+[core]
+	autocrlf = input
+	pager = less -FRSX
+[push]
+	default = upstream
+[color]
+	ui = auto
+[alias]
+	di = diff
+	ci = commit
+	cis = commit --signoff
+	co = checkout
+	ann = blame
+	st = status
