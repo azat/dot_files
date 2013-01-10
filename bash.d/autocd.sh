@@ -1,0 +1,2 @@
+# 
+shopt -s autocd
