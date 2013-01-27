@@ -75,13 +75,6 @@ set hidden
 
 set autoindent
 
-" detect indent plugin
-source /etc/vim/plugins/detectindent.vim
-let g:detectindent_preferred_expandtab=1
-let g:detectindent_preferred_indent=4
-let g:detectindent_max_lines_to_analyse=1024
-DetectIndent
-
 set smartindent
 
 " F2 -  fast save
@@ -186,4 +179,12 @@ autocmd FileType c setlocal foldmethod=syntax
 set hlsearch " highlight search
 set incsearch " search while typing
 set fileformat=unix
+
+" detect indent plugin
+source /etc/vim/plugins/detectindent.vim
+let g:detectindent_preferred_expandtab=1
+let g:detectindent_preferred_indent=4
+let g:detectindent_max_lines_to_analyse=1024
+let g:detectindent_verbosity=0
+au VimEnter * DetectIndent
 
