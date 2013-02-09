@@ -4,6 +4,7 @@
 [core]
 	autocrlf = input
 	pager = less -FRSX
+	whitespace = trailing-space
 [push]
 	default = upstream
 [color]
@@ -15,3 +16,5 @@
 	co = checkout
 	ann = blame
 	st = status
+[apply]
+	whitespace = fix
