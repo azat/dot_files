@@ -32,20 +32,21 @@ PS1=$PS1$currentUserColor$Prompt_User$Color_Off:$BBlue$Prompt_PathShort$Color_Of
 # If REPO/.git/.repository_is_quite_big is exist, than don't request git-status or something like this.
 if [ $(which git) ] ; then
 	PS1=$PS1'$(
-		GIT_DIR="$(__gitdir)"
+		GIT_DIR="$(__gitdir)" \
+		GIT_PS="$(__git_ps1 " (%s)")" \
 
-		if [ -f $GIT_DIR/.repository_is_quite_big ]; then \
-			echo "'$Purple'"$(__git_ps1 " (%s)"'$Color_Off'); \
+		if [ -f $GIT_DIR/.repository_is_quite_big ] || [[ $GIT_PS =~ ^\\ \\(BARE: ]]; then \
+			echo "'$Purple'"$GIT_PS'$Color_Off'; \
 		else \
 			git branch &>/dev/null;\
 			if [ $? -eq 0 ]; then \
 			  echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
 			  if [ "$?" -eq "0" ]; then \
 				 # @4 - Clean repository - nothing to commit
-				 echo "'$Green'"$(__git_ps1 " (%s)"); \
+				 echo "'$Green'"$GIT_PS; \
 			  else \
 				 # @5 - Changes to working tree
-				 echo "'$IRed'"$(__git_ps1 " {%s}"); \
+				 echo "'$IRed'"$GIT_PS; \
 			  fi)'$Color_Off'"; \
 			fi \
 		fi \
