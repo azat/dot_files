@@ -35,7 +35,7 @@ if [ $(which git) ] ; then
 		GIT_DIR="$(__gitdir)" \
 		GIT_PS="$(__git_ps1 " (%s)")" \
 
-		if [ -f $GIT_DIR/.repository_is_quite_big ] || [[ $GIT_PS =~ ^\\ \\(BARE: ]]; then \
+		if [ -f $GIT_DIR/.repository_is_quite_big ] || [[ $GIT_PS =~ ^\\ \\(BARE: ]] || [[ $GIT_PS = " (GIT_DIR!)" ]]; then \
 			echo "'$Purple'"$GIT_PS'$Color_Off'; \
 		else \
 			git branch &>/dev/null;\
