@@ -56,7 +56,11 @@ fi
 # jobs
 PS1=$PS1'$(\
 	JOBS_NUM=$(jobs | wc -l); \
-	JOBS_NUM=$(( $JOBS_NUM - 1)); # current job \
+	# Doh. jump.
+	if [[ -n $AUTOJUMP ]]; then \
+		JOBS_NUM=$(( $JOBS_NUM - 1)); \
+	fi \
+	;
 	if [ $JOBS_NUM -gt 0 ]; then \
 		echo " ['$ICyan'$JOBS_NUM'$Color_Off']"; \
 	fi
