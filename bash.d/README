@@ -1,4 +1,4 @@
 # Bash hooks
-# 
+#
 # For disable one of script, just make it hidden ( leading point in file name ), or drop extension ".sh"
 #
