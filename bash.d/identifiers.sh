@@ -1,6 +1,8 @@
 # Different identifiers
 
-EMAIL_ADDRESS=a3at.mail@gmail.com
+export EMAIL=$(git config user.email)
+export EMAIL_ADDRESS="$EMAIL"
 
-CHANGE_LOG_NAME="Azat Khuzhin"
+export NAME=$(git config user.name)
+export CHANGE_LOG_NAME=$NAME
 
