@@ -16,5 +16,6 @@
 	co = checkout
 	ann = blame
 	st = status
+	amk = am --keep-non-patch
 [apply]
 	whitespace = fix
