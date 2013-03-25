@@ -17,5 +17,7 @@
 	ann = blame
 	st = status
 	amk = am --keep-non-patch
+	ams = am -s
+	amks = am -s --keep-non-patch
 [apply]
 	whitespace = fix
