@@ -193,3 +193,9 @@ source /etc/vim/plugins/taglist.vim
 source /etc/vim/plugins/ctags.vim
 set runtimepath^=/etc/vim/plugins/ctrlp
 source /etc/vim/plugins/ctrlp/plugin/ctrlp.vim
+" http://stackoverflow.com/a/741486/328260
+"
+" This will look in the current directory for "tags", and work up the tree
+" towards root until one is found. IOW, you can be anywhere in your source
+" tree instead of just the root of it.
+set tags=tags;/
