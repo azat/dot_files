@@ -2,9 +2,6 @@
 # System-wide GDB initialization file.
 #
 
-# red
-set prompt \033[31mgdb$ \033[0m
-
 set disassembly-flavor intel
 
 set confirm off
