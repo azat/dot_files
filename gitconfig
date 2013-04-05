@@ -21,3 +21,12 @@
 	amks = am -s --keep-non-patch
 [apply]
 	whitespace = fix
+
+#
+# KDE projects
+# Usage: git clone kde:amarok
+#
+[url "git://anongit.kde.org/"]
+    insteadOf = kde:
+[url "git@git.kde.org:"]
+	pushInsteadOf = kde:
