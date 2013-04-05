@@ -88,7 +88,6 @@ $endif
 #
 # Enhanced options
 #
-set completion-ignore-case On
 set completion-map-case On
 set visible-stats On
 set mark-symlinked-directories On
