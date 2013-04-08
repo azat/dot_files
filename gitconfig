@@ -21,6 +21,7 @@
 	amks = am -s --keep-non-patch
 	purr = pull --rebase
 	ready = rebase -i @{u}
+	pull = pull --ff-only
 [apply]
 	whitespace = fix
 
