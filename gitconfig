@@ -19,6 +19,8 @@
 	amk = am --keep-non-patch
 	ams = am -s
 	amks = am -s --keep-non-patch
+	purr = pull --rebase
+	ready = rebase -i @{u}
 [apply]
 	whitespace = fix
 
