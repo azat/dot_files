@@ -33,3 +33,12 @@
     insteadOf = kde:
 [url "git@git.kde.org:"]
 	pushInsteadOf = kde:
+
+#
+# Github
+# Usage: git clone github:user/project
+#
+[url "git://github.com/"]
+	insteadOf = github:
+[url "git@github.com:"]
+	pushInsteadOf = github:
