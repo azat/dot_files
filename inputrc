@@ -138,3 +138,8 @@ $if Bash
 
 $endif
 
+#
+# When you want to do ls -l|less you'd type ls -l and press control-J instead of <enter>.
+# http://serverfault.com/a/31870/41731
+#
+"\C-j": " | less -FRSX\C-m"
