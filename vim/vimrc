@@ -172,9 +172,6 @@ colorscheme desert
 " No auto-wrap
 set tw=0
 
-" http://stackoverflow.com/questions/1744440/collapse-comments-and-all-functions-in-vim-gvim
-autocmd FileType c setlocal foldmethod=syntax
-
 " http://stackoverflow.com/a/2559262/328260
 set hlsearch " highlight search
 set incsearch " search while typing
