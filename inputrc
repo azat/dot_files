@@ -142,7 +142,7 @@ $endif
 # When you want to do ls -l|less you'd type ls -l and press control-J instead of <enter>.
 # http://serverfault.com/a/31870/41731
 #
-"\C-j": " | less -FRSX\C-m"
+"\C-h": " | less -FRSX\C-m"
 
 
 # Use Ctrl+← and Ctrl+→ (or Alt/Meta, or Esc) to move between words.
