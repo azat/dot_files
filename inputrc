@@ -139,7 +139,7 @@ $if Bash
 $endif
 
 #
-# When you want to do ls -l|less you'd type ls -l and press control-J instead of <enter>.
+# When you want to do ls -l|less you'd type ls -l and press control-H instead of <enter>.
 # http://serverfault.com/a/31870/41731
 #
 "\C-h": " | less -FRSX\C-m"
