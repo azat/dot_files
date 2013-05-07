@@ -1,0 +1,41 @@
+#
+# Ignore list
+#
+--ignore-dir=build
+--ignore-dir=.cmake
+--ignore-dir=.doxygen
+--ignore-dir=.git
+--ignore-dir=.svn
+
+#
+# Pager
+#
+--pager=less -FRSX
+
+#
+# Types
+#
+--type-set=markdown=.markdown,.mdown,.md,.mkd,.mkdn,.txt
+
+--type-add=cpp=.cc,.cpp,.hpp
+--type-add=c=.c,.h
+
+--type-add=js=.json
+--type-add=php=.phps,.html
+
+#
+# Coloring
+#
+--color-filename=bright_magenta
+--color-match=bright_red
+--color-lineno=bright_green
+
+#
+# Other options
+#
+--follow
+# do not group all match under the filename but show it like grep
+--nogroup
+
+# ignore case while there is only lower cases
+--smart-case
