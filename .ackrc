@@ -33,7 +33,6 @@
 #
 # Other options
 #
---follow
 # do not group all match under the filename but show it like grep
 --nogroup
 
