@@ -13,17 +13,6 @@
 --pager=less -FRSX
 
 #
-# Types
-#
---type-set=markdown=.markdown,.mdown,.md,.mkd,.mkdn,.txt
-
---type-add=cpp=.cc,.cpp,.hpp
---type-add=cc=.c,.h
-
---type-add=js=.json
---type-add=php=.phps,.html
-
-#
 # Coloring
 #
 --color-filename=bright_magenta
