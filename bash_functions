@@ -1,6 +1,6 @@
 #
 # Bash functions
-# 
+#
 
 function get_base_name()
 {
@@ -11,11 +11,11 @@ function get_base_name()
 function get_path()
 {
 	# If don't have "/" at all
-	if $(expr index "$1" / &>/dev/null); then 
+	if $(expr index "$1" / &>/dev/null); then
 		echo "${1/%\/*/}"
 	else
 		echo "./"
-	fi	
+	fi
 }
 
 make_file()
@@ -24,7 +24,7 @@ make_file()
 	echo "Making '$1' to '$_bin_name'" >&2
 	if [ ! -f "$_bin_name" ]; then
 		gcc -ofast -std=c99 -o "$_bin_name" "$1"
-	fi	
+	fi
 	echo "$_bin_name"
 }
 
@@ -43,7 +43,7 @@ function scpdeploy() {
 	if [ ! "$1" ] ; then
 		echo "Usage scpdeploy SERVER_AND_PATH"
 		return;
-	fi	
+	fi
 
 	cd .. && tar -czf $OLDPWD.tgz `basename $OLDPWD` && scp $OLDPWD.tgz $1 && cd -
 }
