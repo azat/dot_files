@@ -188,8 +188,15 @@ autocmd BufReadPost * :DetectIndent
 " ctags
 source /etc/vim/plugins/taglist.vim
 source /etc/vim/plugins/ctags.vim
+
+" ctrlp
 set runtimepath^=/etc/vim/plugins/ctrlp
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn|cmake)$',
+  \ 'file': '\v\.(exe|so|dll|a|o|la|lo|pc|in|swp|zip|rar|tgz|gz|tar)$',
+  \ }
 source /etc/vim/plugins/ctrlp/plugin/ctrlp.vim
+
 " http://stackoverflow.com/a/741486/328260
 "
 " This will look in the current directory for "tags", and work up the tree
