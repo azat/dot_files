@@ -188,18 +188,31 @@ autocmd BufReadPost * :DetectIndent
 " ctags
 source /etc/vim/plugins/taglist.vim
 source /etc/vim/plugins/ctags.vim
-
-" ctrlp
-set runtimepath^=/etc/vim/plugins/ctrlp
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn|cmake)$',
-  \ 'file': '\v\.(exe|so|dll|a|o|la|lo|pc|in|swp|zip|rar|tgz|gz|tar)$',
-  \ }
-source /etc/vim/plugins/ctrlp/plugin/ctrlp.vim
-
 " http://stackoverflow.com/a/741486/328260
 "
 " This will look in the current directory for "tags", and work up the tree
 " towards root until one is found. IOW, you can be anywhere in your source
 " tree instead of just the root of it.
 set tags=tags;/
+
+" ctrlp
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn|cmake)$',
+  \ 'file': '\v\.(exe|so|dll|a|o|la|lo|pc|in|swp|zip|rar|tgz|gz|tar)$',
+  \ }
+" avoid using runtimepath
+" because of deplying
+source /etc/vim/plugins/ctrlp/autoload/ctrlp/mrufiles.vim
+source /etc/vim/plugins/ctrlp/plugin/ctrlp.vim
+source /etc/vim/plugins/ctrlp/autoload/ctrlp/rtscript.vim
+source /etc/vim/plugins/ctrlp/autoload/ctrlp/line.vim
+source /etc/vim/plugins/ctrlp/autoload/ctrlp/changes.vim
+source /etc/vim/plugins/ctrlp/autoload/ctrlp/utils.vim
+source /etc/vim/plugins/ctrlp/autoload/ctrlp/quickfix.vim
+source /etc/vim/plugins/ctrlp/autoload/ctrlp/tag.vim
+source /etc/vim/plugins/ctrlp/autoload/ctrlp/undo.vim
+source /etc/vim/plugins/ctrlp/autoload/ctrlp/buffertag.vim
+source /etc/vim/plugins/ctrlp/autoload/ctrlp/mixed.vim
+source /etc/vim/plugins/ctrlp/autoload/ctrlp/bookmarkdir.vim
+source /etc/vim/plugins/ctrlp/autoload/ctrlp/dir.vim
+source /etc/vim/plugins/ctrlp/autoload/ctrlp.vim
