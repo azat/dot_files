@@ -2,14 +2,25 @@
 	"color_scheme": "Packages/Color Scheme - Default/Blackboard.tmTheme",
 	"file_exclude_patterns":
 	[
+		"*.cmd",
+		"*.o",
+		"*.ko",
+		"*.mod",
+		"*/.deps/*",
+		"*/oprofile_data/*",
+		"*/CMakeFiles/*",
+		"*/CMakeCache.txt",
+		"*/cmake_install.cmake",
 		"*/.cmake/*",
+		"*/.doxygen/*",
 		"*/build/*",
-		"*.exe"
+		"*.exe",
+		"*.bat"
 	],
-	"font_size": 9,
+	"font_size": 10,
 	"ignored_packages":
 	[
-		"Vintage"
+		"MarkdownEditing"
 	],
 	"indent_to_bracket": true,
 	"tab_size": 4,
