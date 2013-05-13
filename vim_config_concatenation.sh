@@ -30,7 +30,7 @@ function handleFile()
 {
 	printHeader "$1"
 
-	FUNC_NAME="funciton LoadFile_$(echo "$1" | tr '/.' '_')"
+	local FUNC_NAME="LoadFile_$(echo "$1" | tr '/.' '_')"
 	echo "function! $FUNC_NAME()"
 
 	while IFS=$'\n' read line; do
