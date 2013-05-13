@@ -1,0 +1,19 @@
+{
+	"color_scheme": "Packages/Color Scheme - Default/Blackboard.tmTheme",
+	"file_exclude_patterns":
+	[
+		"*/.cmake/*",
+		"*/build/*",
+		"*.exe"
+	],
+	"font_size": 9,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"indent_to_bracket": true,
+	"tab_size": 4,
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"vintage_start_in_command_mode": true
+}

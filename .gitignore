@@ -44,3 +44,6 @@
 # mutt
 !/.mutt
 !/.mutt/*
+
+# subl
+!/.config
