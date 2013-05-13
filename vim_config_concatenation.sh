@@ -8,12 +8,11 @@ SELF=${0%/*}
 
 START_FROM="$SELF/vim/vimrc"
 SOURCE_PATTERN="source "
-ADDITIONAL_FILES=$(grep "$SOURCE_PATTERN" $START_FROM | awk '{print $2}')
 
 function printHeader()
 {
 	echo
-	echo "\" Begining of $FILE"
+	echo "\" Begining of $1"
 	echo "\" {{{"
 	echo
 }
@@ -24,29 +23,37 @@ function printFooter()
 	echo "\" }}}"
 }
 
-echo "\""
-echo "\" Generated at $(date)"
-echo "\" From https://github.com/azat/dot_files"
-echo "\""
+function handleFile()
+{
+	printHeader "$1"
+
+	while read line; do
+		# TODO: use bash build-in commands
+		if ! $(echo "$line" | fgrep -v '"' | egrep -q "^[\t ]*source "); then
+			echo $line
+			continue
+		fi
+
+		INCLUDE="$(echo $line | awk '{print $NF}')"
+		if [ ! -f "$INCLUDE" ]; then
+			echo "\" GENERATOR: File '$INCLUDE' not found."
+			continue
+		fi
+		echo "\" GENERATOR: Inlining '$INCLUDE'"
+		handleFile "$INCLUDE"
+	done < "$1"
+
+	printFooter "$1"
+}
+
+function printMainHeader()
+{
+	echo "\""
+	echo "\" Generated at $(date)"
+	echo "\" From https://github.com/azat/dot_files"
+	echo "\""
+}
 
 # vimrc
-printHeader
-cat $START_FROM | grep -v $SOURCE_PATTERN
-printFooter
-echo
-
-for FILE in $(echo $ADDITIONAL_FILES); do
-	if [ ! -f $FILE ]; then
-		continue;
-	fi
-
-	echo
-	echo "\" Begining of $FILE"
-	echo "\" {{{"
-	echo
-
-	cat $FILE
-
-	echo
-	echo "\" }}}"
-done
+printMainHeader
+handleFile "$START_FROM"
