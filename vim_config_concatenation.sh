@@ -30,9 +30,6 @@ function handleFile()
 {
 	printHeader "$1"
 
-	local FUNC_NAME="LoadFile_$(echo "$1" | tr '/.' '_')"
-	echo "function! $FUNC_NAME()"
-
 	while IFS=$'\n' read line; do
 		# TODO: use bash build-in commands
 		if ! $(echo "$line" | fgrep -v '"' | egrep -q "^[\t ]*source "); then
@@ -48,9 +45,6 @@ function handleFile()
 		echo "\" GENERATOR: Inlining '$INCLUDE'"
 		handleFile "$INCLUDE"
 	done < "$1"
-
-	echo "endfunction"
-	echo "call $FUNC_NAME()"
 
 	printFooter "$1"
 }
