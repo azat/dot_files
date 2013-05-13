@@ -29,10 +29,10 @@ function handleFile()
 
 	FUNC_NAME="funciton LoadFile_$(echo "$1" | tr '/.' '_')"
 	echo "function! $FUNC_NAME()"
-	while read line; do
+	while IFS=$'\n' read line; do
 		# TODO: use bash build-in commands
 		if ! $(echo "$line" | fgrep -v '"' | egrep -q "^[\t ]*source "); then
-			echo $line
+			echo "$line"
 			continue
 		fi
 
