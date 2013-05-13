@@ -48,8 +48,9 @@ function handleFile()
 			continue
 		fi
 
-		# Don't include scripts from "/usr"
-		if $( echo "$INCLUDE" | grep -q "^/usr/" ); then
+		# Don't include scripts from "taglist"
+		# I have number of errors if I inline it.
+		if $( echo "$INCLUDE" | grep -q "taglist.vim$" ); then
 			echo "\" GENERATOR: Skip '$INCLUDE'"
 			echo "$line"
 			continue
