@@ -28,7 +28,9 @@ function printFooter()
 #
 function handleFile()
 {
-	printHeader "$1"
+	FILE=$(readlink -f "$1")
+
+	printHeader "$FILE"
 
 	while IFS=$'\n' read line; do
 		# TODO: use bash build-in commands
@@ -37,16 +39,27 @@ function handleFile()
 			continue
 		fi
 
-		INCLUDE="$(echo $line | awk '{print $NF}')"
+		INCLUDE="$(readlink -f "$(echo $line | awk '{print $NF}')")"
+
+		# Not found, maybe it will under condititon, so leave line
 		if [ ! -f "$INCLUDE" ]; then
-			echo "\" GENERATOR: File '$INCLUDE' not found."
+			echo "\" GENERATOR: Doesn't exist '$INCLUDE'"
+			echo "$line"
 			continue
 		fi
+
+		# Don't include scripts from "/usr"
+		if $( echo "$INCLUDE" | grep -q "^/usr/" ); then
+			echo "\" GENERATOR: Skip '$INCLUDE'"
+			echo "$line"
+			continue
+		fi
+
 		echo "\" GENERATOR: Inlining '$INCLUDE'"
 		handleFile "$INCLUDE"
-	done < "$1"
+	done < "$FILE"
 
-	printFooter "$1"
+	printFooter "$FILE"
 }
 
 function printMainHeader()
