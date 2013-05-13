@@ -39,7 +39,12 @@ function handleFile()
 			continue
 		fi
 
-		INCLUDE="$(readlink -f "$(echo $line | awk '{print $NF}')")"
+		ORIG_INCLUDE="$(echo $line | awk '{print $NF}')"
+		ESCAPED_ORIG_INCLUDE="${ORIG_INCLUDE//\//\\/}"
+		INCLUDE="$(readlink -f "$ORIG_INCLUDE")"
+		ESCAPED_INCLUDE="${INCLUDE//\//\\/}"
+		# Resolve symlinks
+		line=$(echo $line | sed "s/$ESCAPED_ORIG_INCLUDE/$ESCAPED_INCLUDE/")
 
 		# Not found, maybe it will under condititon, so leave line
 		if [ ! -f "$INCLUDE" ]; then
