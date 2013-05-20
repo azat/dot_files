@@ -1,0 +1,6 @@
+
+#
+# Make it more pretty.
+#
+set show-author = abbreviated
+set show-date = relative
