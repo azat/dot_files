@@ -9,19 +9,45 @@
 	default = upstream
 [color]
 	ui = auto
+[help]
+	# $ git lgo
+	# You called a Git command named 'lgo', which does not exist.
+	# Continuing under the assumption that you meant 'log'
+	# in 1.0 seconds automatically...
+	autocorrect = 10
 [alias]
 	di = diff
+
 	ci = commit
 	cis = commit --signoff
+	amend = commit --amend
+
 	co = checkout
 	ann = blame
 	st = status
+
+	patch = add --patch
+
+	last = log -1
+	oneline = log --oneline
+
+	staged = diff --cached
+	both = diff HEAD
+
+	# sha1 of the current branch's HEAD
+	sha1 = !sh -c 'git rev-parse ${1-`echo HEAD`}' -
+	# shows a 7 character abbreviation of a reference, defaulting to HEAD
+	abbrev = !sh -c 'git rev-parse --short ${1-`echo HEAD`}' -
+
 	amk = am --keep-non-patch
 	ams = am -s
 	amks = am -s --keep-non-patch
+
 	purr = pull --rebase
-	ready = rebase -i @{u}
 	puff = pull --ff-only
+
+	ready = rebase -i @{u}
+	ri = rebase --interactive
 [apply]
 	whitespace = fix
 
