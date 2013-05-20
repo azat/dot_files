@@ -48,6 +48,8 @@
 
 	ready = rebase -i @{u}
 	ri = rebase --interactive
+
+	push-up-to = !sh -c \"test -n '$1' -a -n '$2' && git push $1 $2:$(git rev-parse --abbrev-ref HEAD)\"
 [apply]
 	whitespace = fix
 
