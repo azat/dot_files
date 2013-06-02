@@ -4,7 +4,12 @@
 [core]
 	autocrlf = input
 	pager = less -FRSX
-	whitespace = trailing-space
+	# This is not for dot_files repository.
+	# Because it may contain different _generated_ configs,
+	# and I don't think that it is a good idea to change indent in all configs.
+	#
+	# This is for repositories with source codes.
+	whitespace = blank-at-eol,-blank-at-eof,tab-in-indent,tabwidth=4
 [push]
 	default = upstream
 [color]
