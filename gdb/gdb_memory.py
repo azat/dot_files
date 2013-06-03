@@ -3,17 +3,23 @@
 #
 
 import gdb
+import re
 
 class info_memory(gdb.Command):
     def __init__(self):
-        gdb.Command.__init__ (self, "info memory", gdb.COMMAND_NONE)
+        gdb.Command.__init__ (self, "info memory", gdb.COMMAND_OBSCURE)
 
     def invoke(self, arg, from_tty):
         memory = 0
+        countAll = (arg == "all")
+        memoryPattern = re.compile("0x[0-f]* - 0x[0-f]*")
 
         lines = gdb.execute("info files", False, True).split("\n")
         for line in lines:
-            if 'load' in line:
+            if not memoryPattern.match(line, 1):
+                continue
+
+            if countAll or ('load' in line):
                 parts = line.split(" ")
                 start = int(parts[0].strip(), 16)
                 end = int(parts[2].strip(), 16)
