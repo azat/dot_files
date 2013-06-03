@@ -1,8 +1,10 @@
 #
 # Parse "info files" and print used memory
 #
-# Command
+# Command:
 # info memory[ {RE}]
+# Example:
+# info memory .*is \.(text|data).*
 #
 
 import gdb
