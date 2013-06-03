@@ -1,6 +1,9 @@
 #
 # Parse "info files" and print used memory
 #
+# Command
+# info memory[ all]
+#
 
 import gdb
 import re
