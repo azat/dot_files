@@ -2,7 +2,7 @@
 # Parse "info files" and print used memory
 #
 # Command
-# info memory[ all]
+# info memory[ {RE}]
 #
 
 import gdb
@@ -14,15 +14,20 @@ class info_memory(gdb.Command):
 
     def invoke(self, arg, from_tty):
         memory = 0
-        countAll = (arg == "all")
         memoryPattern = re.compile("0x[0-f]* - 0x[0-f]*")
+
+        # Get user regular expression
+        if arg:
+            userPattern = re.compile(arg)
+        else:
+            userPattern = memoryPattern
 
         lines = gdb.execute("info files", False, True).split("\n")
         for line in lines:
             if not memoryPattern.match(line, 1):
                 continue
 
-            if countAll or ('load' in line):
+            if userPattern.match(line, 1):
                 parts = line.split(" ")
                 start = int(parts[0].strip(), 16)
                 end = int(parts[2].strip(), 16)
