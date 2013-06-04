@@ -1,0 +1,16 @@
+Some configuration files that I use.
+
+Files started from dot (".") is generally personal configs (per user),
+other is system-wide configs.
+
+Inside:
+- gdb
+- vim
+- ack
+- bash
+- git
+- tmux
+- mutt
+- tig
+- readline
+- sublime
