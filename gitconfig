@@ -35,6 +35,7 @@
 
 	last = log -1
 	oneline = log --oneline
+    changes = !sh -c 'git log --oneline `git rev-parse --symbolic-full-name --abbrev-ref @{u}`...${u}'
 
 	staged = diff --cached
 	both = diff HEAD
