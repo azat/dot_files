@@ -26,5 +26,6 @@
 	"tab_size": 4,
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
-	"vintage_start_in_command_mode": true
+	"vintage_start_in_command_mode": true,
+	"use_directory_settings": true
 }
