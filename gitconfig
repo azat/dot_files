@@ -64,7 +64,7 @@
 # Usage: git clone kde:amarok
 #
 [url "git://anongit.kde.org/"]
-    insteadOf = kde:
+	insteadOf = kde:
 [url "git@git.kde.org:"]
 	pushInsteadOf = kde:
 
