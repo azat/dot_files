@@ -1,5 +1,3 @@
-alias git-changelog='git --no-pager log --format="%ai %aN %n%n%x09* %s%d%n"'
-
 function git_ahead_behind
 {
     curr_branch=$(git rev-parse --abbrev-ref HEAD);
