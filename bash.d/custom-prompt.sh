@@ -39,10 +39,12 @@ if [ $(which git) ] ; then
 			echo "'$Purple'"$GIT_PS'$Color_Off'; \
 		else \
 			AHEAD_BEHIND="$(git_ahead_behind)" \
+			# Trim behind commits (if there is no one)
+			AHEAD_BEHIND="${AHEAD_BEHIND%|0}"
 
 			echo "$(
 			# TODO: check only for "ahead" commits? (first number)
-			if [ "$AHEAD_BEHIND" = "0|0" ]; then \
+			if [ "$AHEAD_BEHIND" = "0" ]; then \
 				echo "'$Green'"$GIT_PS; \
 			else \
 				echo "'$IRed'"$GIT_PS'['$AHEAD_BEHIND']'; \
