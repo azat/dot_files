@@ -38,17 +38,15 @@ if [ $(which git) ] ; then
 		if [ -f $GIT_DIR/.repository_is_quite_big ] || [[ $GIT_PS =~ ^\\ \\(BARE: ]] || [[ $GIT_PS = " (GIT_DIR!)" ]]; then \
 			echo "'$Purple'"$GIT_PS'$Color_Off'; \
 		else \
-			git branch &>/dev/null;\
-			if [ $? -eq 0 ]; then \
-			  echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
-			  if [ "$?" -eq "0" ]; then \
-				 # @4 - Clean repository - nothing to commit
-				 echo "'$Green'"$GIT_PS; \
-			  else \
-				 # @5 - Changes to working tree
-				 echo "'$IRed'"$GIT_PS; \
-			  fi)'$Color_Off'"; \
-			fi \
+			AHEAD_BEHIND="$(git_ahead_behind)" \
+
+			echo "$(
+			# TODO: check only for "ahead" commits? (first number)
+			if [ "$AHEAD_BEHIND" = "0|0" ]; then \
+				echo "'$Green'"$GIT_PS; \
+			else \
+				echo "'$IRed'"$GIT_PS'['$AHEAD_BEHIND']'; \
+			fi)'$Color_Off'"; \
 		fi \
 	)'
 fi
@@ -67,5 +65,4 @@ PS1=$PS1'$(\
 )'
 
 PS1=$PS1$currentUserPostfix' '
-
 
