@@ -43,7 +43,7 @@ function _custom_prompt_colored_git()
 	fi
 
 	HAVE_CHANGES=1
-	if $(git branch &> /dev/null) && $(git status | grep "nothing to commit" >& /dev/null); then
+	if $(git branch &> /dev/null) && $(git status | grep -q "nothing to commit"); then
 		HAVE_CHANGES=0
 	fi
 
