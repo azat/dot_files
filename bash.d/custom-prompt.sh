@@ -42,16 +42,16 @@ function _custom_prompt_colored_git()
 		return
 	fi
 
-	HAVE_CHANGES=1
-	if $(git branch &> /dev/null) && $(git status | grep -q "nothing to commit"); then
-		HAVE_CHANGES=0
-	fi
-
 	AHEAD_BEHIND="$(git_ahead_behind)"
 	# Trim behind commits (if there is no one)
 	AHEAD_BEHIND="${AHEAD_BEHIND%|0}"
 
 	if [ "$AHEAD_BEHIND" = "0" ]; then
+		HAVE_CHANGES=1
+		if $(git branch &> /dev/null) && $(git status | grep -q "nothing to commit"); then
+			HAVE_CHANGES=0
+		fi
+
 		if [ $HAVE_CHANGES = "0" ]; then
 			echo -en $Green$GIT_PS
 		else
