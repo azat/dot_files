@@ -3,6 +3,7 @@ function git_ahead_behind
     curr_branch=$(git rev-parse --abbrev-ref HEAD);
     curr_remote=$(git config branch.$curr_branch.remote);
     if [ -z $curr_remote ]; then
+        echo "0|0"
         return
     fi
     curr_merge_branch=$(git config branch.$curr_branch.merge | cut -d / -f 3);
