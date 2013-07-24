@@ -48,6 +48,8 @@ function _custom_prompt_colored_git()
 	GIT_DIR="$(__gitdir)"
 	GIT_PS="$(__git_ps1 " (%s)")"
 
+	which tput &>/dev/null && tput el
+
 	if [ -z $GIT_DIR ]; then
 		return
 	fi
