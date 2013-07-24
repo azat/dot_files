@@ -30,27 +30,32 @@ PS1=$PS1$currentUserColor$Prompt_User$Color_Off:$BBlue$Prompt_PathShort$Color_Of
 
 # git
 # If REPO/.git/.repository_is_quite_big is exist, than don't request git-status or something like this.
+function _custom_prompt_colored_git()
+{
+	GIT_DIR="$(__gitdir)"
+	GIT_PS="$(__git_ps1 " (%s)")"
+
+	if [ -f $GIT_DIR/.repository_is_quite_big ] ||
+		[[ $GIT_PS =~ ^\ \(BARE: ]] ||
+		[[ $GIT_PS = " (GIT_DIR!)" ]]; then
+		echo -en $Purple$GIT_PS$Color_Off
+		return
+	fi
+
+	AHEAD_BEHIND="$(git_ahead_behind)"
+	# Trim behind commits (if there is no one)
+	AHEAD_BEHIND="${AHEAD_BEHIND%|0}"
+
+	if [ "$AHEAD_BEHIND" = "0" ]; then
+		echo -en $Green$GIT_PS
+	else
+		echo -en $IRed$GIT_PS"["$AHEAD_BEHIND"]"
+	fi
+	echo -en $Color_Off
+}
+
 if [ $(which git) ] ; then
-	PS1=$PS1'$(
-		GIT_DIR="$(__gitdir)" \
-		GIT_PS="$(__git_ps1 " (%s)")" \
-
-		if [ -f $GIT_DIR/.repository_is_quite_big ] || [[ $GIT_PS =~ ^\\ \\(BARE: ]] || [[ $GIT_PS = " (GIT_DIR!)" ]]; then \
-			echo "'$Purple'"$GIT_PS'$Color_Off'; \
-		else \
-			AHEAD_BEHIND="$(git_ahead_behind)" \
-			# Trim behind commits (if there is no one)
-			AHEAD_BEHIND="${AHEAD_BEHIND%|0}"
-
-			echo "$(
-			# TODO: check only for "ahead" commits? (first number)
-			if [ "$AHEAD_BEHIND" = "0" ]; then \
-				echo "'$Green'"$GIT_PS; \
-			else \
-				echo "'$IRed'"$GIT_PS'['$AHEAD_BEHIND']'; \
-			fi)'$Color_Off'"; \
-		fi \
-	)'
+	PS1=$PS1'$(_custom_prompt_colored_git)'
 fi
 
 # jobs
