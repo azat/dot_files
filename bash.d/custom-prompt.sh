@@ -28,6 +28,19 @@ fi
 
 PS1=$PS1$currentUserColor$Prompt_User$Color_Off:$BBlue$Prompt_PathShort$Color_Off
 
+# From function that called by PS1
+# we need to decode colors
+#
+# We can't store decoded colors because in this case
+# There will _bugs_ with detecting of begining of string in readline/bash 
+function _color_ps()
+{
+	local color=${1/\\[/}
+	echo ${color/\\]/}
+	# To avoid syntax breaking in VIM
+	# ]
+}
+
 # git
 # If REPO/.git/.repository_is_quite_big is exist, than don't request git-status or something like this.
 function _custom_prompt_colored_git()
@@ -39,6 +52,9 @@ function _custom_prompt_colored_git()
 		return
 	fi
 
+	local Color_Off=$(_color_ps $Color_Off)
+	local Purple=$(_color_ps $Purple)
+
 	if [ -f $GIT_DIR/.repository_is_quite_big ] ||
 		[[ $GIT_PS =~ ^\ \(BARE: ]] ||
 		[[ $GIT_PS = " (GIT_DIR!)" ]]; then
@@ -49,6 +65,9 @@ function _custom_prompt_colored_git()
 	AHEAD_BEHIND="$(git_ahead_behind)"
 	# Trim behind commits (if there is no one)
 	AHEAD_BEHIND="${AHEAD_BEHIND%|0}"
+
+	local Green=$(_color_ps $Green)
+	local IRed=$(_color_ps $IRed)
 
 	if [ "$AHEAD_BEHIND" = "0" ]; then
 		HAVE_CHANGES=1
