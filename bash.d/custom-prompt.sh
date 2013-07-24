@@ -35,6 +35,10 @@ function _custom_prompt_colored_git()
 	GIT_DIR="$(__gitdir)"
 	GIT_PS="$(__git_ps1 " (%s)")"
 
+	if [ -z $GIT_DIR ]; then
+		return
+	fi
+
 	if [ -f $GIT_DIR/.repository_is_quite_big ] ||
 		[[ $GIT_PS =~ ^\ \(BARE: ]] ||
 		[[ $GIT_PS = " (GIT_DIR!)" ]]; then
