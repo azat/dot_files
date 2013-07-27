@@ -10,6 +10,8 @@
 	#
 	# This is for repositories with source codes.
 	whitespace = blank-at-eol,-blank-at-eof,tab-in-indent,tabwidth=4
+[sendemail]
+	smtpserver = /usr/bin/msmtp
 [push]
 	default = upstream
 [color]
