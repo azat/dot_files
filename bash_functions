@@ -5,7 +5,7 @@
 function get_base_name()
 {
 	local _path=${1/*\//}
-	echo "${_path/%.*/}"
+	echo "${_path%.*}"
 }
 
 function get_path()
