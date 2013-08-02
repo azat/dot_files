@@ -23,10 +23,14 @@ else
 	currentUserPostfix='\$'
 fi
 
-# Short prompt string, without git
-# PS1=$PS1$currentUserColor$Prompt_User$Color_Off:$BBlue$Prompt_PathShort$Color_Off$currentUserPostfix' '
+# Simplest PS1
+simpleColoredPrompt=$PS1$currentUserColor$Prompt_User$Color_Off:$BBlue$Prompt_PathShort$Color_Off$currentUserPostfix' '
+unset PS1
 
-PS1=$PS1$currentUserColor$Prompt_User$Color_Off:$BBlue$Prompt_PathShort$Color_Off
+# For not simpleColoredPrompt we don't need to escape this flag.
+if [ ! $USER = "root" ]; then
+	currentUserPostfix='$'
+fi
 
 # From function that called by PS1
 # we need to decode colors
@@ -88,22 +92,57 @@ function _custom_prompt_colored_git()
 	echo -en $Color_Off
 }
 
-if [ $(which git) ] ; then
-	PS1=$PS1'$(_custom_prompt_colored_git)'
-fi
+function _jobs_prompt()
+{
+	JOBS_NUM=$(jobs | grep -v ' Done ' | wc -l)
 
-# jobs
-PS1=$PS1'$(\
-	JOBS_NUM=$(jobs | wc -l); \
-	# Doh. jump.
-	if [[ -n $AUTOJUMP ]]; then \
-		JOBS_NUM=$(( $JOBS_NUM - 1)); \
-	fi \
-	;
-	if [ $JOBS_NUM -gt 0 ]; then \
-		echo " ['$ICyan'$JOBS_NUM'$Color_Off']"; \
+	if [ $JOBS_NUM -gt 0 ]; then
+		local ICyan=$(_color_ps $ICyan)
+		local Color_Off=$(_color_ps $Color_Off)
+
+		echo -en " [$ICyan$JOBS_NUM$Color_Off]"
 	fi
-)'
+}
 
-PS1=$PS1$currentUserPostfix' '
+function _dir_chomp()
+{
+	local p=${1/#$HOME/\~} b s
+	s=${#p}
+	while [[ $p != ${p//\/} ]]&&(($s>$2))
+	do
+		p=${p#/}
+		[[ $p =~ \.?. ]]
+		b=$b/${BASH_REMATCH[0]}
+		p=${p#*/}
+		((s=${#b}+${#p}))
+	done
+	echo ${b/\/~/\~}${b+/}$p
+}
+
+function _short_path()
+{
+	local newPwd=$(echo $PWD | rev | cut -d/ -f-2 | rev)
+	if [ ! "$newPwd" = "$PWD" ]; then
+		echo "..$newPwd"
+		return
+	fi
+
+	echo $PWD
+}
+
+function _render_prompt()
+{
+	local currentUserColor=$(_color_ps $currentUserColor)
+	local BBlue=$(_color_ps $BBlue)
+	local Color_Off=$(_color_ps $Color_Off)
+
+	echo -en $currentUserColor$USER$Color_Off:$BBlue"$(_short_path "$(_dir_chomp)")"$Color_Off
+	if [ $(which git) ] ; then
+		_custom_prompt_colored_git
+	fi
+	_jobs_prompt
+	echo -en $currentUserPostfix' '
+}
+
+PROMPT_COMMAND="$PROMPT_COMMAND && _render_prompt"
 
