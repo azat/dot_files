@@ -44,6 +44,11 @@ function _color_ps()
 	# ]
 }
 
+function _prompt_clear()
+{
+	which tput &>/dev/null && tput el
+}
+
 # git
 # If REPO/.git/.repository_is_quite_big is exist, than don't request git-status or something like this.
 function _custom_prompt_colored_git()
@@ -54,8 +59,6 @@ function _custom_prompt_colored_git()
 	if [ -z $GIT_DIR ]; then
 		return
 	fi
-
-	which tput &>/dev/null && tput el
 
 	local Color_Off=$(_color_ps $Color_Off)
 	local Purple=$(_color_ps $Purple)
