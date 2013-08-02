@@ -24,12 +24,8 @@ else
 fi
 
 # Simplest PS1
-simpleColoredPrompt=$PS1$currentUserColor$Prompt_User$Color_Off:$BBlue$Prompt_PathShort$Color_Off$currentUserPostfix' '
-
-# For not simpleColoredPrompt we don't need to escape this flag.
-if [ ! $USER = "root" ]; then
-	currentUserPostfix='$'
-fi
+simpleColoredPromptBegin=$PS1$currentUserColor$Prompt_User$Color_Off:$BBlue$Prompt_PathShort$Color_Off
+simpleColoredPrompt=$simpleColoredPromptBegin$currentUserPostfix' '
 
 # git
 # If REPO/.git/.repository_is_quite_big is exist, than don't request git-status or something like this.
@@ -79,35 +75,9 @@ function _jobs_prompt()
 	fi
 }
 
-function _dir_chomp()
-{
-	local p=${1/#$HOME/\~} b s
-	s=${#p}
-	while [[ $p != ${p//\/} ]]&&(($s>$2))
-	do
-		p=${p#/}
-		[[ $p =~ \.?. ]]
-		b=$b/${BASH_REMATCH[0]}
-		p=${p#*/}
-		((s=${#b}+${#p}))
-	done
-	echo ${b/\/~/\~}${b+/}$p
-}
-
-function _short_path()
-{
-	local newPwd=$(echo $PWD | rev | cut -d/ -f-2 | rev)
-	if [ ! "$newPwd" = "$PWD" ]; then
-		echo "..$newPwd"
-		return
-	fi
-
-	echo $PWD
-}
-
 function _render_prompt()
 {
-	PS1=$currentUserColor$USER$Color_Off:$BBlue"$(_short_path "$(_dir_chomp)")"$Color_Off
+	PS1=$simpleColoredPromptBegin
 	if [ $(which git) ] ; then
 		PS1=$PS1$(_custom_prompt_colored_git)
 	fi
