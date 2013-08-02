@@ -25,7 +25,6 @@ fi
 
 # Simplest PS1
 simpleColoredPrompt=$PS1$currentUserColor$Prompt_User$Color_Off:$BBlue$Prompt_PathShort$Color_Off$currentUserPostfix' '
-unset PS1
 
 # For not simpleColoredPrompt we don't need to escape this flag.
 if [ ! $USER = "root" ]; then
@@ -136,13 +135,13 @@ function _render_prompt()
 	local BBlue=$(_color_ps $BBlue)
 	local Color_Off=$(_color_ps $Color_Off)
 
-	echo -en $currentUserColor$USER$Color_Off:$BBlue"$(_short_path "$(_dir_chomp)")"$Color_Off
+	PS1=$currentUserColor$USER$Color_Off:$BBlue"$(_short_path "$(_dir_chomp)")"$Color_Off
 	if [ $(which git) ] ; then
-		_custom_prompt_colored_git
+		PS1=$PS1$(_custom_prompt_colored_git)
 	fi
-	_jobs_prompt
-	echo -en $currentUserPostfix' '
+	PS1=$PS1$(_jobs_prompt)
+	PS1=$PS1$currentUserPostfix' '
 }
 
-PROMPT_COMMAND="$PROMPT_COMMAND && _render_prompt"
+PROMPT_COMMAND="$PROMPT_COMMAND ; _render_prompt"
 
