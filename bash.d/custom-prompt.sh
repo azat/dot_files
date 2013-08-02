@@ -31,24 +31,6 @@ if [ ! $USER = "root" ]; then
 	currentUserPostfix='$'
 fi
 
-# From function that called by PS1
-# we need to decode colors
-#
-# We can't store decoded colors because in this case
-# There will _bugs_ with detecting of begining of string in readline/bash 
-function _color_ps()
-{
-	local color=${1/\\[/}
-	echo ${color/\\]/}
-	# To avoid syntax breaking in VIM
-	# ]
-}
-
-function _prompt_clear()
-{
-	which tput &>/dev/null && tput el
-}
-
 # git
 # If REPO/.git/.repository_is_quite_big is exist, than don't request git-status or something like this.
 function _custom_prompt_colored_git()
@@ -60,9 +42,6 @@ function _custom_prompt_colored_git()
 		return
 	fi
 
-	local Color_Off=$(_color_ps $Color_Off)
-	local Purple=$(_color_ps $Purple)
-
 	if [ -f $GIT_DIR/.repository_is_quite_big ] ||
 		[[ $GIT_PS =~ ^\ \(BARE: ]] ||
 		[[ $GIT_PS = " (GIT_DIR!)" ]]; then
@@ -73,9 +52,6 @@ function _custom_prompt_colored_git()
 	AHEAD_BEHIND="$(git_ahead_behind)"
 	# Trim behind commits (if there is no one)
 	AHEAD_BEHIND="${AHEAD_BEHIND%|0}"
-
-	local Green=$(_color_ps $Green)
-	local IRed=$(_color_ps $IRed)
 
 	if [ "$AHEAD_BEHIND" = "0" ]; then
 		HAVE_CHANGES=1
@@ -99,9 +75,6 @@ function _jobs_prompt()
 	JOBS_NUM=$(jobs | grep -v ' Done ' | wc -l)
 
 	if [ $JOBS_NUM -gt 0 ]; then
-		local ICyan=$(_color_ps $ICyan)
-		local Color_Off=$(_color_ps $Color_Off)
-
 		echo -en " [$ICyan$JOBS_NUM$Color_Off]"
 	fi
 }
@@ -134,10 +107,6 @@ function _short_path()
 
 function _render_prompt()
 {
-	local currentUserColor=$(_color_ps $currentUserColor)
-	local BBlue=$(_color_ps $BBlue)
-	local Color_Off=$(_color_ps $Color_Off)
-
 	PS1=$currentUserColor$USER$Color_Off:$BBlue"$(_short_path "$(_dir_chomp)")"$Color_Off
 	if [ $(which git) ] ; then
 		PS1=$PS1$(_custom_prompt_colored_git)
