@@ -15,6 +15,7 @@ set history expansion on
 directory $cwd:$cdir
 
 source /etc/gdb/functions
+source /etc/gdb/kde_functions
 
 source /etc/gdb/gdb_mutexinfo.py
 source /etc/gdb/gdb_memory.py
