@@ -27,4 +27,5 @@ source /etc/gdb/gdb_mutexinfo.py
 source /etc/gdb/gdb_memory.py
 source /etc/gdb/gdb_cmake.py
 source /etc/gdb/gdb_git.py
+source /etc/gdb/gdb_linux_kernel.py
 
