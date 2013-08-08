@@ -2,7 +2,7 @@ function git_ahead_behind
 {
     curr_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
     curr_remote=$(git config branch.$curr_branch.remote)
-    if [ -z $curr_remote ]; then
+    if [ -z "$curr_remote" ]; then
         echo "0|0"
         return
     fi
