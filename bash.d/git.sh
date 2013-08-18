@@ -1,4 +1,4 @@
-function git_ahead_behind
+function git_ahead_behind()
 {
     curr_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
     curr_remote=$(git config branch.$curr_branch.remote)
