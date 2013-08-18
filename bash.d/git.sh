@@ -18,3 +18,26 @@ function git_ahead_behind()
 GIT_REVIEW_DIFF=$(git config diff.tool) : ${GIT_REVIEW_DIFF:="git diff"}
 export GIT_REVIEW_DIFF
 
+#
+# Change directory relative to git root.
+#
+function git_cd()
+{
+    local dir="$1"
+    if [ ! ${dir:0:1} = "/" ]; then
+        dir="$(__gitdir)/../$dir"
+    fi
+    cd $dir
+}
+function _git_cd_completion()
+{
+    local cur="$(_get_cword)"
+
+    if [ -z $cur ]; then
+        cur="$(readlink -f $(__gitdir)/../$(_get_cword))/"
+    fi
+
+    _filedir
+}
+complete -F _git_cd_completion git_cd
+
