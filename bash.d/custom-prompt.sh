@@ -31,7 +31,7 @@ simpleColoredPrompt=$simpleColoredPromptBegin$currentUserPostfix' '
 # If REPO/.git/.repository_is_quite_big is exist, than don't request git-status or something like this.
 function _custom_prompt_colored_git()
 {
-	GIT_DIR="$(__gitdir)"
+	GIT_DIR="$(git rev-parse --git-dir)"
 	GIT_PS="$(__git_ps1 " (%s)")"
 
 	if [ -z $GIT_DIR ]; then

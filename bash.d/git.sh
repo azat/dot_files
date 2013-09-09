@@ -25,7 +25,7 @@ function git_cd()
 {
     local dir="$1"
     if [ ! ${dir:0:1} = "/" ]; then
-        dir="$(__gitdir)/../$dir"
+        dir="$(git rev-parse --git-dir)/../$dir"
     fi
     cd $dir
 }
@@ -34,7 +34,7 @@ function _git_cd_completion()
     local cur="$(_get_cword)"
 
     if [ -z $cur ]; then
-        cur="$(readlink -f $(__gitdir)/../$(_get_cword))/"
+        cur="$(readlink -f $(git rev-parse --git-dir)/../$(_get_cword))/"
     fi
 
     _filedir
