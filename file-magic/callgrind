@@ -1,0 +1,2 @@
+0 string version:\ 1\ncreator:\ callgrind callgrind
+>0 regex cmd:\ (.*)\n %s
