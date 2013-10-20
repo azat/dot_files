@@ -6,6 +6,8 @@
 --ignore-dir=.doxygen
 --ignore-dir=.git
 --ignore-dir=.svn
+# Linux kernel specific
+--ignore-file=match:/.o.cmd$/
 
 #
 # Pager
