@@ -7,6 +7,17 @@
 --ignore-dir=.git
 --ignore-dir=.svn
 # Linux kernel specific
+--ignore-file=is:modules.order
+--ignore-file=is:modules.builtin
+--ignore-file=is:modules.builtin.bin
+--ignore-file=is:modules.mk
+--ignore-file=is:modules.alias
+--ignore-file=is:modules.alias.bin
+--ignore-file=is:modules.dep
+--ignore-file=is:modules.dep.bin
+--ignore-file=is:modules.symbols
+--ignore-file=is:modules.devname
+--ignore-file=is:modules.softdep
 --ignore-file=match:/.o.cmd$/
 
 #
