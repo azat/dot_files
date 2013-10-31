@@ -47,13 +47,20 @@ complete -F _git_cd_completion git_cd
 git_stat()
 {
     verbose=0
+    submodules=0
     while getopts "vs" o; do
         case "$o" in
-            v)   verbose=$((verbose+1))
+            v)   verbose=$((verbose+1)) ;;
+            s)   submodules=1 ;;
         esac
     done
 
-    for i in $( git ls-files | egrep -v '^('$(git submodule | cut -d' ' -f3 | awk '{printf "%s|", $1}' | sed 's/|$//')')' ); do
+    submodules_excludes="^$"
+    if [[ $submodules -eq 0 ]]; then
+        submodules_excludes='^('$(git submodule | cut -d' ' -f3 | awk '{printf "%s|", $1}' | sed 's/|$//')')'
+    fi
+
+    for i in $( git ls-files | egrep -v "$submodules_excludes" ); do
         if [ ! -f $i ]; then
             continue;
         fi
