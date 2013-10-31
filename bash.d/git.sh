@@ -41,3 +41,17 @@ function _git_cd_completion()
 }
 complete -F _git_cd_completion git_cd
 
+#
+# short stat
+#
+git_stat()
+{
+    for i in $(git ls-files | fgrep -v thirdparty | fgrep -v secondparty); do
+        if [ ! -f $i ]; then
+            continue;
+        fi
+
+        git blame --line-porcelain $i | sed -n 's/^author //p'
+    done | sort | uniq -c | sort -rn
+}
+
