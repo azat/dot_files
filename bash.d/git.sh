@@ -46,7 +46,7 @@ complete -F _git_cd_completion git_cd
 #
 git_stat()
 {
-    for i in $(git ls-files | fgrep -v thirdparty | fgrep -v secondparty); do
+    for i in $( git ls-files | egrep -v '^('$(git submodule | cut -d' ' -f3 | awk '{printf "%s|", $1}' | sed 's/|$//')')' ); do
         if [ ! -f $i ]; then
             continue;
         fi
