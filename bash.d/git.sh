@@ -47,22 +47,15 @@ complete -F _git_cd_completion git_cd
 git_stat()
 {
     verbose=0
-    submodules=0
     while getopts "vsh" o; do
         case "$o" in
             v)   verbose=$((verbose+1)) ;;
-            s)   submodules=1 ;;
             h)   echo "Usage: git_stat [-v] [-s]"; return 0 ;;
             \?)  echo "Invalid option: -$OPTARG" >&2; return 1 ;;
         esac
     done
 
-    submodules_excludes="^$"
-    if [[ $submodules -eq 0 ]]; then
-        submodules_excludes='^('$(git submodule | cut -d' ' -f3 | awk '{printf "%s|", $1}' | sed 's/|$//')')'
-    fi
-
-    for i in $( git ls-files | egrep -v "$submodules_excludes" ); do
+    for i in $(git ls-files); do
         if [ ! -f $i ]; then
             continue;
         fi
