@@ -46,9 +46,19 @@ complete -F _git_cd_completion git_cd
 #
 git_stat()
 {
+    verbose=0
+    while getopts "vs" o; do
+        case "$o" in
+            v)   verbose=$((verbose+1))
+        esac
+    done
+
     for i in $( git ls-files | egrep -v '^('$(git submodule | cut -d' ' -f3 | awk '{printf "%s|", $1}' | sed 's/|$//')')' ); do
         if [ ! -f $i ]; then
             continue;
+        fi
+        if [[ $verbose -gt 0 ]]; then
+            echo "Processing $i" >&2
         fi
 
         git blame --line-porcelain $i | sed -n 's/^author //p'
