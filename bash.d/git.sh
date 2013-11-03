@@ -47,7 +47,7 @@ complete -F _git_cd_completion git_cd
 git_stat()
 {
     verbose=0
-    while getopts "vsh" o; do
+    while getopts "vh" o; do
         case "$o" in
             v)   verbose=$((verbose+1)) ;;
             h)   echo "Usage: git_stat [-v] [-s]"; return 0 ;;
