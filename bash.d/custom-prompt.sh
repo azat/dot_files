@@ -68,7 +68,7 @@ function _custom_prompt_colored_git()
 
 function _jobs_prompt()
 {
-	JOBS_NUM=$(jobs -p | grep -v ' Done ' | wc -l)
+	JOBS_NUM=$(jobs -p | xargs -r ps -opid | tail -n+2 | wc -l)
 
 	if [ $JOBS_NUM -gt 0 ]; then
 		echo -en " [$ICyan$JOBS_NUM$Color_Off]"
