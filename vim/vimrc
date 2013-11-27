@@ -15,6 +15,12 @@ runtime! debian.vim
 " options, so any other options should be set AFTER setting 'compatible'.
 "set compatible
 
+set rtp+=/etc/vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+Bundle 'Valloric/YouCompleteMe'
+let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
+
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 syntax on
