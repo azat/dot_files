@@ -10,24 +10,13 @@
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
-" Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
-
 set rtp+=/etc/vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
 
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
 syntax on
-
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-"set background=dark
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -70,17 +59,12 @@ set encoding=utf8
 " Show line numbers
 set nu
 
-" Mouse support 
-"set mouse=a
-"set mousemodel=popup
-
 " Do not unload buffer, when switching for another
 " This allow us edit multiple files at the same time, without saving every
 " time, when switcing between them
 set hidden
 
 set autoindent
-
 set smartindent
 
 " F2 -  fast save
@@ -145,28 +129,6 @@ menu Encoding.windows-1251 :e ++enc=cp1251<CR>
 menu Encoding.cp866 :e ++enc=cp866<CR>
 menu Encoding.utf-8 :e ++enc=utf8 <CR>
 
-" Autocomplete by tab
-function InsertTabWrapper()
-     let col = col('.') - 1
-     if !col || getline('.')[col - 1] !~ '\k'
-         return "\<tab>"
-     else
-         return "\<c-p>"
-     endif
-endfunction
-imap <tab> <c-r>=InsertTabWrapper()<cr>
-
-" Phrases for autocomplete
-set complete=""
-" From buffer
-set complete+=.
-" From dictionary
-set complete+=k
-" From other opened buffers
-set complete+=b
-" From tags
-set complete+=t
-
 " Turn on filetype plugin
 filetype plugin on
 au BufRead,BufNewFile *.phps    set filetype=php
@@ -209,3 +171,4 @@ source /etc/vim/plugins/ctrlp/plugin/ctrlp.vim
 " towards root until one is found. IOW, you can be anywhere in your source
 " tree instead of just the root of it.
 set tags=tags;/
+
