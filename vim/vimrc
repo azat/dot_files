@@ -22,7 +22,20 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn|cmake)$',
   \ 'file': '\v\.(exe|so|dll|a|o|la|lo|pc|in|swp|zip|rar|tgz|gz|tar)$',
   \ }
-
+Bundle 'szw/vim-tags'
+Bundle 'vim-scripts/taglist.vim'
+" http://stackoverflow.com/a/741486/328260
+"
+" This will look in the current directory for "tags", and work up the tree
+" towards root until one is found. IOW, you can be anywhere in your source
+" tree instead of just the root of it.
+set tags=tags;/
+Bundle 'ciaranm/detectindent'
+let g:detectindent_preferred_expandtab=1
+let g:detectindent_preferred_indent=4
+let g:detectindent_max_lines_to_analyse=1024
+" let g:detectindent_verbosity=0
+autocmd BufReadPost * :DetectIndent
 
 syntax on
 
@@ -152,23 +165,4 @@ set tw=0
 set hlsearch " highlight search
 set incsearch " search while typing
 set fileformat=unix
-
-" detect indent plugin
-source /etc/vim/plugins/detectindent.vim
-let g:detectindent_preferred_expandtab=1
-let g:detectindent_preferred_indent=4
-let g:detectindent_max_lines_to_analyse=1024
-" let g:detectindent_verbosity=0
-autocmd BufReadPost * :DetectIndent
-
-" ctags
-source /etc/vim/plugins/taglist.vim
-source /etc/vim/plugins/ctags.vim
-
-" http://stackoverflow.com/a/741486/328260
-"
-" This will look in the current directory for "tags", and work up the tree
-" towards root until one is found. IOW, you can be anywhere in your source
-" tree instead of just the root of it.
-set tags=tags;/
 
