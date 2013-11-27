@@ -12,10 +12,17 @@ runtime! debian.vim
 
 set rtp+=/etc/vim/bundle/vundle/
 call vundle#rc()
+
 Bundle 'gmarik/vundle'
 Bundle 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
 Bundle 'scrooloose/syntastic'
+Bundle 'kien/ctrlp.vim'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn|cmake)$',
+  \ 'file': '\v\.(exe|so|dll|a|o|la|lo|pc|in|swp|zip|rar|tgz|gz|tar)$',
+  \ }
+
 
 syntax on
 
@@ -157,14 +164,6 @@ autocmd BufReadPost * :DetectIndent
 " ctags
 source /etc/vim/plugins/taglist.vim
 source /etc/vim/plugins/ctags.vim
-
-" ctrlp
-set runtimepath^=/etc/vim/plugins/ctrlp
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn|cmake)$',
-  \ 'file': '\v\.(exe|so|dll|a|o|la|lo|pc|in|swp|zip|rar|tgz|gz|tar)$',
-  \ }
-source /etc/vim/plugins/ctrlp/plugin/ctrlp.vim
 
 " http://stackoverflow.com/a/741486/328260
 "
