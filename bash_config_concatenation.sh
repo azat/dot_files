@@ -6,7 +6,7 @@ FILES="$SELF/bash.bashrc \
 	$SELF/bash_functions"
 
 if [ "$SERVER_VERSION" ]; then
-	FILES="$FILES /etc/bash_completion.d/git"
+	FILES="$FILES /usr/lib/git-core/git-sh-prompt"
 fi
 
 for FILE in $(ls -d $SELF/bash.d/* | fgrep -v autojump.sh | fgrep -v remark.sh); do
