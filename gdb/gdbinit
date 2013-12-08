@@ -18,6 +18,9 @@ set print static-members off
 # Show the real classname of object instances - e.g. (Kded *) 0x8073440 instead of (class QObject *) 0x8073440
 set print object
 
+# TODO: support style like vim/subl have
+set filename-display basename
+
 directory $cwd:$cdir
 
 source /etc/gdb/functions
