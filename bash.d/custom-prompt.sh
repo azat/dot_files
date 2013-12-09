@@ -26,7 +26,11 @@ fi
 # Simplest PS1
 simpleColoredPromptUser=$PS1$currentUserColor$Prompt_User$Color_Off
 simpleColoredPromptPath=:$BBlue$Prompt_PathShort$Color_Off
-simpleColoredPromptBegin=$simpleColoredPromptUser$simpleColoredPromptPath
+if [ ! -e "$SSH_CONNECTION" ]; then
+	simpleColoredPromptBegin=$simpleColoredPromptUser$currentUserColor@'\h'$Color_Off$simpleColoredPromptPath
+else
+	simpleColoredPromptBegin=$simpleColoredPromptUser$simpleColoredPromptPath
+fi
 
 simpleColoredPrompt=$simpleColoredPromptBegin$currentUserPostfix' '
 
@@ -78,20 +82,9 @@ function _jobs_prompt()
 	fi
 }
 
-function _remote_prompt()
-{
-	if [ ! -e "$SSH_CONNECTION" ]; then
-		host=$(hostname)
-		shortHost=${host/.*} # leave only first part
-		echo -en "@$currentUserColor$shortHost$Color_Off"
-	fi
-}
-
 function _render_prompt()
 {
-	PS1=$simpleColoredPromptUser
-	PS1=$PS1$(_remote_prompt)
-	PS1=$PS1$simpleColoredPromptPath
+	PS1=$simpleColoredPromptBegin
 	if [ $(which git) ] ; then
 		PS1=$PS1$(_custom_prompt_colored_git)
 	fi
