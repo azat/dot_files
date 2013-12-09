@@ -16,6 +16,8 @@
 	default = upstream
 [color]
 	ui = auto
+[merge]
+	log = true
 [help]
 	# $ git lgo
 	# You called a Git command named 'lgo', which does not exist.
