@@ -26,7 +26,7 @@ fi
 # Simplest PS1
 simpleColoredPromptUser=$PS1$currentUserColor$Prompt_User$Color_Off
 simpleColoredPromptPath=:$BBlue$Prompt_PathShort$Color_Off
-if [ ! -e "$SSH_CONNECTION" ]; then
+if [ -n "$SSH_CONNECTION" ]; then
 	simpleColoredPromptBegin=$simpleColoredPromptUser$currentUserColor@'\h'$Color_Off$simpleColoredPromptPath
 else
 	simpleColoredPromptBegin=$simpleColoredPromptUser$simpleColoredPromptPath
