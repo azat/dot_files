@@ -170,3 +170,7 @@ set fileformat=unix
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
+"====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
+exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+set list
+
