@@ -166,3 +166,7 @@ set hlsearch " highlight search
 set incsearch " search while typing
 set fileformat=unix
 
+"====[ Make the 81st column stand out ]====================
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+
