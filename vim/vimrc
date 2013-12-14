@@ -178,10 +178,7 @@ set list
 augroup NoSimultaneousEdits
     autocmd!
     autocmd SwapExists * let v:swapchoice = 'o'
-    autocmd SwapExists * echomsg ErrorMsg
-    autocmd SwapExists * echo 'Duplicate edit session (readonly)'
-    autocmd SwapExists * echohl None
-    autocmd SwapExists * sleep 2
+	" TODO: need to fix error/warning
+    autocmd SwapExists * echoerr 'Duplicate edit session (readonly)'
 augroup END
-" Also consider the autoswap_mac.vim plugin (but beware its limitations)
 
