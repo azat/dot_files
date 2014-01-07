@@ -14,7 +14,18 @@ ssh() {
 		return
 	fi
 
-	server="${@: -1}"
+	# Non-interactive shell, will spawned on remote,
+	# in this case settitle will just print headers
+	# with command output, which is bad
+	last="${@: -1}"
+	nextToLast="${@: -2:1}"
+	if [[ -n "$last" ]] && [[ ! "$last" =~ ^- ]] &&
+		[[ -n "$nextToLast" ]] && [[ ! "$nextToLast" =~ ^- ]] && [[ ! "$nextToLast" =~ bash$ ]]; then
+		command ssh "$@"
+		return
+	fi
+
+	server="$last"
 	settitle "$server"
 	command ssh "$@"
 	settitle "bash"
