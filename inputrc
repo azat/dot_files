@@ -91,6 +91,7 @@ $endif
 set completion-map-case On
 set visible-stats On
 set mark-symlinked-directories On
+set page-completions On
 
 #
 # character search with Meta-] and Ctrl-Meta-]
