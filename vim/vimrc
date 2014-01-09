@@ -36,6 +36,8 @@ let g:detectindent_preferred_indent=4
 let g:detectindent_max_lines_to_analyse=1024
 " let g:detectindent_verbosity=0
 autocmd BufReadPost * :DetectIndent
+" http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
+Bundle 'godlygeek/tabular'
 
 syntax on
 
