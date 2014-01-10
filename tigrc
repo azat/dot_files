@@ -4,3 +4,6 @@
 #
 set show-author = abbreviated
 set show-date = relative
+
+bind main ^R !git revert %(commit)
+
