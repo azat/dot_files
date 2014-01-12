@@ -26,9 +26,14 @@ class leaking(gdb.Command):
             current = self.memory()
             if ((prev - current) > prev * 0.1):
                 print "Current: %lu bytes, was %lu bytes (%i iteration)" % (current, prev, i)
+                print "Backtrace before current free():\n%s" % (prevBt)
                 break
 
-            gdb.execute("continue")
+            prevBt = gdb.execute("bt", False, True)
+            if ((i % 100000) == 0):
+                print "Iteration %i backtrace:\n%s" % (i, prevBt)
+
+            gdb.execute("continue", False, True)
 
     def memory(self):
         mem = gdb.execute("info memory", False, True)
