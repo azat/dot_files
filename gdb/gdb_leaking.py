@@ -20,7 +20,7 @@ class leaking(gdb.Command):
         max = 1 << 24
         i = 0
         prev = self.memory()
-        print "Start: %lu bytes" % (prev)
+        print "Start: %lu bytes (max iterations: %lu)" % (prev, max)
 
         while ++i < max:
             current = self.memory()
