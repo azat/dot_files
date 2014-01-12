@@ -23,7 +23,11 @@ class leaking(gdb.Command):
         print "Start: %lu bytes (max iterations: %lu)" % (prev, max)
 
         for i in range(max):
-            current = self.memory()
+            try:
+                current = self.memory()
+            except gdb.error:
+                break
+
             if ((prev - current) > prev * 0.1):
                 print "Current: %lu bytes, was %lu bytes (%i iteration)" % (current, prev, i)
                 print "Backtrace before current free():\n%s" % (prevBt)
@@ -34,6 +38,9 @@ class leaking(gdb.Command):
                 print "Iteration %i backtrace:\n%s" % (i, prevBt)
 
             gdb.execute("continue", False, True)
+
+        print "Finished with: %lu bytes, was %lu bytes (%i iteration)" % (current, prev, i)
+        print "Backtrace before current free():\n%s" % (prevBt)
 
     def memory(self):
         # VmSize:   111784 kB
