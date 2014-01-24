@@ -13,6 +13,8 @@ set history filename ~/.gdb_history
 set history save
 set history expansion on
 
+set auto-load safe-path $debugdir:$datadir/auto-load:/usr/share
+
 # Disable printing of static members. Qt has too many, it clutters the output
 set print static-members off
 
