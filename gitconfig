@@ -63,6 +63,9 @@
 	purr = pull --rebase
 	puff = pull --ff-only
 
+	muff = merge --ff-only
+	munn = merge --no-ff
+
 	ready = rebase -i @{u}
 	ri = rebase --interactive
 
