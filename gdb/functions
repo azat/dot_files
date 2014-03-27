@@ -21,3 +21,23 @@ document tbt
 	Print backtrace of all running threads
 end
 
+define malloc_info
+	set $malloc_break_loop = 0
+	set $start = &main_arena
+	set $malloc_system_mem = 0
+	set $malloc_max_system_mem = 0
+
+	while ($start != 0 && $malloc_break_loop != 1)
+		set $malloc_system_mem += $start->system_mem
+		set $malloc_max_system_mem += $start->max_system_mem
+
+		if ($start == $start->next)
+			set $malloc_break_loop = 1
+		end
+		set $start = $start->next
+	end
+
+	printf "malloc_system_mem: %lu\n", $malloc_system_mem
+	printf "malloc_max_system_mem: %lu\n", $malloc_max_system_mem
+end
+
