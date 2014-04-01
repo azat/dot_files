@@ -43,6 +43,11 @@
 	changes = !sh -c 'git log --oneline `git rev-parse --symbolic-full-name --abbrev-ref @{u}`...${u}'
 	# Or just use git-status
 	aheadbegind = !sh -c 'curr_branch=$(git rev-parse --abbrev-ref HEAD) && curr_remote=$(git config branch.$curr_branch.remote) && curr_merge_branch=$(git config branch.$curr_branch.merge | cut -d / -f 3) && git rev-list --left-right --count $curr_branch...$curr_remote/$curr_merge_branch | tr -s \\\\t \\|'
+
+	# see which patches are different between branches
+	branchonly = !sh -c 'git cherry HEAD ${1} | tr -d + | xargs -I{} git show {}' -
+	currentonly = !sh -c 'git cherry ${1} HEAD | tr -d + | xargs -I{} git show {}' -
+
 	# Debian-like changelog
 	deb-changelog = !sh -c 'git --no-pager log --format=%ai\\ %aN\\ %n%n%x09*\\ %s%d%n'
 
