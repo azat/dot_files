@@ -41,3 +41,29 @@ define malloc_info
 	printf "malloc_max_system_mem: %lu\n", $malloc_max_system_mem
 end
 
+define container_of
+    set $_container_of_offset = &((struct $arg1 *)0)->$arg2
+    print ((struct $arg1 *)((char *)$arg0 - (char *)$_container_of_offset))
+end
+document container_of
+    Like that one from linux kernel headers
+    Usage: container_of ptr name_of_struct member
+    Example: container_of inode.i_dentry.first dentry d_name
+
+    (gdb) container_of dir_dentry->d_inode.i_dentry.first dentry d_alias
+    $50 = (struct dentry *) 0xffff88007b9f1640
+    (gdb) p $50->d_name
+    $51 = {
+      {
+        {
+          hash = 7303014,
+          len = 3
+        },
+        hash_len = 12892204902
+      },
+      name = 0xffff88007b9f16b0 "foo"
+    }
+end
+
+
+
