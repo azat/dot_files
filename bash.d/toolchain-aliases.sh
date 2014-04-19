@@ -10,7 +10,8 @@ function c_const()
     const="$1"
     additional_headers="$2"
     headers=$(cat <<-EOL
-        stdint.h stdio.h stdlib.h unistd.h fcntl.h \
+        stdint.h limits.h \
+        stdio.h stdlib.h unistd.h fcntl.h \
         sys/types.h sys/stat.h \
         sys/socket.h netinet/in.h arpa/inet.h
         errno.h
