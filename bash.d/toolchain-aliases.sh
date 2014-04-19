@@ -13,6 +13,7 @@ function c_const()
         stdint.h stdio.h stdlib.h unistd.h fcntl.h \
         sys/types.h sys/stat.h \
         sys/socket.h netinet/in.h arpa/inet.h
+        errno.h
 EOL
 )
     (
