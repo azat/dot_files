@@ -13,7 +13,8 @@ function c_const()
         stdint.h stdio.h stdlib.h unistd.h fcntl.h \
         sys/types.h sys/stat.h \
         sys/socket.h netinet/in.h arpa/inet.h
-EOL)
+EOL
+)
     (
         for header in $additional_headers $headers; do
             printf "#include <%s>\n" "$header"
