@@ -146,3 +146,8 @@ function unbak() {
 	done
 }
 
+function random()
+{
+	head -c${2:-"5000"} /dev/urandom | env LANG=c sed 's/[^0-9a-z]*//g' | \
+		tr -d $'\n' | head -c${1:-"10"}; echo
+}
