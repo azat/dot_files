@@ -19,7 +19,7 @@ let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn|cmake)$',
+  \ 'dir':  '\v[\/](\.(git|hg|svn|cmake)|build)$',
   \ 'file': '\v\.(exe|so|dll|a|o|la|lo|pc|in|swp|zip|rar|tgz|gz|tar)$',
   \ }
 Bundle 'szw/vim-tags'
