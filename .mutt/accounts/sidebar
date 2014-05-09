@@ -7,3 +7,10 @@ bind index,pager \CN sidebar-next
 bind index,pager \CO sidebar-open
 
 set imap_check_subscribed = yes
+
+# http://people.redhat.com/kzak/mutt-kz/muttrc
+color sidebar_new yellow default
+color sidebar green default
+set sidebar_width   = 35
+set sidebar_visible = yes
+set sort_sidebar=unsorted
