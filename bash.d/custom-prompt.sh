@@ -64,7 +64,7 @@ function _custom_prompt_colored_git()
 	if [ $HAVE_CHANGES = "0" ]; then
 		echo -en $Green$GIT_PS
 	else
-		echo -en $IRed$GIT_PS
+		echo -en $Yellow$GIT_PS
 	fi
 	if [ ! "$AHEAD_BEHIND" = 0 ]; then
 		echo -en "["$AHEAD_BEHIND"]"
