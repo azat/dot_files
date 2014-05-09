@@ -1,0 +1,13 @@
+
+color header color204 default "^From:.*"
+color header color210 default "^Subject:.*"
+color header color27 default "^X.*"
+color header color94 default "^Tag.*"
+
+# patches
+color body brightred default "^-.*"
+color body brightgreen default "^[+].*"
+color body brightwhite default "^diff --git.*"
+color body brightwhite default "^index [a-f0-9].*"
+color body brightyellow default "^@@.*"
+
