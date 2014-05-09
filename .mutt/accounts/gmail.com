@@ -1,5 +1,6 @@
 
 source ~/.mutt/accounts/common
+source ~/.mutt/accounts/sidebar
 
 set query_command   =   "/usr/bin/lbdbq '%s'"
 set signature       =   "~/.mutt/signatures/default"
