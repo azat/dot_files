@@ -18,7 +18,6 @@ set include
 set auto_tag        =   yes
 set imap_keepalive = 900
 
-hdr_order Date From To Cc
 bind editor <Tab> complete-query
 bind editor ^T complete
 bind editor <space> noop

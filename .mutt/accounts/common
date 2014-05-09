@@ -20,4 +20,8 @@ macro index   <left>   "<change-folder>?"
 bind  browser <right>  select-entry
 macro browser <left>   "<exit><change-folder>!<Enter>"
 
+ignore *
+unignore from: subject to cc date
+unignore x-git-refname
+hdr_order date from to cc
 
