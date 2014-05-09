@@ -4,7 +4,6 @@ source ~/.mutt/accounts/sidebar
 
 set query_command   =   "/usr/bin/lbdbq '%s'"
 set signature       =   "~/.mutt/signatures/default"
-set certificate_file =  ~/.mutt/certificates
 set envelope_from   =   "yes"
 set sort            =   reverse-threads
 set sort_aux        =   last-date-received
