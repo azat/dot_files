@@ -29,7 +29,7 @@ class InfoLinux(gdb.Command):
                 continue
             parts = line.strip().split(" ")
             absolutePtr = int("0x" + parts[2].strip(), 16)
-            print "0x%lx" % absolutePtr
+            gdb.write("0x%lx\n" % absolutePtr)
 
 
     #

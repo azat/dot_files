@@ -23,15 +23,15 @@ class thread_holder:
 
 def print_thread (thr, owner):
     if thr == selected_thread:
-        print "* ",
+        gdb.write("* \n"),
     else:
-        print "  ",
+        gdb.write("  \n"),
     if owner:
-        print "Owned by thread",
+        gdb.write("Owned by thread\n"),
     else:
-        print "Thread",
+        gdb.write("Thread\n"),
     (pid, lwp, tid) = thr.ptid
-    print "%d  " % lwp
+    gdb.write("%d  " % lwp)
 
 class info_mutex(gdb.Command):
     def __init__ (self):
@@ -74,12 +74,12 @@ class info_mutex(gdb.Command):
 
         for id in mutexes.keys():
             if id is None:
-                print "Threads not waiting for a lock:"
+                gdb.write("Threads not waiting for a lock:\n")
             else:
-                print "Mutex 0x%x:" % id
+                gdb.write("Mutex 0x%x:\n" % id)
                 print_thread (threads[owner[id]], True)
             for thr in mutexes[id]:
                 print_thread (thr, False)
-            print
+            gdb.write("\n")
 
 info_mutex()

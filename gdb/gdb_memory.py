@@ -36,7 +36,7 @@ class info_memory(gdb.Command):
 
                 memory += (end - start)
 
-        print "Memory: %s (%lu bytes)" % (self.sizeof_fmt(memory), memory)
+        gdb.write("Memory: %s (%lu bytes)\n" % (self.sizeof_fmt(memory), memory))
 
     def sizeof_fmt(self, num):
         for x in ['bytes','KiB','MiB','GiB','TiB']:

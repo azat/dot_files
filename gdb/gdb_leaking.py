@@ -37,17 +37,17 @@ class leaking(gdb.Command):
 
             # 5 %
             if (current > initial*0.05):
-                print "Current: %lu bytes, initial %lu bytes (%i iteration)" % (current, initial, i)
-                print "Backtrace before current free():\n%s" % (bt)
+                gdb.write("Current: %lu bytes, initial %lu bytes (%i iteration)\n" % (current, initial, i))
+                gdb.write("Backtrace before current free():\n%s\n" % (bt))
                 return
 
             if ((i % 100000) == 0):
-                print "Iteration %i backtrace:\n%s" % (i, bt)
+                gdb.write("Iteration %i backtrace:\n%s\n" % (i, bt))
 
             gdb.execute("continue", False, True)
 
-        print "Finished with %i iterations" % (i)
-        print "Last backtrace:\n%s" % (bt)
+        gdb.write("Finished with %i iterations\n" % (i))
+        gdb.write("Last backtrace:\n%s\n" % (bt))
 
     def memory(self):
         # VmSize:   111784 kB
