@@ -21,5 +21,11 @@ EOL
         for header in $additional_headers $headers; do
             printf "#include <%s>\n" "$header"
         done
-    ) | g++ -E -dM -xc++ - | fgrep $1 | egrep 'define|typedef'
+    ) | g++ -E -dM -xc++ - | fgrep $1 | fgrep define
+
+    (
+        for header in $additional_headers $headers; do
+            printf "#include <%s>\n" "$header"
+        done
+    ) | g++ -E -xc++ - | fgrep $1 | fgrep typedef
 }
