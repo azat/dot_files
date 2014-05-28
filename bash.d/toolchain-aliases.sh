@@ -5,11 +5,9 @@ function cm()
     make $* > /dev/null
 }
 
-function c_const()
+function c_const_generate()
 {
-    const="$1"
-    additional_headers="$2"
-    headers=$(cat <<-EOL
+    local headers=$(cat <<-EOL
         stdint.h limits.h \
         stdio.h stdlib.h unistd.h fcntl.h \
         sys/types.h sys/stat.h \
@@ -17,15 +15,15 @@ function c_const()
         errno.h
 EOL
 )
-    (
-        for header in $additional_headers $headers; do
-            printf "#include <%s>\n" "$header"
-        done
-    ) | g++ -E -dM -xc++ - | fgrep $1 | fgrep define
+    for header in $@ $headers; do
+        printf "#include <%s>\n" "$header"
+    done
+}
+function c_const()
+{
+    const="$1"
+    shift
 
-    (
-        for header in $additional_headers $headers; do
-            printf "#include <%s>\n" "$header"
-        done
-    ) | g++ -E -xc++ - | fgrep $1 | fgrep typedef
+    c_const_generate $@ | g++ -E -dM -xc++ - | fgrep $const | fgrep define
+    c_const_generate $@ | g++ -E -xc++ - | fgrep $const | fgrep typedef
 }
