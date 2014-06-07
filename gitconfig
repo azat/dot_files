@@ -42,15 +42,15 @@
 	autocorrect = 10
 [alias]
 	di = diff
-
 	ci = commit
 	cis = commit --signoff
 	amend = commit --amend
-
+	pi = cherry-pick
+	br = branch
+	mt = mergetool
 	co = checkout
 	ann = blame
 	st = status
-
 	patch = add --patch
 
 	# from http://heipei.net/linux/files/configs/gitconfig
