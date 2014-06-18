@@ -43,12 +43,13 @@ tmuxcatwindow()
 tmuxcapture()
 {
 	prefix=${1:-"tmux."}
+	start=${2:-"-1000000000"}
 
 	while read w n _; do
 		w=${w/:}
 		for p in $(tmux list-pane -t "$w" | cut -d: -f1); do
 			echo "Dumping window $n: $w:$p"
-			tmux -q capture-pane -t "${w}.${p}" -p -S -1000000000 >| \
+			tmux -q capture-pane -t "${w}.${p}" -p -S "$start" >| \
 				"${prefix}${n}.${w}.${p}"
 		done
 	done < <(tmux list-windows)
