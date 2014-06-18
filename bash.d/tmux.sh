@@ -40,3 +40,16 @@ tmuxcatwindow()
 	(for i in $(tmux list-pane -t "$session_window" | awk -F: '{print $1}'); do tmux -q capture-pane -t "$session_window".$i -p -S "$start"; done)
 }
 
+tmuxcapture()
+{
+	prefix=${1:-"tmux."}
+
+	while read w n _; do
+		w=${w/:}
+		for p in $(tmux list-pane -t "$w" | cut -d: -f1); do
+			echo "Dumping window $n: $w:$p"
+			tmux -q capture-pane -t "${w}.${p}" -p -S -1000000000 >| \
+				"${prefix}${n}.${w}.${p}"
+		done
+	done < <(tmux list-windows)
+}
