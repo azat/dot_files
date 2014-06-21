@@ -1,0 +1,12 @@
+# Git branches, using tig
+name: gb
+root: ~/
+
+windows:
+  - branches:
+    # Hack for 'i' button, not work without this timeout
+    - sleep 1 && tmux send-keys -t gb:branches.0 i &
+    - tig
+    # send more keys (settings)
+    - H
+    - I
