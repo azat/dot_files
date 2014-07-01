@@ -67,3 +67,13 @@ git_stat()
     done | sort | uniq -c | sort -rn
 }
 
+git_cmake_each()
+{
+    local upstream=${1:-"origin/master"}
+    shift
+
+    local a=""
+    [ ! -z "$@" ] && a="&& $@"
+    git rebase -i --exec "cd `git rev-parse --git-dir`/../.cmake && make $a" "$upstream"
+}
+
