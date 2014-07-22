@@ -70,8 +70,21 @@ git_stat()
 git_avg()
 {
     for i in $(git log --format=%h $@); do
-        git log --format=%B $i -1 | wc -l
-    done | awk '{all += $NF; total++;} END {printf "avg: %.0f (all: %.0f, total: %.0f)\n", (all / total), all, total}'
+        git log --format=%B $i -1 | wc
+    done | awk '\
+{
+    lines += $1;
+    words += $2;
+    bytes += $3;
+    ++commits;
+}
+END {
+    printf("Commits: %.0f\n", commits);
+    printf("Avg commit length: %.0f\n", (lines / commits));
+    printf("Avg commit words: %.0f\n", (words / commits));
+    printf("Avg commit bytes: %.0f\n", (bytes / commits));
+}
+'
 }
 
 git_cmake_each()
