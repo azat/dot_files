@@ -67,6 +67,13 @@ git_stat()
     done | sort | uniq -c | sort -rn
 }
 
+git_avg()
+{
+    for i in $(git log --format=%h $@); do
+        git log --format=%B $i -1 | wc -l
+    done | awk '{all += $NF; total++;} END {printf "avg: %.0f (all: %.0f, total: %.0f)\n", (all / total), all, total}'
+}
+
 git_cmake_each()
 {
     local upstream=${1:-"origin/master"}
