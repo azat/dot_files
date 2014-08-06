@@ -71,7 +71,7 @@ git_avg()
 {
     for i in $(git log --format=%h "$@"); do
         echo -n "$i " >& 2
-        git log --format=%B $i -1 | tac | tail -n+2 | wc
+        git log --format=%B $i -1 | tee -a >(tail -n+2) | head -1 | wc
     done |& awk '\
 {
     if (!$2) {
