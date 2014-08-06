@@ -70,17 +70,21 @@ git_stat()
 git_avg()
 {
     for i in $(git log --format=%h "$@"); do
+        echo -n "$i " >& 2
         git log --format=%B $i -1 | tac | tail -n+2 | wc
-    done | awk '\
+    done |& awk '\
 {
-    lines += $1;
-    words += $2;
-    bytes += $3;
+    if (!$2) {
+        print "Empty commit " $1;
+    }
+    lines += $2;
+    words += $3;
+    bytes += $4;
     ++commits;
 }
 END {
     printf("Commits: %.0f\n", commits);
-    printf("Avg commit lines: %.0f\n", (lines / commits));
+    printf("Avg commit length: %.0f\n", (lines / commits));
     printf("Avg commit words: %.0f\n", (words / commits));
     printf("Avg commit bytes: %.0f\n", (bytes / commits));
 }
