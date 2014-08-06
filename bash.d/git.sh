@@ -70,7 +70,7 @@ git_stat()
 git_avg()
 {
     for i in $(git log --format=%h "$@"); do
-        git log --format=%B $i -1 | wc
+        git log --format=%B $i -1 | tac | tail -n+2 | wc
     done | awk '\
 {
     lines += $1;
