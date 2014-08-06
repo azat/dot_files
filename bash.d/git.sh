@@ -84,7 +84,7 @@ git_avg()
 }
 END {
     printf("Commits: %.0f\n", commits);
-    printf("Avg commit length: %.0f\n", (lines / commits));
+    printf("Avg commit length: %.1f\n", (lines / commits));
     printf("Avg commit words: %.0f\n", (words / commits));
     printf("Avg commit bytes: %.0f\n", (bytes / commits));
 }
