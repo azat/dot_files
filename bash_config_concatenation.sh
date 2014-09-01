@@ -1,16 +1,19 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 SERVER_VERSION="$1"
 SELF=${0%/*}
-FILES="$SELF/bash.bashrc \
-	$SELF/bash_functions"
+FILES="$SELF/bash.bashrc"
 
 if [ "$SERVER_VERSION" ]; then
-	FILES="$FILES /usr/lib/git-core/git-sh-prompt"
+	FILES+=" /usr/lib/git-core/git-sh-prompt"
 fi
 
-for FILE in $(ls -d $SELF/bash.d/* | fgrep -v autojump.sh | fgrep -v remark.sh); do
-	FILES="$FILES $FILE"
+for FILE in $SELF/bash.d/*.sh; do
+	if [[ $FILE =~ (autojump|remark).sh ]]; then
+		continue
+	fi
+
+	FILES+=" $FILE"
 done
 
 echo "#"
@@ -28,7 +31,9 @@ for FILE in $(echo $FILES); do
 
 	if [ "$SERVER_VERSION" ]; then
 		# Replace colors of user name in prompt to underlined
-		cat $FILE | sed 's/currentUserColor=$BRed/currentUserColor=$URed/' | sed 's/currentUserColor=$BGreen/currentUserColor=$UGreen/'
+		cat $FILE | \
+			sed 's/currentUserColor=$BRed/currentUserColor=$URed/' | \
+			sed 's/currentUserColor=$BGreen/currentUserColor=$UGreen/'
 	else
 		cat $FILE
 	fi
