@@ -85,11 +85,19 @@ function _render_prompt()
 {
 	PS1=$simpleColoredPromptBegin
 	if [ $(which git) ] ; then
-		PS1=$PS1$(_custom_prompt_colored_git)
+		PS1+=$(_custom_prompt_colored_git)
 	fi
-	PS1=$PS1$(_jobs_prompt)
-	PS1=$PS1$currentUserPostfix' '
+	PS1+=$(_jobs_prompt)
+	PS1+=$currentUserPostfix' '
 }
 
-PROMPT_COMMAND="$PROMPT_COMMAND ; _render_prompt"
-
+# Set window title (Redhat way)
+case $TERM in
+    xterm*|rxvt*)
+        PROMPT_COMMAND="$PROMPT_COMMAND; "'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+    ;;
+    screen)
+        PROMPT_COMMAND="$PROMPT_COMMAND; "'printf "\033]0;%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+    ;;
+esac
+PROMPT_COMMAND+="; _render_prompt"
