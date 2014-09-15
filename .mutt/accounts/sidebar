@@ -7,6 +7,7 @@ bind index,pager \CN sidebar-next
 bind index,pager \CO sidebar-open
 
 set imap_check_subscribed = yes
+set mail_check = 120
 
 # http://people.redhat.com/kzak/mutt-kz/muttrc
 color sidebar_new yellow default
