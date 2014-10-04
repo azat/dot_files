@@ -205,3 +205,11 @@ cabbrev noc set cursorline! <BAR> set cursorcolumn!
 cabbrev tab setl noexpandtab <BAR> setl shiftwidth=4 <BAR> setl tabstop=4
 cabbrev space setl expandtab <BAR> setl shiftwidth=4 <BAR> setl tabstop=4
 
+" Fold
+autocmd FileType c setlocal foldmethod=syntax
+autocmd FileType cpp setlocal foldmethod=syntax
+autocmd FileType h setlocal foldmethod=syntax
+set foldenable!
+set foldlevel=1000 " don't auto folding, since za set foldenable
+hi Folded ctermbg=5 " color scheme dark reset can't handle folded info
+
