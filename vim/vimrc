@@ -185,6 +185,11 @@ augroup NoSimultaneousEdits
     autocmd SwapExists * echoerr 'Duplicate edit session (readonly)'
 augroup END
 
+" no backup needed
+set nobackup
+set nowb
+set noswapfile
+
 " Cursor
 set cursorline
 set cursorcolumn
