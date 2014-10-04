@@ -189,3 +189,11 @@ augroup END
 set cursorline
 set cursorcolumn
 
+" Abbrevs
+iabbrev _email a3at.mail@gmail.com
+iabbrev _me Azat Khuzhin
+iabbrev _r Reviewed-by: Azat Khuzhin <a3at.mail@gmail.com>
+iabbrev _s Signed-off-by: Azat Khuzhin <a3at.mail@gmail.com>
+iabbrev _p Reported-by:
+iabbrev _t Tested-by:
+
