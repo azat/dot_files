@@ -25,6 +25,8 @@ unignore from: subject to cc date
 unignore x-git-refname
 hdr_order date from to cc
 
+set certificate_file = ~/.mutt/cache/certificates
+
 source ~/.mutt/colors/mutt-colors-solarized-dark-16.muttrc
 source ~/.mutt/colors/additional
 
