@@ -118,3 +118,7 @@
 	pushInsteadOf = github:
 [url "git://git.code.sf.net/p/"]
 	insteadOf = sf:
+[url "https://anonscm.debian.org/git/collab-maint/"]
+	insteadOf = deb:
+[url "git://anonscm.debian.org/collab-maint/"]
+	pushInsteadOf = deb:
