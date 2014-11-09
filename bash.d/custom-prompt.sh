@@ -81,6 +81,11 @@ function _jobs_prompt()
 	fi
 }
 
+function _date_prompt()
+{
+	echo -en " | $Green$(date +'%Y-%b-%d %H:%M:%S')$Color_Off"
+}
+
 function _render_prompt()
 {
 	PS1=$simpleColoredPromptBegin
@@ -88,6 +93,9 @@ function _render_prompt()
 		PS1+=$(_custom_prompt_colored_git)
 	fi
 	PS1+=$(_jobs_prompt)
+	if (( $DATE_PROMPT )); then
+		PS1+=$(_date_prompt)
+	fi
 	PS1+=$currentUserPostfix' '
 }
 
