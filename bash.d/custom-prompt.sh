@@ -102,10 +102,10 @@ function _render_prompt()
 # Set window title (Redhat way)
 case $TERM in
     xterm*|rxvt*)
-        PROMPT_COMMAND="$PROMPT_COMMAND; "'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+        PROMPT_COMMAND+='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"; '
     ;;
     screen)
-        PROMPT_COMMAND="$PROMPT_COMMAND; "'printf "\033]0;%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+        PROMPT_COMMAND+='printf "\033]0;%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"; '
     ;;
 esac
 PROMPT_COMMAND+="_render_prompt ;"
