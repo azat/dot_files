@@ -13,6 +13,7 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
+PROMPT_COMMAND=''
 for bash_d_it in /etc/bash.d/*.sh; do
     . $bash_d_it
 done
