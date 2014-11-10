@@ -16,7 +16,7 @@ fi
 PROMPT_COMMAND=''
 for bash_d_it in /etc/bash.d/*.sh; do
     . $bash_d_it
-done
+done 2>/dev/null
 unset bash_d_it
 
 # make less more friendly for non-text input files, see lesspipe(1)
