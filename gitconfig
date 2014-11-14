@@ -96,6 +96,8 @@
 	push-up-to = !sh -c \"test -n '$1' -a -n '$2' && git push $1 $2:$(git rev-parse --abbrev-ref HEAD)\"
 
 	tarball = !sh -c 'git archive --format tar.gz --prefix `basename $PWD`-`git abbrev`/ HEAD > `basename $PWD`-`git abbrev`.tgz'
+
+	mlog = !sh -c \"git log $(git merge-base --octopus $(git log -1 --merges --pretty=format:%P ${1-`echo HEAD`}))..$(git log -1 --merges --pretty=format:%H ${1-`echo HEAD`}) --boundary --graph --pretty=oneline --abbrev-commit\"
 [apply]
 	whitespace = warn
 
