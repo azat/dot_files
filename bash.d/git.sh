@@ -91,13 +91,22 @@ END {
 '
 }
 
-git_cmake_each()
+git_rebase_run()
 {
-    local upstream=${1:-"origin/master"}
-    shift
+    local buildSystem=ninja
+    local buildDir="$PWD" # git rebase --exec will change it
+    local upstream=origin/master
+    while getopts "b:u:" o; do
+        case "$o" in
+            b) buildSystem="$OPTARG"; shift 2;;
+            B) buildDir="$OPTARG"; shift 2;;
+            u) upstream="$OPTARG"; shift 2;;
+            *) echo "$0 [ -b <buildSystem>] [ -u <upstream>] [ another-steps ]" >&2; return 1;;
+        esac
+    done
 
     local a=""
     [ ! -z "$@" ] && a="&& $@"
-    git rebase -i --exec "cd `git rev-parse --git-dir`/../.cmake && make $a" "$upstream"
+    git rebase -i --exec "cd $buildDir && $buildSystem $a" "$upstream"
 }
 
