@@ -19,6 +19,7 @@ bind  index   <right>  display-message
 macro index   <left>   "<change-folder>?"
 bind  browser <right>  select-entry
 macro browser <left>   "<exit><change-folder>!<Enter>"
+bind  index   L        limit
 
 ignore *
 unignore from: subject to cc date
