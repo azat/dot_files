@@ -96,7 +96,7 @@ git_rebase_run()
     local buildSystem=ninja
     local buildDir="$PWD" # git rebase --exec will change it
     local upstream=origin/master
-    while getopts "b:u:" o; do
+    while getopts "b:u:B:" o; do
         case "$o" in
             b) buildSystem="$OPTARG"; shift 2;;
             B) buildDir="$OPTARG"; shift 2;;
