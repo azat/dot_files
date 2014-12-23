@@ -50,5 +50,6 @@
 !/.config
 
 !/.xmodmap
+!/.keymaps
 
 !/.tmuxinator
