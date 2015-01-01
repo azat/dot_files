@@ -99,13 +99,17 @@ function _render_prompt()
 	PS1+=$currentUserPostfix' '
 }
 
+if [ -n "$PROMPT_COMMAND" ] && [ ! "${PROMPT_COMMAND: -1}" = ';' ]; then
+	PROMPT_COMMAND+=';'
+fi
+
 # Set window title (Redhat way)
 case $TERM in
-    xterm*|rxvt*)
-        PROMPT_COMMAND+='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"; '
-    ;;
-    screen)
-        PROMPT_COMMAND+='printf "\033]0;%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"; '
-    ;;
+	xterm*|rxvt*)
+		PROMPT_COMMAND+='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"; '
+	;;
+	screen)
+		PROMPT_COMMAND+='printf "\033]0;%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"; '
+	;;
 esac
 PROMPT_COMMAND+="_render_prompt ;"
