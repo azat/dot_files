@@ -14,6 +14,7 @@ PS1='${debian_chroot:+($debian_chroot)}'
 
 # number of trailing directory components to retain when expanding  the  \w  and  \W
 PROMPT_DIRTRIM=2
+CUSTOM_PROMPT_LAST_COMMAND_STATUS=0
 
 if [ $USER = "root" ] ; then
 	currentUserColor=$BRed
@@ -86,9 +87,17 @@ function _date_prompt()
 	echo -en " | $Green$(date +'%Y-%b-%d %H:%M:%S')$Color_Off"
 }
 
+function _render_prompt_preamble()
+{
+    CUSTOM_PROMPT_LAST_COMMAND_STATUS=$?
+}
 function _render_prompt()
 {
-	PS1=$simpleColoredPromptBegin
+	PS1=
+	if [ ! $CUSTOM_PROMPT_LAST_COMMAND_STATUS -eq 0 ]; then
+		PS1+="$Red$CUSTOM_PROMPT_LAST_COMMAND_STATUS|"
+	fi
+	PS1+=$simpleColoredPromptBegin
 	if [ $(which git) ] ; then
 		PS1+=$(_custom_prompt_colored_git)
 	fi
@@ -112,4 +121,4 @@ case $TERM in
 		PROMPT_COMMAND+='printf "\033]0;%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"; '
 	;;
 esac
-PROMPT_COMMAND+="_render_prompt ;"
+PROMPT_COMMAND="_render_prompt_preamble; $PROMPT_COMMAND _render_prompt; "
