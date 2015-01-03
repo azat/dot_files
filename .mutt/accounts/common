@@ -20,6 +20,7 @@ macro index   <left>   "<change-folder>?"
 bind  browser <right>  select-entry
 macro browser <left>   "<exit><change-folder>!<Enter>"
 bind  index   L        limit
+macro index   A        "<limit>all\n" "show all messages (undo limit)"
 
 ignore *
 unignore from: subject to cc date
