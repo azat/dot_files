@@ -160,9 +160,7 @@ def FlagsForFile( filename, **kwargs ):
     # Bear in mind that compilation_info.compiler_flags_ does NOT return a
     # python list, but a "list-like" StringVec object
     compilation_info = GetCompilationInfoForFile( filename )
-    if not compilation_info:
-      return None
-
+  if compilation_info:
     final_flags = MakeRelativePathsInFlagsAbsolute(
       compilation_info.compiler_flags_,
       compilation_info.compiler_working_dir_ )
