@@ -42,15 +42,21 @@ tmuxcatwindow()
 
 tmuxcapture()
 {
-	prefix=${1:-"tmux."}
-	start=${2:-"-1000000000"}
+	local pattern=${1:-"tmux.%n.%w.%p"}
+	local start=${2:-"-1000000000"}
 
+	local n w p _ name
 	while read w n _; do
 		w=${w/:}
 		for p in $(tmux list-pane -t "$w" | cut -d: -f1); do
-			echo "Dumping window $n: $w:$p"
-			tmux -q capture-pane -t "${w}.${p}" -p -S "$start" >| \
-				"${prefix}${n}.${w}.${p}"
+			echo "Dumping window $n:$w:$p"
+
+			name="$pattern"
+			name=${name/\%n/$n}
+			name=${name/\%w/$w}
+			name=${name/\%p/$p}
+
+			tmux -q capture-pane -t "${w}.${p}" -p -S "$start" >| "$name"
 		done
 	done < <(tmux list-windows)
 }
