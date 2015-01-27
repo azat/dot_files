@@ -255,3 +255,4 @@ map <C-right> :tabnext<cr>
 nmap <leader>w :w!<cr>
 nmap <leader>q :q<cr>
 nmap <leader>e :e ~/.vimrc<cr>
+set pastetoggle=<leader>p
