@@ -77,6 +77,8 @@ $endif
 # incremental history search, both reverse and forward with Ctrl-r/]
 "\C-r": reverse-search-history
 "\C-]": forward-search-history
+# non incrementa history search by substring
+"\C-i": history-substring-search-backward
 #  often, Ctrl-s (default for forward search) is usually masked by tty's STOP
 #  moreover, things like "\e\C-r" reset the isearch keyword
 #  so, overriding Ctrl-] (default character-search) seems to be the best choice
