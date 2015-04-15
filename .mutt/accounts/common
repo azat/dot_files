@@ -34,3 +34,18 @@ set certificate_file = ~/.mutt/cache/certificates
 source ~/.mutt/colors/mutt-colors-solarized-dark-16.muttrc
 source ~/.mutt/colors/additional
 
+# http://pablotron.org/files/muttrc
+set fast_reply
+set fcc_attach
+set pager_stop
+set smart_wrap
+unset wait_key
+
+set abort_nosubject=no
+set abort_unmodified=yes
+set quit=yes
+set recall=no # use recall command instead
+set postpone=ask-yes
+
+set read_inc=20
+set write_inc=20
