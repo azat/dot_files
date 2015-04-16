@@ -43,7 +43,7 @@ unset wait_key
 
 set abort_nosubject=no
 set abort_unmodified=yes
-set quit=yes
+set quit=no
 set recall=no # use recall command instead
 set postpone=ask-yes
 
