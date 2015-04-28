@@ -8,8 +8,7 @@ settitle() {
 }
 
 ssh() {
-	# Non in tmux
-	if [ -z "$TMUX" ]; then
+	if [ -z "$TMUX" ] || [ ! -t 0 ] || [ ! -t 1 ] || [ ! -t 2 ]; then
 		command ssh "$@"
 		return
 	fi
