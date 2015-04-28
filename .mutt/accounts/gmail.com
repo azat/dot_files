@@ -12,6 +12,7 @@ set realname        =   "Azat Khuzhin"
 set spoolfile       =   "+INBOX"
 set postponed       =   "+[Gmail]/Drafts"
 set record          =   /dev/null
+# For trash to work, you need share it in Gmail Settings -> Labels for IMAP
 set trash           =   "imaps://imap.gmail.com/[Gmail]/Trash"
 set move            =   no
 set include
@@ -24,7 +25,7 @@ bind editor <space> noop
 
 # Gmail-style keyboard shortcuts
 bind  index,pager a  group-reply
-bind  index,pager c  mail       
+bind  index,pager c  mail
 bind  generic     x  tag-entry      #Select Conversation
 bind  index       x  tag-thread     #Select Conversation
 bind  pager       x  tag-message    #Select Conversation
@@ -37,7 +38,7 @@ bind  index,pager l  copy-message   #Label
 bind  index,pager v  save-message   #Move to
 macro index,pager I  <set-flag>O    "Mark as read"
 macro index,pager U  <clear-flag>O  "Mark as unread"
-macro index,pager y "<enter-command>unset trash\n <delete-message>" "Gmail archive message"
+macro index,pager y  "<save-message>=[Gmail]/All Mail<enter><enter>" "Gmail archive message"
 macro index,pager gl "<change-folder>"
 macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox"
 macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
