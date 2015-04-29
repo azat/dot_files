@@ -49,3 +49,10 @@ set postpone=ask-yes
 
 set read_inc=20
 set write_inc=20
+
+# https://github.com/gregf/dotfiles/blob/master/mutt/muttrc.bindings
+# show/hide things ----------------------------------------------------
+bind  index                 zA  collapse-thread                                                 # toggle thread, similar to vim folding (though inverted)
+bind  index                 za  collapse-all                                                    # toggle all thread, similar to vim folding
+bind  pager                 zA  toggle-quoted                                                   # toggle quote section, similar to vim folding
+bind  pager                 za  toggle-quoted                                                   # toggle quote section, similar to vim folding
