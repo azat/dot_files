@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+function decode_header()
+{
+    python <<EOL
+from email.header import decode_header
+print decode_header('$@')[0][0]
+EOL
+}
+
 out=~/.lbdb/m_inmail.list
 
 date_format='%Y-%m-%d %H:%M'
@@ -23,6 +31,8 @@ while IFS=$'\n' read line; do
 
         name="${BASH_REMATCH[1]%% }"
         email="${BASH_REMATCH[2]}"
+
+        name="$(decode_header "$name")"
 
         printf "%s\t%s\t%s\n" "$email" "$name" "$date"
     fi
