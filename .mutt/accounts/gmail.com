@@ -2,26 +2,16 @@
 source ~/.mutt/accounts/common
 source ~/.mutt/accounts/sidebar
 
-set query_command   =   "/usr/bin/lbdbq '%s'"
-set signature       =   "~/.mutt/signatures/default"
-set envelope_from   =   "yes"
-set sort            =   reverse-threads
-set sort_aux        =   last-date-received
 set folder          =   "imaps://imap.gmail.com:993"
 set realname        =   "Azat Khuzhin"
 set spoolfile       =   "+INBOX"
 set postponed       =   "+[Gmail]/Drafts"
-set record          =   /dev/null
 # For trash to work, you need share it in Gmail Settings -> Labels for IMAP
 set trash           =   "imaps://imap.gmail.com/[Gmail]/Trash"
 set move            =   no
 set include
 set auto_tag        =   yes
 set imap_keepalive = 900
-
-bind editor <Tab> complete-query
-bind editor ^T complete
-bind editor <space> noop
 
 # Gmail-style keyboard shortcuts
 bind  index,pager a  group-reply

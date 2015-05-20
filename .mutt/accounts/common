@@ -5,6 +5,17 @@
 # Date: Sat, 4 Sep 1999 21:09:00 +0000
 
 
+set query_command   =   "/usr/bin/lbdbq '%s'"
+set signature       =   "~/.mutt/signatures/default"
+set envelope_from   =   "yes"
+set sort            =   reverse-threads
+set sort_aux        =   last-date-received
+set record          =   /dev/null
+
+bind editor <Tab> complete-query
+bind editor ^T complete
+bind editor <space> noop
+
 #
 # These key bindings may be nice for notorious lynx or tin users.
 #
