@@ -46,6 +46,7 @@ set certificate_file = ~/.mutt/cache/certificates
 
 source ~/.mutt/colors/mutt-colors-solarized-dark-16.muttrc
 source ~/.mutt/colors/additional
+source ~/.mutt/accounts/reply-the-same-addr
 
 # http://pablotron.org/files/muttrc
 set fast_reply
