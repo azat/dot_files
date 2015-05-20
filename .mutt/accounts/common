@@ -6,6 +6,8 @@
 
 
 set query_command   =   "/usr/bin/lbdbq '%s'"
+macro index,pager B "<pipe-message>~/.mutt/scripts/lbdb-add.sh<return>" "Add the sender address to lbdb"
+
 set signature       =   "~/.mutt/signatures/default"
 set envelope_from   =   "yes"
 set sort            =   reverse-threads
