@@ -259,3 +259,6 @@ nmap <leader>w :w!<cr>
 nmap <leader>q :q<cr>
 nmap <leader>e :e ~/.vimrc<cr>
 set pastetoggle=<leader>p
+
+nnoremap <C-a> <nop>
+nnoremap <C-x> <nop>
