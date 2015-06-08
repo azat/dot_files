@@ -99,6 +99,9 @@ set hidden
 set autoindent
 set smartindent
 
+nmap <F1> :setlocal spell!<cr>
+imap <F1> <C-\><C-O>:setlocal spell!<cr>
+
 " F2 -  fast save
 nmap <F2> :w<cr>
 vmap <F2> <esc>:w<cr>i
