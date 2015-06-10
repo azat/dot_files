@@ -70,3 +70,5 @@ bind  index                 zA  collapse-thread                                 
 bind  index                 za  collapse-all                                                    # toggle all thread, similar to vim folding
 bind  pager                 zA  toggle-quoted                                                   # toggle quote section, similar to vim folding
 bind  pager                 za  toggle-quoted                                                   # toggle quote section, similar to vim folding
+
+bind  index,pager N  search-opposite
