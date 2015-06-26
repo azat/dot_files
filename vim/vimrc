@@ -39,6 +39,7 @@ autocmd BufReadPost * :DetectIndent
 " http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
 Bundle 'godlygeek/tabular'
 Bundle 'vim-lldb'
+Bundle 'tpope/vim-surround'
 
 syntax on
 
