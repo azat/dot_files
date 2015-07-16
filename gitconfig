@@ -124,3 +124,7 @@
 	insteadOf = deb:
 [url "ssh://git.debian.org/git/collab-maint/"]
 	pushInsteadOf = deb:
+[url "https://anonscm.debian.org/users/"]
+	insteadOf = udeb:
+[url "ssh://git.debian.org/srv/home/users/"]
+	pushInsteadOf = udeb:
