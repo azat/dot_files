@@ -219,8 +219,8 @@ cabbrev non set nonumber
 cabbrev n set number
 cabbrev c set cursorline <BAR> set cursorcolumn
 cabbrev noc set cursorline! <BAR> set cursorcolumn!
-cabbrev tab setl noexpandtab <BAR> setl shiftwidth=4 <BAR> setl tabstop=4
-cabbrev space setl expandtab <BAR> setl shiftwidth=4 <BAR> setl tabstop=4
+cabbrev tab setl noexpandtab <BAR> setl shiftwidth=4 <BAR> setl tabstop=4 <BAR> setl softtabstop=4
+cabbrev space setl expandtab <BAR> setl shiftwidth=4 <BAR> setl tabstop=4 <BAR> setl softtabstop=4
 
 " Fold
 autocmd FileType c setlocal foldmethod=syntax
