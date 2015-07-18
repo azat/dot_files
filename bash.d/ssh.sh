@@ -5,7 +5,7 @@
 function restore_ssh_agent()
 {
     local pid=$(pgrep -u$USER ssh-agent | head -1)
-    local socket=$(sudo lsof -np $pid | fgrep unix | awk '{print $NF}')
+    local socket=$(sudo lsof -np $pid | awk '/unix/ {print $NF; exit(0);}')
 
     export SSH_AGENT_PID=$pid
     export SSH_AUTH_SOCK=$socket
