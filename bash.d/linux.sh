@@ -6,5 +6,7 @@ function linux_ctags()
         "$(ls -1d arch/* | fgrep -v $arch | xargs printf '--exclude=%s/* ')" \
         --exclude='drivers/*' \
         --exclude=build*/* \
+        --exclude=debian/* \
+        "$@" \
         --exclude=sound/* .
 }
