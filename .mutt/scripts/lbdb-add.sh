@@ -27,10 +27,13 @@ while IFS=$'\n' read line; do
     fi
 
     if [[ "$key" =~ ^(From|To|CC)$ ]]; then
-        [[ "$val" =~ $name_email ]] || continue
-
-        name="${BASH_REMATCH[1]%% }"
-        email="${BASH_REMATCH[2]}"
+        if [[ "$val" =~ $name_email ]]; then
+            name="${BASH_REMATCH[1]%% }"
+            email="${BASH_REMATCH[2]}"
+        else
+            email="$val"
+            name="$val"
+        fi
 
         name="$(decode_header "$name")"
 
