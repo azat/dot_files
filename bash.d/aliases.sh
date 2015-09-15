@@ -5,6 +5,7 @@ if [ "$TERM" != "dumb" ]; then
     alias vdir='ls --color=auto --format=long'
     alias lss='ls --color=never'
     alias grep='grep --color=auto'
+    alias wdiff='wdiff -w "$(tput bold;tput setaf 1)" -x "$(tput sgr0)" -y "$(tput bold;tput setaf 2)" -z "$(tput sgr0)"'
 fi
 
 alias ll='ls -l'
