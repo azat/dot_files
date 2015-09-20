@@ -17,3 +17,6 @@ alias save_kde_session='qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInte
 alias f='find ./ -name'
 alias strings='strings -a'
 alias gdb='gdb -q'
+
+alias tmuxl='tmux -f <(echo set -g history-limit 1000000000)'
+alias tmuxs='tmux -f <(echo set -g history-limit 1000)'
