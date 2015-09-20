@@ -16,3 +16,4 @@ alias sortfast="sort -S$(($(sed '/MemT/!d;s/[^0-9]*//g' /proc/meminfo)/1024-200)
 alias save_kde_session='qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.saveCurrentSession'
 alias f='find ./ -name'
 alias strings='strings -a'
+alias gdb='gdb -q'
