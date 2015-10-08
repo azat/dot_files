@@ -53,7 +53,7 @@
 	st = status
 	patch = add --patch
 	tags = tag --sort=v:refname
-	prev = checkut HEAD^
+	prev = checkout HEAD^
 	hprev = reset --hard HEAD^
 
 	# from http://heipei.net/linux/files/configs/gitconfig
