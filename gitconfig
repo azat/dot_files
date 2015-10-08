@@ -53,6 +53,8 @@
 	st = status
 	patch = add --patch
 	tags = tag --sort=v:refname
+	prev = co HEAD^
+	hprev = reset --hard HEAD^
 
 	# from http://heipei.net/linux/files/configs/gitconfig
 	llog = log --date=short --format=\"%C(94)--------------------------------------------------------------------------------%n%C(24)%h %C(124)%ad %C(34)%an %C(22)<%ae>%C(130)%d%n%C(178)%s%+b\"
@@ -92,6 +94,8 @@
 
 	ready = rebase -i @{u}
 	ri = rebase --interactive
+	rc = rebase --continue
+	ra = rebase --abort
 
 	push-up-to = !sh -c \"test -n '$1' -a -n '$2' && git push $1 $2:$(git rev-parse --abbrev-ref HEAD)\"
 
