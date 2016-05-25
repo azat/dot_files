@@ -1,7 +1,7 @@
 export HISTSIZE=100000
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL="ignoreboth:erasedups"
-export HISTIGNORE="&:ls:[bf]g:exit:history:cat:l:ll:ps:history *:pwd:free:w:jobs"
+export HISTIGNORE="&:ls:[bf]g:exit:history:cat:l:ll:ps:history *:pwd:free:w:jobs:* --help|* -help|* -version|* --version"
 
 # all history in 1
 shopt -s histappend
