@@ -137,3 +137,5 @@
 	insteadOf = udeb:
 [url "ssh://git.debian.org/srv/home/users/"]
 	pushInsteadOf = udeb:
+[url "git://anongit.freedesktop.org/"]
+	insteadOf = freedesktop:
