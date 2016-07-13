@@ -43,6 +43,7 @@
 [alias]
 	di = diff
 	ci = commit
+	cs = commit -S
 	cis = commit --signoff
 	amend = commit --amend
 	amn = commit --amend --no-edit
