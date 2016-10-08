@@ -137,6 +137,8 @@ $if Bash
     "\eH": shell-backward-kill-word
     "\eD": shell-kill-word
 
+    # IGNOREEOF
+    "\e\C-d": "exit\C-m"
 $endif
 
 #
