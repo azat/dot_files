@@ -20,3 +20,5 @@ alias gdb='gdb -q'
 
 alias tmuxl='tmux -f <(echo set -g history-limit 1000000000)'
 alias tmuxs='tmux -f <(echo set -g history-limit 1000)'
+
+alias gg='git grep'
