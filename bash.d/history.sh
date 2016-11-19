@@ -8,3 +8,4 @@ shopt -s histappend
 PROMPT_COMMAND+='history -a ;'
 #many strings commands
 shopt -s cmdhist
+shopt -s histverify
