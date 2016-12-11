@@ -15,7 +15,7 @@ class ninja(gdb.Command):
     def invoke(self, arg, from_tty):
         call("ninja " + arg, shell=True)
         for o in gdb.objfiles():
-            print "Reload %s" % (o.filename)
+            print("Reload %s" % (o.filename))
             self.reload(o.filename)
 
     def reload(self, filename):
