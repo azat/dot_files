@@ -7,5 +7,10 @@ function mux()
 
     local p=~/.tmuxinator/"$s.sh"
 
-    tmuxinator debug "$s" >| "$p" && chmod +x "$p" && "$p"
+    # XXX: works only when socket_name == tmuxinator name
+    tmux -L $s a || {
+        tmuxinator debug "$s" >| "$p"
+        chmod +x "$p"
+        "$p"
+    }
 }
