@@ -27,3 +27,5 @@ function c_const()
     c_const_generate $@ | g++ -E -dM -xc++ - | fgrep $const | fgrep define
     c_const_generate $@ | g++ -E -xc++ - | fgrep $const | fgrep typedef
 }
+
+alias gdb='gdb -q'
