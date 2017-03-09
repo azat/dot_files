@@ -38,7 +38,6 @@ flags = [
 '-Wall',
 '-Wextra',
 '-Werror',
-'-Wc++98-compat',
 '-Wno-long-long',
 '-Wno-variadic-macros',
 '-fexceptions',
@@ -52,35 +51,15 @@ flags = [
 # a "-std=<something>".
 # For a C project, you would set this to something like 'c99' instead of
 # 'c++11'.
-'-std=c++11',
+'-std=c++1z',
 # ...and the same thing goes for the magic -x option which specifies the
 # language that the files to be compiled are written in. This is mostly
 # relevant for c++ headers.
 # For a C project, you would set this to 'c' instead of 'c++'.
 '-x',
 'c++',
-'-isystem',
-'../BoostParts',
-'-isystem',
-# This path will only work on OS X, but extra paths that don't exist are not
-# harmful
-'/System/Library/Frameworks/Python.framework/Headers',
-'-isystem',
-'../llvm/include',
-'-isystem',
-'../llvm/tools/clang/include',
 '-I',
 '.',
-'-I',
-'./ClangCompleter',
-'-isystem',
-'./tests/gmock/gtest',
-'-isystem',
-'./tests/gmock/gtest/include',
-'-isystem',
-'./tests/gmock',
-'-isystem',
-'./tests/gmock/include'
 ]
 
 
@@ -176,13 +155,11 @@ def FlagsForFile( filename, **kwargs ):
     relative_to = DirectoryOfThisScript()
     final_flags = MakeRelativePathsInFlagsAbsolute( flags, relative_to )
 
-  # echo | clang -v -E -x c++ -stdlib=libc++ -std=c++11 - 2>&1 | 
+  # echo | clang -v -E -x c++ -stdlib=libc++ -std=c++1z - 2>&1 </dev/null |
   # fgrep -A100 '#include <...> search starts here:' | 
   # grep '^ /' | xargs -I{} readlink -f {}
-  for path in ['/usr/include/c++/v1',
-               '/usr/local/include',
-               '/usr/lib/llvm-3.3/lib/clang/3.3/include',
-               '/usr/include/x86_64-linux-gnu',
+  for path in ['/usr/local/include',
+               '/usr/lib/clang/3.9.1/include',
                '/usr/include']:
     final_flags.append('-isystem')
     final_flags.append(path)
