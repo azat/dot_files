@@ -54,3 +54,5 @@
 
 !/.tmuxinator
 !/.gbp.conf
+
+!/.lldbinit
