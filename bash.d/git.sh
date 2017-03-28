@@ -46,7 +46,8 @@ complete -F _git_cd_completion git_cd
 #
 git_stat()
 {
-    verbose=0
+    local verbose=0
+    local OPTIND OPTARG o
     while getopts "vh" o; do
         case "$o" in
             v)   verbose=$((verbose+1)) ;;
@@ -69,6 +70,7 @@ git_stat()
 
 git_avg()
 {
+    local i
     for i in $(git log --format=%h "$@"); do
         echo -n "$i " >& 2
         git log --format=%B $i -1 | tee -a >(head -1) >(tail -n+3) >/dev/null | wc
@@ -96,7 +98,7 @@ git_rebase_run()
     local buildSystem=ninja
     local buildDir="$PWD" # git rebase --exec will change it
     local upstream=origin/master
-    local OPTIND OPTARG
+    local OPTIND OPTARG o
     while getopts "b:u:B:" o; do
         case "$o" in
             b) buildSystem="$OPTARG"; shift 2;;
