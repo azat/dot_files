@@ -98,10 +98,10 @@ map <F8> :MarksBrowser<cr>
 vmap <F8> <esc>:MarksBrowser<cr>
 imap <F8> <esc>:MarksBrowser<cr>
 
-" F9 - "make" command
-map <F9> :make<cr>
-vmap <F9> <esc>:make<cr>i
-imap <F9> <esc>:make<cr>i
+" F9 - ycm fixit
+map <F9> :YcmCompleter FixIt<CR>
+vmap <F9> <esc>:YcmCompleter FixIt<cr>
+imap <F9> <esc>:YcmCompleter FixIt<cr>
 
 " F10 - delete buffer
 map <F10> :bd<cr>
