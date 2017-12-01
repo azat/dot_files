@@ -1,0 +1,7 @@
+maxlinecpu 0
+maxlinelvm 0
+maxlinemdd 0
+maxlinedisk 0
+maxlinenfsm 0
+maxlineintf 0
+maxlinecont 0
