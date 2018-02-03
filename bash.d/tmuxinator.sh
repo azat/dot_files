@@ -8,9 +8,11 @@ function mux()
     local p=~/.tmuxinator/"$s.sh"
 
     # XXX: works only when socket_name == tmuxinator name
-    tmux -L $s a || {
+    if tmux -L $s has; then
+        tmux -L $s attach
+    else
         tmuxinator debug "$s" >| "$p"
         chmod +x "$p"
         "$p"
-    }
+    fi
 }
