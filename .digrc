@@ -1,0 +1,4 @@
+# use search from /etc/resolv.conf and expand nesting to 2
++search +ndots=2
+# avoid such verbosity
++noall +answer
