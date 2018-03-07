@@ -57,3 +57,5 @@
 
 !/.lldbinit
 !/.digrc
+
+!/.vagrant.d
