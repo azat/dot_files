@@ -32,6 +32,7 @@ let g:is_bash=1
 Bundle 'godlygeek/tabular'
 Bundle 'vim-lldb'
 Bundle 'tpope/vim-surround'
+Bundle 'elzr/vim-json'
 
 syntax on
 
@@ -191,6 +192,7 @@ cabbrev space setl expandtab <BAR> setl shiftwidth=4 <BAR> setl tabstop=4 <BAR> 
 autocmd FileType c setlocal foldmethod=syntax
 autocmd FileType cpp setlocal foldmethod=syntax
 autocmd FileType h setlocal foldmethod=syntax
+autocmd FileType json setlocal foldmethod=syntax
 set foldenable!
 set foldlevel=1000 " don't auto folding, since za set foldenable
 hi Folded ctermbg=5 " color scheme dark reset can't handle folded info
