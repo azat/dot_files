@@ -34,6 +34,8 @@
 	changed = yellow
 [merge]
 	log = 1000
+[tag]
+	sort = -v:refname
 [help]
 	# $ git lgo
 	# You called a Git command named 'lgo', which does not exist.
@@ -54,7 +56,6 @@
 	ann = blame
 	st = status
 	patch = add --patch
-	tags = tag --sort=v:refname
 	prev = checkout HEAD^
 	hprev = reset --hard HEAD^
 
