@@ -160,3 +160,8 @@ $endif
 
 "^[^[[C": forward-word      # Meta-RightArrow
 "^[^[[D": backward-word     # Meta-LeftArrow
+
+# completion
+set show-all-if-ambiguous on
+set completion-ignore-case on
+
