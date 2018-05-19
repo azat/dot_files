@@ -34,7 +34,7 @@ Bundle 'vim-lldb'
 Bundle 'tpope/vim-surround'
 Bundle 'elzr/vim-json'
 
-syntax on
+syntax enable
 
 " Automatically save before commands like :next and :make
 set autowrite
@@ -62,9 +62,6 @@ set nu
 " This allow us edit multiple files at the same time, without saving every
 " time, when switcing between them
 set hidden
-
-set autoindent
-set smartindent
 
 nmap <F1> :setlocal spell!<cr>
 imap <F1> <C-\><C-O>:setlocal spell!<cr>
