@@ -69,31 +69,6 @@ set smartindent
 nmap <F1> :setlocal spell!<cr>
 imap <F1> <C-\><C-O>:setlocal spell!<cr>
 
-" F2 -  fast save
-nmap <F2> :w<cr>
-vmap <F2> <esc>:w<cr>i
-imap <F2> <esc>:w<cr>i
-
-" F3 - show errors
-nmap <F3> :copen<cr>
-vmap <F3> <esc>:copen<cr>
-imap <F3> <esc>:copen<cr>
-
-" F5 - buffer list
-nmap <F5> <Esc>:BufExplorer<cr>
-vmap <F5> <esc>:BufExplorer<cr>
-imap <F5> <esc><esc>:BufExplorer<cr>
-
-" F6 - previous buffer
-map <F6> :bp<cr>
-vmap <F6> <esc>:bp<cr>i
-imap <F6> <esc>:bp<cr>i
-
-" F7 - next buffer
-map <F7> :bn<cr>
-vmap <F7> <esc>:bn<cr>i
-imap <F7> <esc>:bn<cr>i
-
 " F8 - bookmarks list
 map <F8> :MarksBrowser<cr>
 vmap <F8> <esc>:MarksBrowser<cr>
@@ -103,11 +78,6 @@ imap <F8> <esc>:MarksBrowser<cr>
 map <F9> :YcmCompleter FixIt<CR>
 vmap <F9> <esc>:YcmCompleter FixIt<cr>
 imap <F9> <esc>:YcmCompleter FixIt<cr>
-
-" F10 - delete buffer
-map <F10> :bd<cr>
-vmap <F10> <esc>:bd<cr>
-imap <F10> <esc>:bd<cr>
 
 " F11 - show Taglist
 map <F11> :TlistToggle<cr>
