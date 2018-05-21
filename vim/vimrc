@@ -100,6 +100,7 @@ menu Encoding.utf-8 :e ++enc=utf8 <CR>
 
 " Turn on filetype plugin
 filetype plugin on
+filetype plugin indent on
 au BufRead,BufNewFile *.phps    set filetype=php
 au BufRead,BufNewFile *.thtml    set filetype=php
 
