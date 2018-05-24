@@ -136,10 +136,6 @@ set nobackup
 set nowb
 set noswapfile
 
-" Cursor
-set cursorline
-set cursorcolumn
-
 " Abbrevs
 iabbrev _email a3at.mail@gmail.com
 iabbrev _me Azat Khuzhin
