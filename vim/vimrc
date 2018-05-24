@@ -144,8 +144,9 @@ iabbrev _soff Signed-off-by: Azat Khuzhin <a3at.mail@gmail.com>
 iabbrev _pb Reported-by:
 iabbrev _tb Tested-by:
 
-noremap  <C-N> :set number!<CR>
-inoremap <C-N> <C-O>:set number!<CR>
+" C-N for completion...
+noremap  <C-M> :set number!<CR>
+inoremap <C-M> <C-O>:set number!<CR>
 
 noremap  <C-C>  :set cursorline! <BAR> set cursorcolumn!<CR>
 inoremap <C-C>  <C-O>:set cursorline! <BAR> set cursorcolumn!<CR>
