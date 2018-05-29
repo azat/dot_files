@@ -145,8 +145,8 @@ iabbrev _pb Reported-by:
 iabbrev _tb Tested-by:
 
 " C-N for completion...
-noremap  <C-M> :set number!<CR>
-inoremap <C-M> <C-O>:set number!<CR>
+noremap  <C-L> :set number!<CR>
+inoremap <C-L> <C-O>:set number!<CR>
 
 noremap  <C-C>  :set cursorline! <BAR> set cursorcolumn!<CR>
 inoremap <C-C>  <C-O>:set cursorline! <BAR> set cursorcolumn!<CR>
