@@ -10,6 +10,9 @@
 	#
 	# This is for repositories with source codes.
 	whitespace = blank-at-eol,-blank-at-eof,tab-in-indent,tabwidth=4
+[log]
+	showSignature = true
+	mailmap = true
 [sendemail]
 	smtpserver = /usr/bin/msmtp
 [push]
