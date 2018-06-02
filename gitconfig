@@ -15,8 +15,11 @@
 	mailmap = true
 [sendemail]
 	smtpserver = /usr/bin/msmtp
+[commit]
+	gpgSign = true
 [push]
 	default = upstream
+	gpgSign = if-asked
 [color]
 	branch = auto
 	diff = auto
