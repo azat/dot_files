@@ -1,3 +1,9 @@
+" Do not run defaults vim, that can enable mouse mode and other stuff
+"
+" Defaults:
+" - /usr/share/vim/vim80/defaults.vim (debian)
+let g:skip_defaults_vim=1
+
 runtime! debian.vim
 runtime! archlinux.vim
 
