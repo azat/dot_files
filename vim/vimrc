@@ -150,10 +150,8 @@ iabbrev _soff Signed-off-by: Azat Khuzhin <a3at.mail@gmail.com>
 iabbrev _pb Reported-by:
 iabbrev _tb Tested-by:
 
-" M-L for completion...
-execute "set <M-l>=\el"
-noremap  <M-l> :set number!<CR>
-inoremap <M-l> <C-O>:set number!<CR>
+noremap  <leader>n :set number!<CR>
+inoremap <leader>n <C-O>:set number!<CR>
 
 noremap  <C-C>  :set cursorline! <BAR> set cursorcolumn!<CR>
 inoremap <C-C>  <C-O>:set cursorline! <BAR> set cursorcolumn!<CR>
