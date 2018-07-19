@@ -93,7 +93,8 @@
 	ams = am -s
 	amks = am -s --keep-non-patch
 
-	format-one-patch = !sh -c \"git format-patch $1^...$1\"
+	fm = format-patch
+	format-one-patch = !sh -c \"git fm $1^...$1\"
 
 	purr = pull --rebase
 	puff = pull --ff-only
