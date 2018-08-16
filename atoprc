@@ -5,3 +5,5 @@ maxlinedisk 0
 maxlinenfsm 0
 maxlineintf 0
 maxlinecont 0
+
+ownprocline   PID:50 SYSCPU:45 VGROW:40 RGROW:45 COMMAND-LINE:50
