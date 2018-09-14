@@ -155,7 +155,7 @@ noremap  <leader>n :set number!<CR>
 noremap  <C-C>  :set cursorline! <BAR> set cursorcolumn!<CR>
 inoremap <C-C>  <C-O>:set cursorline! <BAR> set cursorcolumn!<CR>
 
-noremap  <leader>s :setl noexpandtab <BAR> setl shiftwidth=4 <BAR> setl tabstop=4 <BAR> setl softtabstop=4<CR>
+noremap  <leader>s :setl noexpandtab! <BAR> setl shiftwidth=4 <BAR> setl tabstop=4 <BAR> setl softtabstop=4<CR>
 
 " Fold
 autocmd FileType c setlocal foldmethod=syntax
