@@ -1,0 +1,1 @@
+ACTION=="change", SUBSYSTEM=="drm", RUN+="/bin/flock -n /tmp/monitor.udev.lock /home/azat/dwm-assets/hotplug-monitor.sh"

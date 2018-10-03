@@ -1,0 +1,2 @@
+ACTION=="add", KERNEL=="event*", SUBSYSTEM=="input", ATTRS{manufacturer}=="Apple, Inc.", ATTRS{configuration}=="Keyboard", RUN+="/etc/udev/scripts.d/keyboard-apple.sh"
+ACTION=="add", KERNEL=="event*", SUBSYSTEM=="input", ATTRS{manufacturer}=="Apple Inc.",  ATTRS{configuration}=="Keyboard", RUN+="/etc/udev/scripts.d/keyboard-apple.sh"
