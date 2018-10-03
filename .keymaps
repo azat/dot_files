@@ -1,12 +1,13 @@
-# before limiting to 15, there was some errors like,
-# Ctrl works as Ctrl (while should works as Cmd)
-# and also after Cmd(as Ctrl) pressed, I can't type regular letters
-# (i.e. like Cmd works as Ctrl_Locked (toggler)), regular letters however
-# works only after Alt-Enter
-keymaps 0-15
+# load it with loadkeys(1)
+# or set it in /etc/vconsole.conf
+
+include "linux-with-two-alt-keys"
+
 # left
-keycode 29 = Alt # 29 == L_Ctrl/Control
-keycode 125 = Control # 125 == L_Cmd/Alt
+keycode 29  = Alt # 29 == L_Ctrl/Control
+keycode 125 = Alt # 125 == Win
+keycode 56  = Control # 56 == Alt
+
 # right
-keycode 97 = Alt # 97 == R_Ctrl/Control
-keycode 126 = Control # 126 == R_Cmd/Alt
+keycode 97  = Alt # 97 == R_Ctrl/Control
+keycode 100 = Control # 100 == Alt/AltGr

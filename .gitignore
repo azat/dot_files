@@ -51,7 +51,7 @@
 
 !/.xmodmap*
 !/.xkeymap*
-!/.keymaps
+!/.keymaps*
 
 !/.tmuxinator
 !/.gbp.conf
