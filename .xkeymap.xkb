@@ -1,0 +1,36 @@
+// This is the layout for the generic pc keyboard
+// (tested on ThinkPad Carbon X1 6th Gen internal keyboard)
+//
+// It changes next keys:
+// - key Alt is not act as Ctrl
+// - key Win is not act as Alt
+// - key Ctrl is not act as Win
+// It was done because of readline bindings
+
+xkb_keymap {
+  xkb_keycodes      { include "evdev+aliases(qwerty)" };
+  xkb_types         { include "complete" };
+  xkb_compatibility { include "complete" };
+  xkb_symbols {
+    include "pc+us+ru:2+inet(evdev)+capslock(grouplock)"
+
+    // replace is required, otherwise modifier_map will not do what I want
+    replace key <LCTL> { [         Super_L ] };
+    replace key <LALT> { [       Control_L ] };
+    replace key <RCTL> { [         Super_R ] };
+    replace key <RALT> { [       Control_R ] };
+    replace key <LWIN> { [           Alt_L ] };
+    replace key <RWIN> { [         Super_R ] };
+    replace key  <ALT> { [       Control_L ] };
+    replace key <SUPR> { [           Alt_L ] };
+
+    modifier_map Mod1    { <LWIN> };
+    modifier_map Mod1    { <RWIN> };
+    modifier_map Mod1    { <SUPR> };
+    modifier_map Mod4    { <LCTL> };
+    modifier_map Mod4    { <RCTL> };
+    modifier_map Control { <LALT> };
+    modifier_map Control { <RALT> };
+    modifier_map Control { <ALT> };
+  };
+};

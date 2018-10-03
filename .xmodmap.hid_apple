@@ -1,0 +1,14 @@
+! This is the layout for the apple keyboard:
+! - Apple Inc. Apple Keyboard
+!
+! All it does, is swap Ctrl <-> Cmd
+
+remove control = Control_L
+remove mod4 = Super_L Super_R
+
+keysym Control_L = Super_L
+keysym Super_L = Control_L
+keysym Super_R = Control_L
+
+add control = Control_L Control_R
+add mod4 = Super_L Super_R

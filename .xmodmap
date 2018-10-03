@@ -1,13 +1,22 @@
+! This is the layout for the generic pc keyboard
+! (tested on ThinkPad Carbon X1 6th Gen internal keyboard)
 !
-! Swap Ctrl and Super
-!
+! It changes next keys:
+! - key Alt is not act as Ctrl
+! - key Win is not act as Alt
+! - key Ctrl is not act as Win
+! It was done because of readline bindings
 
-! https://bbs.archlinux.org/viewtopic.php?id=156257
-remove control = Control_L
-remove mod4 = Super_L Super_R
+clear Control
+clear Mod4
+clear Mod1
+
 keysym Control_L = Super_L
-keysym Super_L = Control_L
-keysym Super_R = Control_L
-add control = Control_L Control_R
-add mod4 = Super_L Super_R
+keysym Control_R = Super_R
+keysym Super_L   = Alt_L
+keysym Alt_L     = Control_L
+keysym Alt_R     = Control_R
 
+add Control = Control_L Control_R
+add Mod4    = Super_L Super_R
+add Mod1    = Alt_L Alt_R
