@@ -11,7 +11,6 @@
 	# This is for repositories with source codes.
 	whitespace = blank-at-eol,-blank-at-eof,tab-in-indent,tabwidth=4
 [log]
-	showSignature = true
 	mailmap = true
 [sendemail]
 	smtpserver = /usr/bin/msmtp
@@ -64,6 +63,7 @@
 	patch = add --patch
 	prev = checkout HEAD^
 	hprev = reset --hard HEAD^
+	slog = log --show-signature
 
 	# from http://heipei.net/linux/files/configs/gitconfig
 	llog = log --date=short --format=\"%C(94)--------------------------------------------------------------------------------%n%C(24)%h %C(124)%ad %C(34)%an %C(22)<%ae>%C(130)%d%n%C(178)%s%+b\"
