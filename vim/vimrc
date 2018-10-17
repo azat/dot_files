@@ -28,10 +28,8 @@ Bundle 'vim-scripts/taglist.vim'
 " tree instead of just the root of it.
 set tags=tags;/
 Bundle 'ciaranm/detectindent'
-let g:detectindent_preferred_expandtab=1
 let g:detectindent_preferred_indent=4
 let g:detectindent_max_lines_to_analyse=1024
-autocmd BufReadPost * :DetectIndent
 let g:is_bash=1
 " http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
 Bundle 'godlygeek/tabular'
@@ -106,7 +104,8 @@ menu Encoding.utf-8 :e ++enc=utf8 <CR>
 " Turn on filetype plugin
 filetype plugin on
 filetype plugin indent on
-autocmd BufEnter * if &filetype == "" | setlocal ft=sh | endif
+autocmd BufEnter    * if &filetype == "" | setlocal ft=sh | endif
+autocmd BufReadPost * :DetectIndent
 
 " Colorscheme
 colorscheme desert
