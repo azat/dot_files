@@ -198,3 +198,9 @@ nnoremap <C-a> <nop>
 nnoremap <C-x> <nop>
 
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯЖ;ABCDEFGHIJKLMNOPQRSTUVWXYZ:,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+
+" Do not overwrite default register when pasting
+nnoremap p "_dP
+nnoremap P "_dp
+xnoremap p "_dP
+xnoremap P "_dp
