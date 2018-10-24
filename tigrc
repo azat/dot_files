@@ -174,7 +174,8 @@ set mouse-wheel-cursor		= no		# Prefer moving the cursor to scrolling the view?
 #   %(diffargs)		The diff options from `diff-options` or `TIG_DIFF_OPTS`
 #   %(prompt)		Prompt for the argument value.
 
-bind main	C	?git cherry-pick %(commit)
+bind main	c	?git cherry-pick %(commit)
+bind main	C	?git checkout %(commit)
 bind status	C	!git commit
 bind stash	A	?git stash apply %(stash)
 bind stash	P	?git stash pop %(stash)
