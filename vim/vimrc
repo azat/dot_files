@@ -19,6 +19,7 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.(git|hg|svn|cmake)|build)$',
   \ 'file': '\v\.(exe|so|dll|a|o|la|lo|pc|in|swp|zip|rar|tgz|gz|tar)$',
   \ }
+let g:ctrlp_extensions = [ 'tag' ]
 Bundle 'szw/vim-tags'
 Bundle 'vim-scripts/taglist.vim'
 " http://stackoverflow.com/a/741486/328260
