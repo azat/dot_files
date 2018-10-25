@@ -122,6 +122,8 @@
 
 [pretty]
 	fixes = Fixes: %h (\"%s\")
+	# libevent changelog
+	le = "    o %s (%h %cN)"
 
 [apply]
 	whitespace = warn
