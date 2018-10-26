@@ -37,6 +37,8 @@ Bundle 'godlygeek/tabular'
 Bundle 'vim-lldb'
 Bundle 'tpope/vim-surround'
 Bundle 'elzr/vim-json'
+Bundle 'svermeulen/vim-easyclip'
+Bundle 'tpope/vim-repeat'
 
 syntax enable
 
@@ -199,9 +201,3 @@ nnoremap <C-a> <nop>
 nnoremap <C-x> <nop>
 
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯЖ;ABCDEFGHIJKLMNOPQRSTUVWXYZ:,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
-
-" Do not overwrite default register when pasting
-nnoremap p "_dP
-nnoremap P "_dp
-xnoremap p "_dP
-xnoremap P "_dp
