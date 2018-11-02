@@ -1,5 +1,5 @@
-set input-meta off
-set output-meta off
+set input-meta on
+set output-meta on
 set bell-style none
 set show-all-if-ambiguous on
 set completion-ignore-case on
