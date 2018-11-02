@@ -74,10 +74,9 @@ $if mode=emacs
         "\eOc": forward-word
         "\eOd": backward-word
     $endif
-    # # alternate mappings for "page up" and "page down" to search the history
-    # "\e[5~": history-search-backward
-    # "\e[6~": history-search-forward
-    #
+    # alternate mappings for "page up" and "page down" to search the history
+    "\e[5~": history-search-backward
+    "\e[6~": history-search-forward
     # # for non RH/Debian xterm, can't hurt for RH/Debian xterm
     # "\eOH": beginning-of-line
     # "\eOF": end-of-line
