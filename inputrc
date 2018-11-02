@@ -19,6 +19,8 @@ set enable-keypad on
 # better history search with Arrow keys: Up/Down
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+"\eOA": history-search-backward
+"\eOB": history-search-forward
 
 # character search with Meta-] and Ctrl-Meta-]
 "\e]":    character-search
