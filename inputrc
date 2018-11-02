@@ -1,150 +1,43 @@
-# /etc/inputrc - global inputrc for libreadline
-# See readline(3readline) and `info rluserman' for more information.
-
-# Be 8 bit clean.
-set input-meta on
-set output-meta on
-
-# To allow the use of 8bit-characters like the german umlauts, uncomment
-# the line below. However this makes the meta key not work as a meta key,
-# which is annoying to those which don't need to type in 8-bit characters.
-
-# set convert-meta off
-
+set input-meta off
+set output-meta off
+set bell-style none
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set completion-map-case On
+set page-completions On
+set visible-stats On
+set mark-symlinked-directories On
 set enable-keypad on
-
-# see /usr/share/doc/bash/inputrc.arrows for other codes of arrow keys
-
-# do not bell on tab-completion
-# set bell-style none
-# set bell-style visible
-
-# some defaults / modifications for the emacs mode
-$if mode=emacs
-
-# allow the use of the Home/End keys
-"\e[1~": beginning-of-line
-"\e[4~": end-of-line
-
-# allow the use of the Delete/Insert keys
-"\e[3~": delete-char
-"\e[2~": quoted-insert
-
-# mappings for "page up" and "page down" to step to the beginning/end
-# of the history
-# "\e[5~": beginning-of-history
-# "\e[6~": end-of-history
-
-# alternate mappings for "page up" and "page down" to search the history
-# "\e[5~": history-search-backward
-# "\e[6~": history-search-forward
-
-# mappings for Ctrl-left-arrow and Ctrl-right-arrow for word moving
-"\e[1;5C": forward-word
-"\e[1;5D": backward-word
-"\e[5C": forward-word
-"\e[5D": backward-word
-"\e\e[C": forward-word
-"\e\e[D": backward-word
-
-$if term=rxvt
-"\e[8~": end-of-line
-"\eOc": forward-word
-"\eOd": backward-word
-$endif
-
-# for non RH/Debian xterm, can't hurt for RH/Debian xterm
-# "\eOH": beginning-of-line
-# "\eOF": end-of-line
-
-# for freebsd console
-# "\e[H": beginning-of-line
-# "\e[F": end-of-line
-
-$endif
-
-
-#
-# Based on https://github.com/netj/dotfiles/blob/master/.inputrc
-#
-
-#
-# History
-#
 
 # incremental history search, both reverse and forward with Ctrl-r/]
 "\C-r": reverse-search-history
+# often, Ctrl-s (default for forward search) is usually masked by tty's STOP
+# moreover, things like "\e\C-r" reset the isearch keyword
+# so, overriding Ctrl-] (default character-search) seems to be the best choice
 "\C-]": forward-search-history
-#  often, Ctrl-s (default for forward search) is usually masked by tty's STOP
-#  moreover, things like "\e\C-r" reset the isearch keyword
-#  so, overriding Ctrl-] (default character-search) seems to be the best choice
 
 # better history search with Arrow keys: Up/Down
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 
-#
-# Enhanced options
-#
-set completion-map-case On
-set visible-stats On
-set mark-symlinked-directories On
-set page-completions On
-
-#
 # character search with Meta-] and Ctrl-Meta-]
-#
 "\e]":    character-search
 "\e\C-]": character-search-backward
 
-#
 # backward/forward words by space with Meta-Shift-B/F
-#
 "\eB": "\C-b\e\C-] \C-f"
 "\eF": "\e] "
 "\e|": delete-horizontal-space
 
-#
 # Orig: easier backward/forward path components with Meta-Ctrl-B/F
-# My  :easier backward/forward path components with Meta-Shift-B/F
-#
+# My  : easier backward/forward path components with Meta-Shift-B/F
 "\e\C-b": "\C-b\e\C-]/\C-f"
 "\e\C-f": "\e]/"
 
-# Bash-specific READLINE Tweaks
-# See-Also: http://www.ukuug.org/events/linux2003/papers/bash_tips/
-$if Bash
-
-    # Do history expansion ! when space is pressed
-    Space: magic-space
-
-    # Insert-Option Macro (enhanced to handle multi-word commands)
-    "\eo": "\C-p\C-a\e]  "
-
-    # a better backward/forward words by space with Meta-Shift-B/F
-    "\eviB": vi-bWord
-    "\eviW": vi-fWord
-    "\eviE": vi-eWord
-    "\eB": "\eviB"
-    "\eF": "\C-f\eviE\C-f"
-
-    # backward/forward shell words by Meta-Left/Right
-    "\e\e[D": shell-backward-word
-    "\e\e[C": shell-forward-word
-    #  and a kill too
-    "\eH": shell-backward-kill-word
-    "\eD": shell-kill-word
-
-    # IGNOREEOF
-    "\e\C-d": "exit\C-m"
-$endif
-
-#
-# When you want to do ls -l|less you'd type ls -l and press control-H instead of <enter>.
+# When you want to do ls -l|less you'd type ls -l and press
+# <Ctrl-H> instead of <ENTER>.
 # http://serverfault.com/a/31870/41731
-#
 "\C-h": " | less -FRSX\C-m"
-
 
 # Use Ctrl+← and Ctrl+→ (or Alt/Meta, or Esc) to move between words.
 "\e[1;5D": backward-word
@@ -159,7 +52,57 @@ $endif
 "^[^[[C": forward-word      # Meta-RightArrow
 "^[^[[D": backward-word     # Meta-LeftArrow
 
-# completion
-set show-all-if-ambiguous on
-set completion-ignore-case on
+$if mode=emacs
+    # allow the use of the Home/End keys
+    "\e[1~": beginning-of-line
+    "\e[4~": end-of-line
+    # allow the use of the Delete/Insert keys
+    "\e[3~": delete-char
+    "\e[2~": quoted-insert
+    # mappings for Ctrl-left-arrow and Ctrl-right-arrow for word moving
+    "\e[1;5C": forward-word
+    "\e[1;5D": backward-word
+    "\e[5C": forward-word
+    "\e[5D": backward-word
+    "\e\e[C": forward-word
+    "\e\e[D": backward-word
+    # rxvt
+    $if term=rxvt
+        "\e[8~": end-of-line
+        "\eOc": forward-word
+        "\eOd": backward-word
+    $endif
+    # # alternate mappings for "page up" and "page down" to search the history
+    # "\e[5~": history-search-backward
+    # "\e[6~": history-search-forward
+    #
+    # # for non RH/Debian xterm, can't hurt for RH/Debian xterm
+    # "\eOH": beginning-of-line
+    # "\eOF": end-of-line
+    #
+    # # for freebsd console
+    # "\e[H": beginning-of-line
+    # "\e[F": end-of-line
+$endif
 
+# http://www.ukuug.org/events/linux2003/papers/bash_tips/
+$if Bash
+    # Do history expansion ! when space is pressed
+    Space: magic-space
+    # Insert-Option Macro (enhanced to handle multi-word commands)
+    "\eo": "\C-p\C-a\e]  "
+    # a better backward/forward words by space with Meta-Shift-B/F
+    "\eviB": vi-bWord
+    "\eviW": vi-fWord
+    "\eviE": vi-eWord
+    "\eB": "\eviB"
+    "\eF": "\C-f\eviE\C-f"
+    # backward/forward shell words by Meta-Left/Right
+    "\e\e[D": shell-backward-word
+    "\e\e[C": shell-forward-word
+    # and a kill too
+    "\eH": shell-backward-kill-word
+    "\eD": shell-kill-word
+    # IGNOREEOF
+    "\e\C-d": "exit\C-m"
+$endif
