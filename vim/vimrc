@@ -39,6 +39,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'elzr/vim-json'
 Bundle 'svermeulen/vim-easyclip'
 Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-fugitive'
 
 syntax enable
 
