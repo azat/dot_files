@@ -1,0 +1,112 @@
+# git ls-files --others --exclude-from=.git/info/exclude
+
+#
+# Tags
+#
+# ctags stuff
+TAGS
+tags
+# cscope stuff
+cscope*
+
+# archives
+*.zip
+*.xz
+*.bz
+*.7z
+*.zst
+*.rar
+*.jar
+*.tgz
+*.tbz
+*.txz
+*.tar.gz
+*.tar.bz
+*.tar.xz
+*.tar.zst
+
+#
+# Editors
+#
+# badly configured vim
+*.sw[poa]
+# kate
+*~
+# other editors
+\#*\#
+.#*
+
+#
+# Build
+#
+# Autotools stuff
+.deps
+.dirstamp
+Makefile.in
+# cmake
+CMakeFiles
+CMakeCache.txt
+CTestTestfile.cmake
+cmake_install.cmake
+# Libtool stuff
+.libs
+*.lo
+*.la
+# binaries for C
+*.o
+*.a
+*.so
+*.so.*
+a.out
+# linux kernel
+*.ko
+*.dwo
+# gcov stuff
+*.gcno
+*.gcov
+*.gcda
+# Stuff made by our makefiles
+*.pc
+*.log
+*.trs
+# ninja-build/ninja
+build.ninja
+.ninja_deps
+.ninja_log
+rules.ninja
+# The initial / makes these files only get ignored in particular directories.
+/autom4te.cache
+# configure in progress
+/.cyg*
+/confdefs.*
+/conftest.*
+# autoconf
+/aclocal.m4
+/config.cache
+/config.guess
+/config.log
+/config.status
+/config.sub
+/configure
+/configure.lineno
+/depcomp
+/config.h
+/config.h.in
+/install-sh
+/libtool
+/ltmain.sh
+/missing
+/stamp-h1
+/stamp-h2
+# by personal cmake preferences
+.cmake*
+
+# Patch leaves these lying arround
+*.orig
+*.rej
+
+# logs
+*.log
+
+# gdb stuff
+.gdb_history
