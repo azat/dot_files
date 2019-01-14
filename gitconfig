@@ -161,3 +161,7 @@
 	insteadOf = aur:
 [url "ssh://aur@aur.archlinux.org/"]
 	pushInsteadOf = aur:
+[url "git@git.sr.ht:~azat/"]
+	insteadOf = me.sr:
+[url "git@git.sr.ht:~azat/"]
+	pushInsteadOf = me.sr:
