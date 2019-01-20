@@ -128,19 +128,11 @@
 [apply]
 	whitespace = warn
 
-#
-# KDE projects
-# Usage: git clone kde:amarok
-#
+# insteadOf/pushInsteadOf
 [url "git://anongit.kde.org/"]
 	insteadOf = kde:
 [url "git@git.kde.org:"]
 	pushInsteadOf = kde:
-
-#
-# Github
-# Usage: git clone github:user/project
-#
 [url "git://github.com/"]
 	insteadOf = github:
 [url "git@github.com:"]
