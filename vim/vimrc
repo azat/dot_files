@@ -19,6 +19,12 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.(git|hg|svn|cmake)|build|__pycache__|.*\.egg-info)$',
   \ 'file': '\v\.(exe|so|dll|a|o|la|lo|pc|in|swp|zip|rar|tgz|gz|tar|pyc|whl|zst|bgz)$',
   \ }
+let g:ctrlp_user_command = {
+    \ 'types': {
+      \ 1: ['.git', 'git ls-files %s --cached --exclude-standard --others']
+      \ },
+    \ 'ignore': 1,
+    \ }
 let g:ctrlp_extensions = [ 'tag' ]
 Bundle 'szw/vim-tags'
 Bundle 'vim-scripts/taglist.vim'
