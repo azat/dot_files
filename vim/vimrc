@@ -11,14 +11,15 @@ set rtp+=/etc/vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
+
+" ycm
 Bundle 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
+
 Bundle 'scrooloose/syntastic'
+
+" ctrlp
 Bundle 'kien/ctrlp.vim'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn|cmake)|build|__pycache__|.*\.egg-info)$',
-  \ 'file': '\v\.(exe|so|dll|a|o|la|lo|pc|in|swp|zip|rar|tgz|gz|tar|pyc|whl|zst|bgz)$',
-  \ }
 let g:ctrlp_user_command = {
     \ 'types': {
       \ 1: ['.git', 'git ls-files %s --cached --exclude-standard --others']
@@ -26,18 +27,23 @@ let g:ctrlp_user_command = {
     \ 'ignore': 1,
     \ }
 let g:ctrlp_extensions = [ 'tag' ]
+
 Bundle 'szw/vim-tags'
 Bundle 'vim-scripts/taglist.vim'
+
 " http://stackoverflow.com/a/741486/328260
 "
 " This will look in the current directory for "tags", and work up the tree
 " towards root until one is found. IOW, you can be anywhere in your source
 " tree instead of just the root of it.
 set tags=tags;/
+
+" detectindent
 Bundle 'ciaranm/detectindent'
 let g:detectindent_preferred_indent=4
 let g:detectindent_max_lines_to_analyse=1024
 let g:is_bash=1
+
 " http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
 Bundle 'godlygeek/tabular'
 " TODO: replace with https://github.com/llvm-mirror/lldb/tree/master/utils/vim-lldb
@@ -52,6 +58,14 @@ syntax enable
 
 set autowrite
 set autochdir
+
+set wildignore+=*/.git/**,*/.hg/**,*/.svn/**,*/.cmake**
+set wildignore+=*/build/**,*/__pycache__/**,*/.egg-info/**
+set wildignore+=*.exe,*.so,*.dll,*.a,*.o
+set wildignore+=*.la,*.lo,*.pc,*.in
+set wildignore+=*.sw[poa]
+set wildignore+=*.zip,*.rar,*.tgz,*.gz,*.tar,*.zst,*.bgz
+set wildignore+=*.pyc,*.whl
 
 set mouse=
 
