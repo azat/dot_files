@@ -22,7 +22,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_user_command = {
     \ 'types': {
-      \ 1: ['.git', 'git ls-files %s --cached --exclude-standard --others']
+      \ 1: ['.git', 'git ls-files %s --cached --exclude-standard --recurse-submodules']
       \ },
     \ 'ignore': 1,
     \ }
