@@ -50,8 +50,8 @@ Bundle 'tpope/vim-fugitive'
 
 syntax enable
 
-" Automatically save before commands like :next and :make
 set autowrite
+set autochdir
 
 set mouse=
 
