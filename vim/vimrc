@@ -28,6 +28,8 @@ let g:ctrlp_user_command = {
     \ }
 let g:ctrlp_extensions = [ 'tag' ]
 let g:ctrlp_max_files = 100000
+Bundle 'JazzCore/ctrlp-cmatcher'
+let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 
 Bundle 'szw/vim-tags'
 Bundle 'vim-scripts/taglist.vim'
