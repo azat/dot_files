@@ -27,6 +27,7 @@ let g:ctrlp_user_command = {
     \ 'ignore': 1,
     \ }
 let g:ctrlp_extensions = [ 'tag' ]
+let g:ctrlp_max_files = 100000
 
 Bundle 'szw/vim-tags'
 Bundle 'vim-scripts/taglist.vim'
