@@ -18,18 +18,24 @@ let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
 
 Bundle 'scrooloose/syntastic'
 
-" ctrlp
-Bundle 'kien/ctrlp.vim'
-let g:ctrlp_user_command = {
-    \ 'types': {
-      \ 1: ['.git', 'git ls-files %s --cached --exclude-standard --recurse-submodules']
-      \ },
-    \ 'ignore': 1,
-    \ }
-let g:ctrlp_extensions = [ 'tag' ]
-let g:ctrlp_max_files = 100000
-Bundle 'JazzCore/ctrlp-cmatcher'
-let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+Bundle 'junegunn/fzf.vim'
+noremap <C-P> :GFiles<CR>
+noremap <leader>b :Buffers<CR>
+noremap <leader>h :History<CR>
+noremap <leader>c :BCommits<CR>
+noremap <leader>C :Commits<CR>
+noremap <leader>t :BTags<CR>
+noremap <leader>T :Tags<CR>
+noremap <leader>l :BLines<CR>
+noremap <leader>L :Lines<CR>
+noremap <Leader>' :Marks<CR>
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+noremap <Leader>g :GGrep<CR>
 
 Bundle 'szw/vim-tags'
 Bundle 'vim-scripts/taglist.vim'
@@ -212,7 +218,7 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " tab operations
-map <leader>t :tabnew<cr>
+map <leader>N :tabnew<cr>
 map <C-left> :tabprev<cr>
 map <C-right> :tabnext<cr>
 
