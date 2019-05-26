@@ -220,9 +220,10 @@ Shortcut! :Gedit<return>            return to editing git buffer
 " - :source $MYVIMRC
 
 " Plug
-Shortcut! :PlugUpdate<return> Update plugins
+Shortcut! :PlugInstall<return> Install plugins
+Shortcut! :PlugUpdate<return>  Update plugins
 Shortcut! :PlugUpdate!<return> Update plugins (force)
-Shortcut! :PlugStatus<return> Plugins status
+Shortcut! :PlugStatus<return>  Plugins status
 
 set pastetoggle=<leader>p
 
