@@ -45,6 +45,7 @@ Plug 'elzr/vim-json'
 Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
+Plug 'sjl/gundo.vim'
 " TODO: replace with https://github.com/llvm-mirror/lldb/tree/master/utils/vim-lldb
 "Plug 'vim-lldb'
 call plug#end()
@@ -224,6 +225,9 @@ Shortcut! :PlugInstall<return> Install plugins
 Shortcut! :PlugUpdate<return>  Update plugins
 Shortcut! :PlugUpdate!<return> Update plugins (force)
 Shortcut! :PlugStatus<return>  Plugins status
+
+" gundo
+Shortcut! :GundoToggle<return> undo tree
 
 set pastetoggle=<leader>p
 
