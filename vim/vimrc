@@ -189,6 +189,9 @@ Shortcut Toggler show numbers noremap <leader>n :set number!<return>
 Shortcut Toggler tag/space mode (current buffer)
   \ noremap <leader>s :setl noexpandtab! <bar> setl shiftwidth=4 <bar> setl tabstop=4 <bar> setl softtabstop=4<return>
 
+command! -bang -nargs=0 Source :source $MYVIMRC
+Shortcut! :Source<return> Reload $MYVIMRC (source)
+
 for i in range(1,9)
   execute 'Shortcut go to tab number '. i .' '
         \ 'noremap <silent> <leader>'. i .' :tabfirst<bar>'. i .'tabnext<return>'
@@ -213,9 +216,10 @@ Shortcut! :Gwrite!<return>          git add: stage all changes in buffer (force)
 Shortcut! :Gremove<return>          git rm: delete file from repository
 Shortcut! :Gremove!<return>         git rm: delete file from repository (force)
 Shortcut! :Gedit<return>            return to editing git buffer
-" TODO(with space in the command):
-" - :Gcommit --amend
-" - :source $MYVIMRC
+
+command! -bang -nargs=0 GAmend :Gcommit --amend
+Shortcut! :GAmend<return> git commit amend
+
 
 " Plug
 Shortcut! :PlugInstall<return> Install plugins
