@@ -19,16 +19,6 @@ let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
 Bundle 'scrooloose/syntastic'
 
 Bundle 'junegunn/fzf.vim'
-noremap <C-P> :GFiles<CR>
-noremap <leader>b :Buffers<CR>
-noremap <leader>h :History<CR>
-noremap <leader>c :BCommits<CR>
-noremap <leader>C :Commits<CR>
-noremap <leader>t :BTags<CR>
-noremap <leader>T :Tags<CR>
-noremap <leader>l :BLines<CR>
-noremap <leader>L :Lines<CR>
-noremap <Leader>' :Marks<CR>
 " Command for git grep
 " - fzf#vim#grep(command, with_column, [options], [fullscreen])
 command! -bang -nargs=* GGrep
@@ -36,6 +26,33 @@ command! -bang -nargs=* GGrep
   \   'git grep --line-number '.shellescape(<q-args>), 0,
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 noremap <Leader>g :GGrep<CR>
+
+Bundle 'sunaku/vim-shortcut'
+runtime plugin/shortcut.vim
+Shortcut show shortcut menu and run chosen shortcut
+  \ noremap <silent> <Leader><Leader> :Shortcuts<Return>
+Shortcut fallback to shortcut menu on partial entry
+  \ noremap <silent> <Leader> :Shortcuts<Return>
+Shortcut Fuzzy search in files
+  \ noremap <C-P> :GFiles<CR>
+Shortcut Fuzzy search in buffers
+  \ noremap <leader>b :Buffers<CR>
+Shortcut Fuzzy search in history
+  \ noremap <leader>h :History<CR>
+Shortcut Fuzzy search in commits (current buffer)
+  \ noremap <leader>c :BCommits<CR>
+Shortcut Fuzzy search in commits
+  \ noremap <leader>C :Commits<CR>
+Shortcut Fuzzy search in tags (current buffer)
+  \ noremap <leader>t :BTags<CR>
+Shortcut Fuzzy search in tags
+  \ noremap <leader>T :Tags<CR>
+Shortcut Fuzzy search in lines (current buffer)
+  \ noremap <leader>l :BLines<CR>
+Shortcut Fuzzy search in lines
+  \ noremap <leader>L :Lines<CR>
+Shortcut Fuzzy search in marks
+  \ noremap <Leader>' :Marks<CR>
 
 Bundle 'szw/vim-tags'
 Bundle 'vim-scripts/taglist.vim'
