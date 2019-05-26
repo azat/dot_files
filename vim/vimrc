@@ -208,14 +208,16 @@ Shortcut! :Gblame<return>           git blame
 Shortcut! :Gstatus<return>          git status
 Shortcut! :Gdiff<return>            git diff
 Shortcut! :Gcommit<return>          git commit
-Shortcut! :Gcommit --ammend<return> git commit ammend
 Shortcut! :Gread<return>            git checkout: revert buffer to repository
 Shortcut! :Gread!<return>           git checkout: revert buffer to repository (force)
 Shortcut! :Gwrite<return>           git add: stage all changes in buffer
 Shortcut! :Gwrite!<return>          git add: stage all changes in buffer (force)
 Shortcut! :Gremove<return>          git rm: delete file from repository
-Shortcut! :Gremove!<return>          git rm: delete file from repository (force)
+Shortcut! :Gremove!<return>         git rm: delete file from repository (force)
 Shortcut! :Gedit<return>            return to editing git buffer
+" TODO(with space in the command):
+" - :Gcommit --amend
+" - :source $MYVIMRC
 
 " Plug
 Shortcut! :PlugUpdate<return> Update plugins
