@@ -10,26 +10,44 @@ runtime! archlinux.vim
 set rtp+=/etc/vim/bundle/vundle/
 call vundle#rc()
 
+" Load vim-plug
+if empty(glob("~/.vim/autoload/plug.vim"))
+    execute '!curl --create-dirs -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
+
+"
 " Plugins
-Bundle 'gmarik/vundle'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'scrooloose/syntastic'
-Bundle 'junegunn/fzf.vim'
-Bundle 'sunaku/vim-shortcut'
-Bundle 'szw/vim-tags'
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'ciaranm/detectindent'
-Bundle 'godlygeek/tabular'
-Bundle 'tpope/vim-surround'
-Bundle 'elzr/vim-json'
-Bundle 'svermeulen/vim-easyclip'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-fugitive'
+"
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --system-boost --system-libclang --clang-completer
+  endif
+endfunction
+
+" for YouCompleteMe
+let g:plug_timeout=600
+
+call plug#begin('~/.vim/bundle')
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+Plug 'scrooloose/syntastic'
+Plug 'junegunn/fzf.vim'
+Plug 'sunaku/vim-shortcut'
+Plug 'szw/vim-tags'
+Plug 'vim-scripts/taglist.vim'
+Plug 'ciaranm/detectindent'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-surround'
+Plug 'elzr/vim-json'
+Plug 'svermeulen/vim-easyclip'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
 " TODO: replace with https://github.com/llvm-mirror/lldb/tree/master/utils/vim-lldb
-"Bundle 'vim-lldb'
-
-" \Plugins
-
+"Plug 'vim-lldb'
+call plug#end()
 
 "
 " basic
@@ -169,6 +187,11 @@ Shortcut Show YouCompleteMe FixIt noremap <Leader>F :YcmCompleter FixIt<CR>
 Shortcut Toggler show numbers noremap <Leader>n :set number!<CR>
 Shortcut Toggler tag/space mode (current buffer)
   \ noremap <Leader>s :setl noexpandtab! <BAR> setl shiftwidth=4 <BAR> setl tabstop=4 <BAR> setl softtabstop=4<CR>
+
+" Plug
+Shortcut! :PlugUpdate<CR> Update plugins
+Shortcut! :PlugUpdate!<CR> Update plugins (force)
+Shortcut! :PlugStatus<CR> Plugins status
 
 set pastetoggle=<leader>p
 
