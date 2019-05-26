@@ -7,9 +7,6 @@ let g:skip_defaults_vim=1
 runtime! debian.vim
 runtime! archlinux.vim
 
-set rtp+=/etc/vim/bundle/vundle/
-call vundle#rc()
-
 " Load vim-plug
 if empty(glob("~/.vim/autoload/plug.vim"))
   execute '!curl --create-dirs -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
