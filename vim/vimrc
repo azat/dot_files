@@ -10,15 +10,116 @@ runtime! archlinux.vim
 set rtp+=/etc/vim/bundle/vundle/
 call vundle#rc()
 
+" Plugins
 Bundle 'gmarik/vundle'
-
-" ycm
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'scrooloose/syntastic'
+Bundle 'junegunn/fzf.vim'
+Bundle 'sunaku/vim-shortcut'
+Bundle 'szw/vim-tags'
+Bundle 'vim-scripts/taglist.vim'
+Bundle 'ciaranm/detectindent'
+Bundle 'godlygeek/tabular'
+Bundle 'tpope/vim-surround'
+Bundle 'elzr/vim-json'
+Bundle 'svermeulen/vim-easyclip'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-fugitive'
+" TODO: replace with https://github.com/llvm-mirror/lldb/tree/master/utils/vim-lldb
+"Bundle 'vim-lldb'
+
+" \Plugins
+
+
+"
+" basic
+"
+set tags=tags;/
+set mouse=
+set autowrite
+set autochdir
+set number
+set hidden
+set termencoding=utf-8
+set fileencodings=utf8,cp1251
+set encoding=utf8
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯЖ;ABCDEFGHIJKLMNOPQRSTUVWXYZ:,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+set tw=0
+set hlsearch
+set incsearch
+set fileformat=unix
+set wildmenu
+set wcm=<Tab>
+if &term =~ '^screen'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+syntax enable
+colorscheme desert
+
+exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+set list
+
+" Make the 81st column stand out
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+
+" Status line
+" https://groups.google.com/forum/#!topic/vim_use/wPnsi-40FhE
+set laststatus=2
+set statusline=
+set statusline +=%1*\ %n\ %*            "buffer number
+set statusline +=%5*%{&ff}%*            "file format
+set statusline +=%3*%y%*                "file type
+set statusline +=%4*\ %<%F%*            "full path
+set statusline +=%2*%m%*                "modified flag
+set statusline +=%1*%=%5l%*             "current line
+set statusline +=%2*/%L%*               "total lines
+set statusline +=%1*%4c\ %*             "column number
+set statusline +=%2*0x%04B\ %*          "character under cursor
+
+" ignores
+set wildignore+=*/.git/**,*/.hg/**,*/.svn/**,*/.cmake**
+set wildignore+=*/build/**,*/__pycache__/**,*/.egg-info/**
+set wildignore+=*.exe,*.so,*.dll,*.a,*.o
+set wildignore+=*.la,*.lo,*.pc,*.in
+set wildignore+=*.sw[poa]
+set wildignore+=*.zip,*.rar,*.tgz,*.gz,*.tar,*.zst,*.bgz
+set wildignore+=*.pyc,*.whl
+
+" no backup needed
+set nobackup
+set nowb
+set noswapfile
+" Open any file with a pre-existing swapfile in readonly mode
+augroup NoSimultaneousEdits
+    autocmd!
+    autocmd SwapExists * let v:swapchoice = 'o'
+    autocmd SwapExists * echoerr 'Duplicate edit session (readonly)'
+augroup END
+
+" fold
+autocmd FileType c setlocal foldmethod=syntax
+autocmd FileType cpp setlocal foldmethod=syntax
+autocmd FileType h setlocal foldmethod=syntax
+autocmd FileType json setlocal foldmethod=syntax
+set foldenable!
+set foldlevel=1000
+hi Folded ctermbg=5 " color scheme dark reset can't handle folded info
+
+"
+" YouCompleteMe
+"
 let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
 
-Bundle 'scrooloose/syntastic'
 
-Bundle 'junegunn/fzf.vim'
+"
+" fzf
+"
+
 " Command for git grep
 " - fzf#vim#grep(command, with_column, [options], [fullscreen])
 command! -bang -nargs=* GGrep
@@ -27,12 +128,17 @@ command! -bang -nargs=* GGrep
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 noremap <Leader>g :GGrep<CR>
 
-Bundle 'sunaku/vim-shortcut'
+"
+" vim-shortcut
+"
 runtime plugin/shortcut.vim
+
+" vim-shortcut bindings
 Shortcut show shortcut menu and run chosen shortcut
-  \ noremap <silent> <Leader><Leader> :Shortcuts<Return>
+  \ noremap <silent> <Leader><Leader> :Shortcuts<CR>
 Shortcut fallback to shortcut menu on partial entry
-  \ noremap <silent> <Leader> :Shortcuts<Return>
+  \ noremap <silent> <Leader> :Shortcuts<CR>
+" fzf bindings
 Shortcut Fuzzy search in files
   \ noremap <C-P> :GFiles<CR>
 Shortcut Fuzzy search in buffers
@@ -54,179 +160,45 @@ Shortcut Fuzzy search in lines
 Shortcut Fuzzy search in marks
   \ noremap <Leader>' :Marks<CR>
 
-Bundle 'szw/vim-tags'
-Bundle 'vim-scripts/taglist.vim'
+Shortcut Explorer noremap <Leader>E :Ex<CR>
+Shortcut Save buffer (force) noremap <Leader>w :w!<CR>
+Shortcut Quit noremap <leader>q :q<CR>
+Shortcut Explorer noremap <Leader>E :Ex<CR>
+Shortcut Open new tab noremap <Leader>N :tagnew<CR>
+Shortcut Show YouCompleteMe FixIt noremap <Leader>F :YcmCompleter FixIt<CR>
+Shortcut Toggler show numbers noremap <Leader>n :set number!<CR>
+Shortcut Toggler tag/space mode (current buffer)
+  \ noremap <Leader>s :setl noexpandtab! <BAR> setl shiftwidth=4 <BAR> setl tabstop=4 <BAR> setl softtabstop=4<CR>
 
-" http://stackoverflow.com/a/741486/328260
+set pastetoggle=<leader>p
+
 "
-" This will look in the current directory for "tags", and work up the tree
-" towards root until one is found. IOW, you can be anywhere in your source
-" tree instead of just the root of it.
-set tags=tags;/
-
 " detectindent
-Bundle 'ciaranm/detectindent'
+"
 let g:detectindent_preferred_indent=4
 let g:detectindent_max_lines_to_analyse=1024
 let g:is_bash=1
 
-" http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
-Bundle 'godlygeek/tabular'
-" TODO: replace with https://github.com/llvm-mirror/lldb/tree/master/utils/vim-lldb
-"Bundle 'vim-lldb'
-Bundle 'tpope/vim-surround'
-Bundle 'elzr/vim-json'
-Bundle 'svermeulen/vim-easyclip'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-fugitive'
-
-syntax enable
-
-set autowrite
-set autochdir
-
-set wildignore+=*/.git/**,*/.hg/**,*/.svn/**,*/.cmake**
-set wildignore+=*/build/**,*/__pycache__/**,*/.egg-info/**
-set wildignore+=*.exe,*.so,*.dll,*.a,*.o
-set wildignore+=*.la,*.lo,*.pc,*.in
-set wildignore+=*.sw[poa]
-set wildignore+=*.zip,*.rar,*.tgz,*.gz,*.tar,*.zst,*.bgz
-set wildignore+=*.pyc,*.whl
-
-set mouse=
-
-if &term =~ '^screen'
-    " tmux will send xterm-style keys when its xterm-keys option is on
-    execute "set <xUp>=\e[1;*A"
-    execute "set <xDown>=\e[1;*B"
-    execute "set <xRight>=\e[1;*C"
-    execute "set <xLeft>=\e[1;*D"
-endif
-
-" Terminal codepage, must equal to that codepage used for output to terminal
-set termencoding=utf-8
-" Possible codepages of input files 
-set fileencodings=utf8,cp1251
-set encoding=utf8
-
-" Show line numbers
-set nu
-
-" Do not unload buffer, when switching for another
-" This allow us edit multiple files at the same time, without saving every
-" time, when switcing between them
-set hidden
-
-nmap <F1> :setlocal spell!<cr>
-imap <F1> <C-\><C-O>:setlocal spell!<cr>
-
-" F8 - bookmarks list
-map <F8> :MarksBrowser<cr>
-vmap <F8> <esc>:MarksBrowser<cr>
-imap <F8> <esc>:MarksBrowser<cr>
-
-" F9 - ycm fixit
-map <F9> :YcmCompleter FixIt<CR>
-vmap <F9> <esc>:YcmCompleter FixIt<cr>
-imap <F9> <esc>:YcmCompleter FixIt<cr>
-
-" F11 - show Taglist
-map <F11> :TlistToggle<cr>
-vmap <F11> <esc>:TlistToggle<cr>
-imap <F11> <esc>:TlistToggle<cr>
-
-" F12 - show explorer
-map <F12> :Ex<cr>
-vmap <F12> <esc>:Ex<cr>i
-imap <F12> <esc>:Ex<cr>i
-
-" < & > - indent
-vmap < <gv
-vmap > >gv
-
-" Select codepage (koi8-r, cp1251, cp866, utf8)
-set wildmenu
-set wcm=<Tab> 
-menu Encoding.koi8-r :e ++enc=koi8-r<CR>
-menu Encoding.windows-1251 :e ++enc=cp1251<CR>
-menu Encoding.cp866 :e ++enc=cp866<CR>
-menu Encoding.utf-8 :e ++enc=utf8 <CR>
-
-" Turn on filetype plugin
+"
+" filetype plugin
+"
 filetype plugin on
 filetype plugin indent on
 autocmd BufEnter    * if &filetype == "" | setlocal ft=sh | endif
 autocmd BufReadPost * :DetectIndent
 
-" Colorscheme
-colorscheme desert
+"
+" bindings (other shortcut)
+"
+noremap  <F1> :setlocal spell!<CR>
+inoremap <F1> <C-\><C-O>:setlocal spell!<CR>
 
-" No auto-wrap
-set tw=0
+nnoremap <C-a> <nop>
+nnoremap <C-x> <nop>
 
-" http://stackoverflow.com/a/2559262/328260
-set hlsearch " highlight search
-set incsearch " search while typing
-set fileformat=unix
-
-"====[ Make the 81st column stand out ]====================
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
-
-"====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
-exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
-set list
-
-"====[ Open any file with a pre-existing swapfile in readonly mode "]=========
-augroup NoSimultaneousEdits
-    autocmd!
-    autocmd SwapExists * let v:swapchoice = 'o'
-    " TODO: need to fix error/warning
-    autocmd SwapExists * echoerr 'Duplicate edit session (readonly)'
-augroup END
-
-" no backup needed
-set nobackup
-set nowb
-set noswapfile
-
-" Abbrevs
-iabbrev _email a3at.mail@gmail.com
-iabbrev _me Azat Khuzhin
-iabbrev _rb Reviewed-by: Azat Khuzhin <a3at.mail@gmail.com>
-iabbrev _soff Signed-off-by: Azat Khuzhin <a3at.mail@gmail.com>
-iabbrev _pb Reported-by:
-iabbrev _tb Tested-by:
-
-noremap  <leader>n :set number!<CR>
-
-noremap  <C-C>  :set cursorline! <BAR> set cursorcolumn!<CR>
-inoremap <C-C>  <C-O>:set cursorline! <BAR> set cursorcolumn!<CR>
-
-noremap  <leader>s :setl noexpandtab! <BAR> setl shiftwidth=4 <BAR> setl tabstop=4 <BAR> setl softtabstop=4<CR>
-
-" Fold
-autocmd FileType c setlocal foldmethod=syntax
-autocmd FileType cpp setlocal foldmethod=syntax
-autocmd FileType h setlocal foldmethod=syntax
-autocmd FileType json setlocal foldmethod=syntax
-set foldenable!
-set foldlevel=1000 " don't auto folding, since za set foldenable
-hi Folded ctermbg=5 " color scheme dark reset can't handle folded info
-
-" Status line
-" https://groups.google.com/forum/#!topic/vim_use/wPnsi-40FhE
-set laststatus=2
-set statusline=
-set statusline +=%1*\ %n\ %*            "buffer number
-set statusline +=%5*%{&ff}%*            "file format
-set statusline +=%3*%y%*                "file type
-set statusline +=%4*\ %<%F%*            "full path
-set statusline +=%2*%m%*                "modified flag
-set statusline +=%1*%=%5l%*             "current line
-set statusline +=%2*/%L%*               "total lines
-set statusline +=%1*%4c\ %*             "column number
-set statusline +=%2*0x%04B\ %*          "character under cursor
+" < & > - indent
+vmap < <gv
+vmap > >gv
 
 " mapping window moving
 map <C-j> <C-W>j
@@ -234,18 +206,11 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" tab operations
-map <leader>N :tabnew<cr>
-map <C-left> :tabprev<cr>
-map <C-right> :tabnext<cr>
+" tab movements
+map <C-left> :tabprev<CR>
+map <C-right> :tabnext<CR>
 
-" Quick key sets using <leader> key
-nmap <leader>w :w!<cr>
-nmap <leader>q :q<cr>
-nmap <leader>e :e ~/.vimrc<cr>
-set pastetoggle=<leader>p
+" toggle *pointer*
+noremap  <C-C>  :set cursorline! <BAR> set cursorcolumn!<CR>
+inoremap <C-C>  <C-O>:set cursorline! <BAR> set cursorcolumn!<CR>
 
-nnoremap <C-a> <nop>
-nnoremap <C-x> <nop>
-
-set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯЖ;ABCDEFGHIJKLMNOPQRSTUVWXYZ:,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
