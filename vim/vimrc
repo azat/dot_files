@@ -10,192 +10,81 @@ runtime! archlinux.vim
 set rtp+=/etc/vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
-
-" ycm
-Bundle 'Valloric/YouCompleteMe'
-let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
-
-Bundle 'scrooloose/syntastic'
-
-Bundle 'junegunn/fzf.vim'
-noremap <C-P> :GFiles<CR>
-noremap <leader>b :Buffers<CR>
-noremap <leader>h :History<CR>
-noremap <leader>c :BCommits<CR>
-noremap <leader>C :Commits<CR>
-noremap <leader>t :BTags<CR>
-noremap <leader>T :Tags<CR>
-noremap <leader>l :BLines<CR>
-noremap <leader>L :Lines<CR>
-noremap <Leader>' :Marks<CR>
-" Command for git grep
-" - fzf#vim#grep(command, with_column, [options], [fullscreen])
-command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
-  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
-noremap <Leader>g :GGrep<CR>
-
-Bundle 'szw/vim-tags'
-Bundle 'vim-scripts/taglist.vim'
-
-" http://stackoverflow.com/a/741486/328260
-"
-" This will look in the current directory for "tags", and work up the tree
-" towards root until one is found. IOW, you can be anywhere in your source
-" tree instead of just the root of it.
-set tags=tags;/
-
-" detectindent
-Bundle 'ciaranm/detectindent'
-let g:detectindent_preferred_indent=4
-let g:detectindent_max_lines_to_analyse=1024
-let g:is_bash=1
-
-" http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
-Bundle 'godlygeek/tabular'
-" TODO: replace with https://github.com/llvm-mirror/lldb/tree/master/utils/vim-lldb
-"Bundle 'vim-lldb'
-Bundle 'tpope/vim-surround'
-Bundle 'elzr/vim-json'
-Bundle 'svermeulen/vim-easyclip'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-fugitive'
-
-syntax enable
-
-set autowrite
-set autochdir
-
-set wildignore+=*/.git/**,*/.hg/**,*/.svn/**,*/.cmake**
-set wildignore+=*/build/**,*/__pycache__/**,*/.egg-info/**
-set wildignore+=*.exe,*.so,*.dll,*.a,*.o
-set wildignore+=*.la,*.lo,*.pc,*.in
-set wildignore+=*.sw[poa]
-set wildignore+=*.zip,*.rar,*.tgz,*.gz,*.tar,*.zst,*.bgz
-set wildignore+=*.pyc,*.whl
-
-set mouse=
-
-if &term =~ '^screen'
-    " tmux will send xterm-style keys when its xterm-keys option is on
-    execute "set <xUp>=\e[1;*A"
-    execute "set <xDown>=\e[1;*B"
-    execute "set <xRight>=\e[1;*C"
-    execute "set <xLeft>=\e[1;*D"
+" Load vim-plug
+if empty(glob("~/.vim/autoload/plug.vim"))
+  execute '!curl --create-dirs -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 
-" Terminal codepage, must equal to that codepage used for output to terminal
+"
+" Plugins
+"
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --system-boost --system-libclang --clang-completer
+  endif
+endfunction
+
+" for YouCompleteMe
+let g:plug_timeout=600
+
+call plug#begin('~/.vim/bundle')
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+Plug 'w0rp/ale'
+Plug 'junegunn/fzf.vim'
+Plug 'sunaku/vim-shortcut'
+Plug 'szw/vim-tags'
+Plug 'vim-scripts/taglist.vim'
+Plug 'ciaranm/detectindent'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-surround'
+Plug 'elzr/vim-json'
+Plug 'svermeulen/vim-easyclip'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'sjl/gundo.vim'
+" TODO: replace with https://github.com/llvm-mirror/lldb/tree/master/utils/vim-lldb
+"Plug 'vim-lldb'
+call plug#end()
+
+"
+" basic
+"
+set tags=tags;/
+set mouse=
+set autowrite
+set autochdir
+set number
+set hidden
 set termencoding=utf-8
-" Possible codepages of input files 
 set fileencodings=utf8,cp1251
 set encoding=utf8
-
-" Show line numbers
-set nu
-
-" Do not unload buffer, when switching for another
-" This allow us edit multiple files at the same time, without saving every
-" time, when switcing between them
-set hidden
-
-nmap <F1> :setlocal spell!<cr>
-imap <F1> <C-\><C-O>:setlocal spell!<cr>
-
-" F8 - bookmarks list
-map <F8> :MarksBrowser<cr>
-vmap <F8> <esc>:MarksBrowser<cr>
-imap <F8> <esc>:MarksBrowser<cr>
-
-" F9 - ycm fixit
-map <F9> :YcmCompleter FixIt<CR>
-vmap <F9> <esc>:YcmCompleter FixIt<cr>
-imap <F9> <esc>:YcmCompleter FixIt<cr>
-
-" F11 - show Taglist
-map <F11> :TlistToggle<cr>
-vmap <F11> <esc>:TlistToggle<cr>
-imap <F11> <esc>:TlistToggle<cr>
-
-" F12 - show explorer
-map <F12> :Ex<cr>
-vmap <F12> <esc>:Ex<cr>i
-imap <F12> <esc>:Ex<cr>i
-
-" < & > - indent
-vmap < <gv
-vmap > >gv
-
-" Select codepage (koi8-r, cp1251, cp866, utf8)
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯЖ;ABCDEFGHIJKLMNOPQRSTUVWXYZ:,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+set tw=0
+set hlsearch
+set incsearch
+set fileformat=unix
 set wildmenu
-set wcm=<Tab> 
-menu Encoding.koi8-r :e ++enc=koi8-r<CR>
-menu Encoding.windows-1251 :e ++enc=cp1251<CR>
-menu Encoding.cp866 :e ++enc=cp866<CR>
-menu Encoding.utf-8 :e ++enc=utf8 <CR>
-
-" Turn on filetype plugin
-filetype plugin on
-filetype plugin indent on
-autocmd BufEnter    * if &filetype == "" | setlocal ft=sh | endif
-autocmd BufReadPost * :DetectIndent
-
-" Colorscheme
+set wcm=<Tab>
+if &term =~ '^screen'
+  " tmux will send xterm-style keys when its xterm-keys option is on
+  execute "set <xUp>=\e[1;*A"
+  execute "set <xDown>=\e[1;*B"
+  execute "set <xRight>=\e[1;*C"
+  execute "set <xLeft>=\e[1;*D"
+endif
+syntax enable
 colorscheme desert
 
-" No auto-wrap
-set tw=0
-
-" http://stackoverflow.com/a/2559262/328260
-set hlsearch " highlight search
-set incsearch " search while typing
-set fileformat=unix
-
-"====[ Make the 81st column stand out ]====================
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
-
-"====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 set list
 
-"====[ Open any file with a pre-existing swapfile in readonly mode "]=========
-augroup NoSimultaneousEdits
-    autocmd!
-    autocmd SwapExists * let v:swapchoice = 'o'
-    " TODO: need to fix error/warning
-    autocmd SwapExists * echoerr 'Duplicate edit session (readonly)'
-augroup END
-
-" no backup needed
-set nobackup
-set nowb
-set noswapfile
-
-" Abbrevs
-iabbrev _email a3at.mail@gmail.com
-iabbrev _me Azat Khuzhin
-iabbrev _rb Reviewed-by: Azat Khuzhin <a3at.mail@gmail.com>
-iabbrev _soff Signed-off-by: Azat Khuzhin <a3at.mail@gmail.com>
-iabbrev _pb Reported-by:
-iabbrev _tb Tested-by:
-
-noremap  <leader>n :set number!<CR>
-
-noremap  <C-C>  :set cursorline! <BAR> set cursorcolumn!<CR>
-inoremap <C-C>  <C-O>:set cursorline! <BAR> set cursorcolumn!<CR>
-
-noremap  <leader>s :setl noexpandtab! <BAR> setl shiftwidth=4 <BAR> setl tabstop=4 <BAR> setl softtabstop=4<CR>
-
-" Fold
-autocmd FileType c setlocal foldmethod=syntax
-autocmd FileType cpp setlocal foldmethod=syntax
-autocmd FileType h setlocal foldmethod=syntax
-autocmd FileType json setlocal foldmethod=syntax
-set foldenable!
-set foldlevel=1000 " don't auto folding, since za set foldenable
-hi Folded ctermbg=5 " color scheme dark reset can't handle folded info
+" Make the 81st column stand out
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
 
 " Status line
 " https://groups.google.com/forum/#!topic/vim_use/wPnsi-40FhE
@@ -210,6 +99,165 @@ set statusline +=%1*%=%5l%*             "current line
 set statusline +=%2*/%L%*               "total lines
 set statusline +=%1*%4c\ %*             "column number
 set statusline +=%2*0x%04B\ %*          "character under cursor
+" vim-fugitive
+set statusline +=\ %{substitute(fugitive#statusline(),'^.Git.\\(.*\\)..$','\\1','')}
+
+
+" ignores
+set wildignore+=*/.git/**,*/.hg/**,*/.svn/**,*/.cmake**
+set wildignore+=*/build/**,*/__pycache__/**,*/.egg-info/**
+set wildignore+=*.exe,*.so,*.dll,*.a,*.o
+set wildignore+=*.la,*.lo,*.pc,*.in
+set wildignore+=*.sw[poa]
+set wildignore+=*.zip,*.rar,*.tgz,*.gz,*.tar,*.zst,*.bgz
+set wildignore+=*.pyc,*.whl
+
+" no backup needed
+set nobackup
+set nowb
+set noswapfile
+" Open any file with a pre-existing swapfile in readonly mode
+augroup NoSimultaneousEdits
+  autocmd!
+  autocmd SwapExists * let v:swapchoice = 'o'
+  autocmd SwapExists * echoerr 'Duplicate edit session (readonly)'
+augroup END
+
+" fold
+autocmd FileType c setlocal foldmethod=syntax
+autocmd FileType cpp setlocal foldmethod=syntax
+autocmd FileType h setlocal foldmethod=syntax
+autocmd FileType json setlocal foldmethod=syntax
+set foldenable!
+set foldlevel=1000
+hi Folded ctermbg=5 " color scheme dark reset can't handle folded info
+
+"
+" YouCompleteMe
+"
+let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
+
+
+"
+" fzf
+"
+
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+noremap <leader>g :GGrep<return>
+
+"
+" vim-shortcut
+"
+runtime plugin/shortcut.vim
+
+" vim-shortcut bindings
+Shortcut show shortcut menu and run chosen shortcut
+  \ noremap <silent> <leader><leader> :Shortcuts<return>
+Shortcut fallback to shortcut menu on partial entry
+  \ noremap <silent> <leader> :Shortcuts<return>
+" fzf bindings
+Shortcut Fuzzy search in files
+  \ noremap <C-P> :GFiles<return>
+Shortcut Fuzzy search in buffers
+  \ noremap <leader>b :Buffers<return>
+Shortcut Fuzzy search in history
+  \ noremap <leader>h :History<return>
+Shortcut Fuzzy search in commits (current buffer)
+  \ noremap <leader>c :BCommits<return>
+Shortcut Fuzzy search in commits
+  \ noremap <leader>C :Commits<return>
+Shortcut Fuzzy search in tags (current buffer)
+  \ noremap <leader>t :BTags<return>
+Shortcut Fuzzy search in tags
+  \ noremap <leader>T :Tags<return>
+Shortcut Fuzzy search in lines (current buffer)
+  \ noremap <leader>l :BLines<return>
+Shortcut Fuzzy search in lines
+  \ noremap <leader>L :Lines<return>
+Shortcut Fuzzy search in marks
+  \ noremap <leader>' :Marks<return>
+
+Shortcut Explorer noremap <leader>E :Ex<return>
+Shortcut Save buffer (force) noremap <leader>w :w!<return>
+Shortcut Quit noremap <leader>q :q<return>
+Shortcut Explorer noremap <leader>E :Ex<return>
+Shortcut Open new tab noremap <leader>N :tagnew<return>
+Shortcut Show YouCompleteMe FixIt noremap <leader>F :YcmCompleter FixIt<return>
+Shortcut Toggler show numbers noremap <leader>n :set number!<return>
+Shortcut Toggler tag/space mode (current buffer)
+  \ noremap <leader>s :setl noexpandtab! <bar> setl shiftwidth=4 <bar> setl tabstop=4 <bar> setl softtabstop=4<return>
+
+for i in range(1,9)
+  execute 'Shortcut go to tab number '. i .' '
+        \ 'noremap <silent> <leader>'. i .' :tabfirst<bar>'. i .'tabnext<return>'
+endfor
+
+" vim-tags
+Shortcut! :TagsGenerate<return> Generate tags
+Shortcut! :TagsGenerate!<return> Generate tags (force)
+
+" taglist.vim
+Shortcut! :TlistToggle<return> Toggle tags (current buffer)
+
+" vim-fugitive
+Shortcut! :Gblame<return>           git blame
+Shortcut! :Gstatus<return>          git status
+Shortcut! :Gdiff<return>            git diff
+Shortcut! :Gcommit<return>          git commit
+Shortcut! :Gread<return>            git checkout: revert buffer to repository
+Shortcut! :Gread!<return>           git checkout: revert buffer to repository (force)
+Shortcut! :Gwrite<return>           git add: stage all changes in buffer
+Shortcut! :Gwrite!<return>          git add: stage all changes in buffer (force)
+Shortcut! :Gremove<return>          git rm: delete file from repository
+Shortcut! :Gremove!<return>         git rm: delete file from repository (force)
+Shortcut! :Gedit<return>            return to editing git buffer
+" TODO(with space in the command):
+" - :Gcommit --amend
+" - :source $MYVIMRC
+
+" Plug
+Shortcut! :PlugInstall<return> Install plugins
+Shortcut! :PlugUpdate<return>  Update plugins
+Shortcut! :PlugUpdate!<return> Update plugins (force)
+Shortcut! :PlugStatus<return>  Plugins status
+
+" gundo
+Shortcut! :GundoToggle<return> undo tree
+
+set pastetoggle=<leader>p
+
+"
+" detectindent
+"
+let g:detectindent_preferred_indent=4
+let g:detectindent_max_lines_to_analyse=1024
+let g:is_bash=1
+
+"
+" filetype plugin
+"
+filetype plugin on
+filetype plugin indent on
+autocmd BufEnter    * if &filetype == "" | setlocal ft=sh | endif
+autocmd BufReadPost * :DetectIndent
+
+"
+" bindings (other shortcut)
+"
+noremap  <F1> :setlocal spell!<return>
+inoremap <F1> <C-\><C-O>:setlocal spell!<return>
+
+nnoremap <C-a> <nop>
+nnoremap <C-x> <nop>
+
+" < & > - indent
+vmap < <gv
+vmap > >gv
 
 " mapping window moving
 map <C-j> <C-W>j
@@ -217,18 +265,11 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" tab operations
-map <leader>N :tabnew<cr>
-map <C-left> :tabprev<cr>
-map <C-right> :tabnext<cr>
+" tab movements
+map <C-left> :tabprev<return>
+map <C-right> :tabnext<return>
 
-" Quick key sets using <leader> key
-nmap <leader>w :w!<cr>
-nmap <leader>q :q<cr>
-nmap <leader>e :e ~/.vimrc<cr>
-set pastetoggle=<leader>p
+" toggle *pointer*
+noremap  <C-C>  :set cursorline! <bar> set cursorcolumn!<return>
+inoremap <C-C>  <C-O>:set cursorline! <bar> set cursorcolumn!<return>
 
-nnoremap <C-a> <nop>
-nnoremap <C-x> <nop>
-
-set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯЖ;ABCDEFGHIJKLMNOPQRSTUVWXYZ:,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
