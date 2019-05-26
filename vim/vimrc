@@ -147,7 +147,7 @@ command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number '.shellescape(<q-args>), 0,
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
-noremap <Leader>g :GGrep<CR>
+noremap <leader>g :GGrep<return>
 
 "
 " vim-shortcut
@@ -156,71 +156,71 @@ runtime plugin/shortcut.vim
 
 " vim-shortcut bindings
 Shortcut show shortcut menu and run chosen shortcut
-  \ noremap <silent> <Leader><Leader> :Shortcuts<CR>
+  \ noremap <silent> <leader><leader> :Shortcuts<return>
 Shortcut fallback to shortcut menu on partial entry
-  \ noremap <silent> <Leader> :Shortcuts<CR>
+  \ noremap <silent> <leader> :Shortcuts<return>
 " fzf bindings
 Shortcut Fuzzy search in files
-  \ noremap <C-P> :GFiles<CR>
+  \ noremap <C-P> :GFiles<return>
 Shortcut Fuzzy search in buffers
-  \ noremap <leader>b :Buffers<CR>
+  \ noremap <leader>b :Buffers<return>
 Shortcut Fuzzy search in history
-  \ noremap <leader>h :History<CR>
+  \ noremap <leader>h :History<return>
 Shortcut Fuzzy search in commits (current buffer)
-  \ noremap <leader>c :BCommits<CR>
+  \ noremap <leader>c :BCommits<return>
 Shortcut Fuzzy search in commits
-  \ noremap <leader>C :Commits<CR>
+  \ noremap <leader>C :Commits<return>
 Shortcut Fuzzy search in tags (current buffer)
-  \ noremap <leader>t :BTags<CR>
+  \ noremap <leader>t :BTags<return>
 Shortcut Fuzzy search in tags
-  \ noremap <leader>T :Tags<CR>
+  \ noremap <leader>T :Tags<return>
 Shortcut Fuzzy search in lines (current buffer)
-  \ noremap <leader>l :BLines<CR>
+  \ noremap <leader>l :BLines<return>
 Shortcut Fuzzy search in lines
-  \ noremap <leader>L :Lines<CR>
+  \ noremap <leader>L :Lines<return>
 Shortcut Fuzzy search in marks
-  \ noremap <Leader>' :Marks<CR>
+  \ noremap <leader>' :Marks<return>
 
-Shortcut Explorer noremap <Leader>E :Ex<CR>
-Shortcut Save buffer (force) noremap <Leader>w :w!<CR>
-Shortcut Quit noremap <leader>q :q<CR>
-Shortcut Explorer noremap <Leader>E :Ex<CR>
-Shortcut Open new tab noremap <Leader>N :tagnew<CR>
-Shortcut Show YouCompleteMe FixIt noremap <Leader>F :YcmCompleter FixIt<CR>
-Shortcut Toggler show numbers noremap <Leader>n :set number!<CR>
+Shortcut Explorer noremap <leader>E :Ex<return>
+Shortcut Save buffer (force) noremap <leader>w :w!<return>
+Shortcut Quit noremap <leader>q :q<return>
+Shortcut Explorer noremap <leader>E :Ex<return>
+Shortcut Open new tab noremap <leader>N :tagnew<return>
+Shortcut Show YouCompleteMe FixIt noremap <leader>F :YcmCompleter FixIt<return>
+Shortcut Toggler show numbers noremap <leader>n :set number!<return>
 Shortcut Toggler tag/space mode (current buffer)
-  \ noremap <Leader>s :setl noexpandtab! <BAR> setl shiftwidth=4 <BAR> setl tabstop=4 <BAR> setl softtabstop=4<CR>
+  \ noremap <leader>s :setl noexpandtab! <bar> setl shiftwidth=4 <bar> setl tabstop=4 <bar> setl softtabstop=4<return>
 
 for i in range(1,9)
   execute 'Shortcut go to tab number '. i .' '
-        \ 'noremap <silent> <Leader>'. i .' :tabfirst<Bar>'. i .'tabnext<CR>'
+        \ 'noremap <silent> <leader>'. i .' :tabfirst<bar>'. i .'tabnext<return>'
 endfor
 
 " vim-tags
-Shortcut! :TagsGenerate<CR> Generate tags
-Shortcut! :TagsGenerate!<CR> Generate tags (force)
+Shortcut! :TagsGenerate<return> Generate tags
+Shortcut! :TagsGenerate!<return> Generate tags (force)
 
 " taglist.vim
-Shortcut! :TlistToggle<CR> Toggle tags (current buffer)
+Shortcut! :TlistToggle<return> Toggle tags (current buffer)
 
 " vim-fugitive
-Shortcut! :Gblame<CR>           git blame
-Shortcut! :Gstatus<CR>          git status
-Shortcut! :Gdiff<CR>            git diff
-Shortcut! :Gcommit<CR>          git commit
-Shortcut! :Gcommit --ammend<CR> git commit ammend
-Shortcut! :Gread<CR>            git checkout: revert buffer to repository
-Shortcut! :Gread!<CR>           git checkout: revert buffer to repository (force)
-Shortcut! :Gwrite<CR>           git add: stage all changes in buffer
-Shortcut! :Gwrite!<CR>          git add: stage all changes in buffer (force)
-Shortcut! :Gremove<CR>          git rm: delete file from repository
-Shortcut! :Gremove!<CR>          git rm: delete file from repository (force)
-Shortcut! :Gedit<CR>            return to editing git buffer
+Shortcut! :Gblame<return>           git blame
+Shortcut! :Gstatus<return>          git status
+Shortcut! :Gdiff<return>            git diff
+Shortcut! :Gcommit<return>          git commit
+Shortcut! :Gcommit --ammend<return> git commit ammend
+Shortcut! :Gread<return>            git checkout: revert buffer to repository
+Shortcut! :Gread!<return>           git checkout: revert buffer to repository (force)
+Shortcut! :Gwrite<return>           git add: stage all changes in buffer
+Shortcut! :Gwrite!<return>          git add: stage all changes in buffer (force)
+Shortcut! :Gremove<return>          git rm: delete file from repository
+Shortcut! :Gremove!<return>          git rm: delete file from repository (force)
+Shortcut! :Gedit<return>            return to editing git buffer
 
 " Plug
-Shortcut! :PlugUpdate<CR> Update plugins
-Shortcut! :PlugUpdate!<CR> Update plugins (force)
-Shortcut! :PlugStatus<CR> Plugins status
+Shortcut! :PlugUpdate<return> Update plugins
+Shortcut! :PlugUpdate!<return> Update plugins (force)
+Shortcut! :PlugStatus<return> Plugins status
 
 set pastetoggle=<leader>p
 
@@ -242,8 +242,8 @@ autocmd BufReadPost * :DetectIndent
 "
 " bindings (other shortcut)
 "
-noremap  <F1> :setlocal spell!<CR>
-inoremap <F1> <C-\><C-O>:setlocal spell!<CR>
+noremap  <F1> :setlocal spell!<return>
+inoremap <F1> <C-\><C-O>:setlocal spell!<return>
 
 nnoremap <C-a> <nop>
 nnoremap <C-x> <nop>
@@ -259,10 +259,10 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " tab movements
-map <C-left> :tabprev<CR>
-map <C-right> :tabnext<CR>
+map <C-left> :tabprev<return>
+map <C-right> :tabnext<return>
 
 " toggle *pointer*
-noremap  <C-C>  :set cursorline! <BAR> set cursorcolumn!<CR>
-inoremap <C-C>  <C-O>:set cursorline! <BAR> set cursorcolumn!<CR>
+noremap  <C-C>  :set cursorline! <bar> set cursorcolumn!<return>
+inoremap <C-C>  <C-O>:set cursorline! <bar> set cursorcolumn!<return>
 
