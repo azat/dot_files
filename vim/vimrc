@@ -188,6 +188,27 @@ Shortcut Toggler show numbers noremap <Leader>n :set number!<CR>
 Shortcut Toggler tag/space mode (current buffer)
   \ noremap <Leader>s :setl noexpandtab! <BAR> setl shiftwidth=4 <BAR> setl tabstop=4 <BAR> setl softtabstop=4<CR>
 
+" vim-tags
+Shortcut! :TagsGenerate<CR> Generate tags
+Shortcut! :TagsGenerate!<CR> Generate tags (force)
+
+" taglist.vim
+Shortcut! :TlistToggle<CR> Toggle tags (current buffer)
+
+" vim-fugitive
+Shortcut! :Gblame<CR>           git blame
+Shortcut! :Gstatus<CR>          git status
+Shortcut! :Gdiff<CR>            git diff
+Shortcut! :Gcommit<CR>          git commit
+Shortcut! :Gcommit --ammend<CR> git commit ammend
+Shortcut! :Gread<CR>            git checkout: revert buffer to repository
+Shortcut! :Gread!<CR>           git checkout: revert buffer to repository (force)
+Shortcut! :Gwrite<CR>           git add: stage all changes in buffer
+Shortcut! :Gwrite!<CR>          git add: stage all changes in buffer (force)
+Shortcut! :Gremove<CR>          git rm: delete file from repository
+Shortcut! :Gremove!<CR>          git rm: delete file from repository (force)
+Shortcut! :Gedit<CR>            return to editing git buffer
+
 " Plug
 Shortcut! :PlugUpdate<CR> Update plugins
 Shortcut! :PlugUpdate!<CR> Update plugins (force)
