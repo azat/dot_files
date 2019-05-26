@@ -152,6 +152,28 @@ noremap <leader>g :GGrep<return>
 "
 runtime plugin/shortcut.vim
 
+" at least execute map if vim-shortcut is not available
+if !exists(':Shortcut')
+  command! -bang -nargs=+ Shortcut call s:null_shortcut(<q-args>, <bang>0)
+
+  function! s:null_shortcut_parse(input) abort
+    let parts = split(a:input, '\s*\ze\<[nvxsoilct]\?\%(nore\)\?map\>')
+    if len(parts) < 2
+      throw 'expected "<description> <map-command>" but got ' . string(a:input)
+    endif
+    let [description; rest] = parts
+    let definition = join(rest, '')
+    return [description, definition]
+  endfunction
+
+  function! s:null_shortcut(qargs, bang) abort
+    if !a:bang
+      let [description, definition] = s:null_shortcut_parse(a:qargs)
+      execute definition
+    endif
+  endfunction
+endif
+
 " vim-shortcut bindings
 Shortcut show shortcut menu and run chosen shortcut
   \ noremap <silent> <leader><leader> :Shortcuts<return>
