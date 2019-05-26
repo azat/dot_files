@@ -50,8 +50,6 @@ Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'sjl/gundo.vim'
-" TODO: replace with https://github.com/llvm-mirror/lldb/tree/master/utils/vim-lldb
-"Plug 'vim-lldb'
 call plug#end()
 
 "
