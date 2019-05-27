@@ -57,6 +57,7 @@ call plug#end()
 "
 set tags=tags;/
 set mouse=
+set guicursor=
 set autowrite
 set autochdir
 set number
