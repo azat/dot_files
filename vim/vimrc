@@ -140,11 +140,23 @@ let g:vim_tags_project_tags_command = "flock -n /tmp/vim-ctags.lock {CTAGS} -R {
 "
 " lightline
 "
+function! LinterStatus() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+
+  return l:counts.total == 0 ? 'OK' : printf(
+  \   '%dW %dE',
+  \   all_non_errors,
+  \   all_errors
+  \)
+endfunction
 let g:lightline = {
   \ 'colorscheme': 'seoul256',
   \ 'active': {
   \   'left': [
-  \     [ 'mode', 'paste', 'filename' ]
+  \     [ 'mode', 'paste', 'filename', 'linterstatus' ]
   \   ],
   \   'right': [
   \     [ 'gitbranch' ],
@@ -153,7 +165,8 @@ let g:lightline = {
   \   ]
   \ },
   \ 'component_function': {
-  \   'gitbranch': 'fugitive#head'
+  \   'gitbranch': 'fugitive#head',
+  \   'linterstatus': 'LinterStatus'
   \ },
   \ }
 
