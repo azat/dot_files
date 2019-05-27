@@ -230,8 +230,10 @@ Shortcut Toggler show numbers noremap <leader>n :set number!<return>
 Shortcut Toggler tag/space mode (current buffer)
   \ noremap <leader>s :setl noexpandtab! <bar> setl shiftwidth=4 <bar> setl tabstop=4 <bar> setl softtabstop=4<return>
 
-command! -bang -nargs=0 Source :source $MYVIMRC
-Shortcut! :Source<return> Reload $MYVIMRC (source)
+command! -bang -nargs=0 SourceLocal :source $MYVIMRC
+command! -bang -nargs=0 SourceSystemWide :source /etc/vimrc
+Shortcut! :SourceLocal<return> Reload $MYVIMRC (source)
+Shortcut! :SourceSystemWide<return> Reload system-wide vimrc (source)
 
 for i in range(1,9)
   execute 'Shortcut go to tab number '. i .' '
