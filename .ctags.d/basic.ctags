@@ -1,5 +1,22 @@
 # Basic
 --recurse=yes
 --exclude=.git
---exclude=*/build
---exclude=*/.cmake*
+--exclude=build
+--exclude=.cmake*
+--exclude=contrib
+--exclude=3dparty
+--exclude=3d-party
+--exclude=3party
+--exclude=thirdparty
+--exclude=third-party
+# Languages
+--languages=-SQL
+--languages=-JavaScript
+--languages=-CSS
+--languages=-HTML
+--languages=-XML
+--languages=-SVG
+--languages=-Markdown
+--languages=-ReStructuredText
+--languages=-JSON
+--languages=-Yaml
