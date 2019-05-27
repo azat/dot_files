@@ -1,0 +1,5 @@
+# Basic
+--recurse=yes
+--exclude=.git
+--exclude=*/build
+--exclude=*/.cmake*

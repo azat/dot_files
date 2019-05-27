@@ -60,3 +60,5 @@
 !/.digrc
 
 !/.vagrant.d
+
+!/.ctags
