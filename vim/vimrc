@@ -50,6 +50,7 @@ Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'sjl/gundo.vim'
+Plug 'itchyny/lightline.vim'
 call plug#end()
 
 "
@@ -71,6 +72,7 @@ set hlsearch
 set incsearch
 set fileformat=unix
 set wildmenu
+set laststatus=2
 set wcm=<Tab>
 if &term =~ '^screen'
   " tmux will send xterm-style keys when its xterm-keys option is on
@@ -88,24 +90,6 @@ set list
 " Make the 81st column stand out
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
-
-" Status line
-" https://groups.google.com/forum/#!topic/vim_use/wPnsi-40FhE
-set laststatus=2
-set statusline=
-set statusline +=%1*\ %n\ %*            "buffer number
-set statusline +=%5*%{&ff}%*            "file format
-set statusline +=%3*%y%*                "file type
-set statusline +=%4*\ %<%F%*            "full path
-set statusline +=%2*%m%*                "modified flag
-set statusline +=%1*%=%5l%*             "current line
-set statusline +=%2*/%L%*               "total lines
-set statusline +=%1*%4c\ %*             "column number
-set statusline +=%2*0x%04B\ %*          "character under cursor
-" vim-fugitive only if it is available
-if PlugLoaded('vim-fugitive')
-  set statusline +=\ %{substitute(fugitive#statusline(),'^.Git.\\(.*\\)..$','\\1','')}
-endif
 
 " ignores
 set wildignore+=*/.git/**,*/.hg/**,*/.svn/**,*/.cmake**
@@ -145,6 +129,26 @@ let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
 " ale
 "
 let g:ale_lint_on_text_changed = 'never'
+
+"
+" lightline
+"
+let g:lightline = {
+  \ 'colorscheme': 'solarized',
+  \ 'active': {
+  \   'left': [
+  \     [ 'mode', 'paste', 'filename' ]
+  \   ],
+  \   'right': [
+  \     [ 'gitbranch' ],
+  \     [ 'lineinfo', 'percent' ],
+  \     [ 'fileformat', 'filetype' ]
+  \   ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#head'
+  \ },
+  \ }
 
 "
 " fzf
