@@ -152,6 +152,7 @@ command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number '.shellescape(<q-args>), 0,
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+noremap <S-F> :GGrep <C-R>=expand("<cword>")<return><return>
 
 "
 " vim-shortcut
