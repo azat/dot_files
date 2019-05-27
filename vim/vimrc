@@ -231,6 +231,7 @@ for i in range(1,9)
 endfor
 
 " vim-tags
+let g:vim_tags_directories=[".git/.."]
 Shortcut! :TagsGenerate<return> Generate tags
 Shortcut! :TagsGenerate!<return> Generate tags (force)
 
