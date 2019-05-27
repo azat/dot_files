@@ -141,6 +141,10 @@ hi Folded ctermbg=5 " color scheme dark reset can't handle folded info
 "
 let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
 
+"
+" ale
+"
+let g:ale_lint_on_text_changed = 'never'
 
 "
 " fzf
@@ -263,6 +267,10 @@ Shortcut! :PlugStatus<return>  Plugins status
 
 " gundo
 Shortcut! :GundoToggle<return> undo tree
+
+" ale
+Shortcut! :ALELint<return> Run ALE linters
+Shortcut! :ALEInfo<return> Show ALE info (current buffer)
 
 set pastetoggle=<leader>p
 
