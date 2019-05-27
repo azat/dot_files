@@ -299,7 +299,7 @@ Shortcut! :YcmToggleLogs<return> YcmToggleLogs
 Shortcut [ycm GoTo] GoTo (force)
   \ noremap <leader>jt :YcmCompleter GoTo<return>
 Shortcut [ycm GoToImprecise] GoTo
-  \ noremap <C-[> :YcmCompleter GoToImprecise<return>
+  \ noremap <C-\> :YcmCompleter GoToImprecise<return>
 Shortcut [ycm GoToImprecise] GoToImprecise (trades correctness for speed)
   \ noremap <leader>ji :YcmCompleter GoToImprecise<return>
 Shortcut [ycm GoToInclude] Looks up the current line for a header and jumps to it
