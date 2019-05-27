@@ -275,6 +275,11 @@ Shortcut! :GundoToggle<return> undo tree
 " ale
 Shortcut! :ALELint<return> Run ALE linters
 Shortcut! :ALEInfo<return> Show ALE info (current buffer)
+Shortcut! :ALEDetail<return> Show ALE details
+Shortcut! :ALEFix<return> Show ALE fixes
+Shortcut! :ALEDisable<return> Disable ALE
+Shortcut! :ALEEnable<return> Enable ALE
+Shortcut! :ALEToggle<return> Toggle ALE
 
 set pastetoggle=<leader>p
 
