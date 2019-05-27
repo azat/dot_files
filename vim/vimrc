@@ -232,7 +232,6 @@ Shortcut Close buffer noremap <leader>d :bd<return>
 Shortcut Close buffer (force) noremap <leader>D :bd!<return>
 Shortcut Explorer noremap <leader>E :Ex<return>
 Shortcut Open new tab noremap <leader>N :tagnew<return>
-Shortcut Show YouCompleteMe FixIt noremap <leader>F :YcmCompleter FixIt<return>
 Shortcut Toggler show numbers noremap <leader>n :set number!<return>
 Shortcut Toggler tag/space mode (current buffer)
   \ noremap <leader>s :setl noexpandtab! <bar> setl shiftwidth=4 <bar> setl tabstop=4 <bar> setl softtabstop=4<return>
@@ -288,6 +287,41 @@ Shortcut! :ALEFix<return> Show ALE fixes
 Shortcut! :ALEDisable<return> Disable ALE
 Shortcut! :ALEEnable<return> Enable ALE
 Shortcut! :ALEToggle<return> Toggle ALE
+
+" ycm/YouCompleteMe
+Shortcut! :YcmRestartServer<return> YcmRestartServer
+Shortcut! :YcmForceCompileAndDiagnostics<return> YcmForceCompileAndDiagnostics
+Shortcut! :YcmDiags<return> YcmDiags
+Shortcut! :YcmShowDetailedDiagnostic<return> YcmShowDetailedDiagnostic
+Shortcut! :YcmDebugInfo<return> YcmDebugInfo
+Shortcut! :YcmToggleLogs<return> YcmToggleLogs
+" GoTo
+Shortcut [ycm GoTo] GoTo (force)
+  \ noremap <leader>jt :YcmCompleter GoTo<return>
+Shortcut [ycm GoToImprecise] GoTo
+  \ noremap <C-[> :YcmCompleter GoToImprecise<return>
+Shortcut [ycm GoToImprecise] GoToImprecise (trades correctness for speed)
+  \ noremap <leader>ji :YcmCompleter GoToImprecise<return>
+Shortcut [ycm GoToInclude] Looks up the current line for a header and jumps to it
+  \ noremap <leader>jI :YcmCompleter GoToInclude<return>
+Shortcut [ycm GoToDeclaration] Looks up the symbol under the cursor and jumps to its declaration
+  \ noremap <leader>jd :YcmCompleter GoToDeclaration<return>
+Shortcut [ycm GoToDefinition] Looks up the symbol under the cursor and jumps to its definition
+  \ noremap <leader>jD :YcmCompleter GoToDefinition<return>
+" Semantic Information Commands
+Shortcut [ycm GetType] Echos the type of the variable or method under the cursor
+  \ noremap <leader>gT :YcmCompleter GetType<return>
+Shortcut [ycm GetTypeImprecise] Echos the type of the variable or method under the cursor (force)
+  \ noremap <leader>gt :YcmCompleter GetTypeImprecise<return>
+Shortcut [ycm GetParent] Echos the semantic parent of the point under the cursor
+  \ noremap <leader>gp :YcmCompleter GetParent<return>
+Shortcut [ycm GetDoc] Displays the doc (force)
+  \ noremap <leader>gD :YcmCompleter GetDoc<return>
+Shortcut [ycm GetDocImprecise] Displays the doc
+  \ noremap <leader>gd :YcmCompleter GetDocImprecise<return>
+Shortcut [ycm] FixIt
+  \ noremap <leader>F :YcmCompleter FixIt<return>
+" TODO: make shortcuts works from menu and not only via <leader>
 
 set pastetoggle=<leader>p
 
