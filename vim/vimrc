@@ -341,6 +341,10 @@ Shortcut [ycm] FixIt
   \ noremap <leader>F :YcmCompleter FixIt<return>
 " TODO: make shortcuts works from menu and not only via <leader>
 
+" syntax
+command! -bang -nargs=0 ShowSyntaxList :syntax list
+Shortcut! :ShowSyntaxList<return> Show syntax list
+
 set pastetoggle=<leader>p
 
 "
