@@ -129,6 +129,10 @@ let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
 " ale
 "
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_fixers = {
+  \ '*':      [ 'trim_whitespace', ],
+  \ 'python': [ 'autopep8', 'isort', ],
+  \ }
 
 "
 " vim-tags
@@ -296,7 +300,8 @@ Shortcut! :GundoToggle<return> undo tree
 Shortcut! :ALELint<return> Run ALE linters
 Shortcut! :ALEInfo<return> Show ALE info (current buffer)
 Shortcut! :ALEDetail<return> Show ALE details
-Shortcut! :ALEFix<return> Show ALE fixes
+Shortcut! :ALEFix<return> Run ALE fixers
+Shortcut! :ALEFixSuggest<return> Show ALE suggest fixes
 Shortcut! :ALEDisable<return> Disable ALE
 Shortcut! :ALEEnable<return> Enable ALE
 Shortcut! :ALEToggle<return> Toggle ALE
