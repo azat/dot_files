@@ -39,6 +39,7 @@ cscope*
 #
 # Build
 #
+compile_commands.json
 # Autotools stuff
 .deps
 .dirstamp
