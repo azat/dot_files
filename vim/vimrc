@@ -133,6 +133,10 @@ let g:ale_fixers = {
   \ '*':      [ 'trim_whitespace', ],
   \ 'python': [ 'autopep8', 'isort', ],
   \ }
+let g:ale_linters = {
+  \ 'cpp':    [],
+  \ 'c':      [],
+  \ }
 
 "
 " vim-tags
