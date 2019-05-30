@@ -137,7 +137,7 @@ let g:ale_fixers = {
 "
 " vim-tags
 "
-let g:vim_tags_directories = [".git/.."]
+let g:vim_tags_directories = [ ".git/.." ]
 let g:vim_tags_auto_generate = 0
 let g:vim_tags_project_tags_command = "flock -n /tmp/vim-ctags.lock {CTAGS} -R {OPTIONS} {DIRECTORY} 2>/dev/null"
 
@@ -157,21 +157,21 @@ function! LinterStatus() abort
   \)
 endfunction
 let g:lightline = {
-  \ 'colorscheme': 'seoul256',
-  \ 'active': {
-  \   'left': [
-  \     [ 'mode', 'paste', 'filename', 'linterstatus' ]
-  \   ],
-  \   'right': [
-  \     [ 'gitbranch' ],
-  \     [ 'lineinfo', 'percent' ],
-  \     [ 'fileformat', 'filetype' ]
-  \   ]
-  \ },
-  \ 'component_function': {
-  \   'gitbranch': 'fugitive#head',
-  \   'linterstatus': 'LinterStatus'
-  \ },
+  \   'colorscheme': 'seoul256',
+  \   'active': {
+  \     'left': [
+  \       [ 'mode', 'paste', 'filename', 'linterstatus', ],
+  \     ],
+  \     'right': [
+  \       [ 'gitbranch', ],
+  \       [ 'lineinfo', 'percent', ],
+  \       [ 'fileformat', 'filetype', ],
+  \     ],
+  \   },
+  \   'component_function': {
+  \     'gitbranch':    'fugitive#head',
+  \     'linterstatus': 'LinterStatus',
+  \   },
   \ }
 
 "
