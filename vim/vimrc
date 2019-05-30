@@ -171,11 +171,18 @@ function! YCMStatus() abort
   \   errors
   \)
 endfunction
+function! LinterStatus() abort
+  let l:ale_enabled = exists('b:ale_linted')
+  if ale_enabled
+    return ALEStatus()
+  else
+    return YCMStatus()
+endfunction
 let g:lightline = {
   \   'colorscheme': 'seoul256',
   \   'active': {
   \     'left': [
-  \       [ 'mode', 'paste', 'filename', 'ale', 'ycm', ],
+  \       [ 'mode', 'paste', 'filename', 'linter', ],
   \     ],
   \     'right': [
   \       [ 'gitbranch', ],
@@ -185,8 +192,7 @@ let g:lightline = {
   \   },
   \   'component_function': {
   \     'gitbranch':  'fugitive#head',
-  \     'ale':        'ALEStatus',
-  \     'ycm':        'YCMStatus',
+  \     'linter':     'LinterStatus',
   \   },
   \ }
 
