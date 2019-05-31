@@ -121,11 +121,6 @@ set foldlevel=1000
 hi Folded ctermbg=5 " color scheme dark reset can't handle folded info
 
 "
-" YouCompleteMe
-"
-let g:ycm_global_ycm_extra_conf = '/etc/vim/ycm_extra_conf.py'
-
-"
 " ale
 "
 let g:ale_lint_on_text_changed = 'never'
