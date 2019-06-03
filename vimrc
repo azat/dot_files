@@ -314,6 +314,8 @@ Shortcut! :PlugStatus<return>  Plugins status
 Shortcut! :GundoToggle<return> undo tree
 
 " ale
+Shortcut [ale] Next error     noremap <C-k> :ALENextWrap<return>
+Shortcut [ale] Previous error noremap <C-j> :ALEPreviousWrap<return>
 Shortcut! :ALELint<return> Run ALE linters
 Shortcut! :ALEInfo<return> Show ALE info (current buffer)
 Shortcut! :ALEDetail<return> Show ALE details
@@ -322,6 +324,7 @@ Shortcut! :ALEFixSuggest<return> Show ALE suggest fixes
 Shortcut! :ALEDisable<return> Disable ALE
 Shortcut! :ALEEnable<return> Enable ALE
 Shortcut! :ALEToggle<return> Toggle ALE
+
 
 " ycm/YouCompleteMe
 Shortcut! :YcmRestartServer<return> YcmRestartServer
@@ -391,12 +394,6 @@ nnoremap <C-x> <nop>
 " < & > - indent
 vmap < <gv
 vmap > >gv
-
-" mapping window moving
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
 
 " tab movements
 map <C-left> :tabprev<return>
