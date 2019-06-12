@@ -74,6 +74,7 @@ set fileformat=unix
 set wildmenu
 set laststatus=2
 set wcm=<Tab>
+set splitbelow
 if &term =~ '^screen'
   " tmux will send xterm-style keys when its xterm-keys option is on
   execute "set <xUp>=\e[1;*A"
