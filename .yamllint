@@ -1,0 +1,10 @@
+# vi: ft=yaml
+---
+extends: default
+
+rules:
+    indentation:
+        level: warning
+        indent-sequences: consistent
+    line-length:
+        level: warning
