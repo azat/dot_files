@@ -1,0 +1,14 @@
+# vim: ft=config
+
+[MESSAGES CONTROL]
+disable = bad-continuation,
+          missing-docstring,
+          bad-whitespace,
+          too-few-public-methods,
+          invalid-name,
+          too-many-arguments,
+          keyword-arg-before-vararg,
+          too-many-locals,
+          too-many-instance-attributes,
+          fixme,
+          global-variable-undefined,

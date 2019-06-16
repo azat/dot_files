@@ -57,7 +57,7 @@
 !/.gbp.conf
 
 !/.lldbinit
-!/.digrc
+!/.*rc
 
 !/.vagrant.d
 
