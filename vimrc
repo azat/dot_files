@@ -174,6 +174,9 @@ function! LinterStatus() abort
   else
     return YCMStatus()
 endfunction
+function! StatusFileName()
+  return expand('%:p')
+endfunction
 let g:lightline = {
   \   'colorscheme': 'seoul256',
   \   'active': {
@@ -189,6 +192,7 @@ let g:lightline = {
   \   'component_function': {
   \     'gitbranch':  'fugitive#head',
   \     'linter':     'LinterStatus',
+  \     'filename':   'StatusFileName',
   \   },
   \ }
 
