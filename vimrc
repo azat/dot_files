@@ -51,6 +51,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'sjl/gundo.vim'
 Plug 'itchyny/lightline.vim'
+Plug 'lepture/vim-jinja'
 call plug#end()
 
 "
