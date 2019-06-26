@@ -52,6 +52,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'sjl/gundo.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'lepture/vim-jinja'
+Plug 'pearofducks/ansible-vim' " , { 'do': 'cd ./UltiSnips; ./generate.py' }
 call plug#end()
 
 "
