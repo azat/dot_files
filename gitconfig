@@ -14,6 +14,8 @@
 	mailmap = true
 [sendemail]
 	smtpserver = /usr/bin/msmtp
+[tag]
+	gpgSign = true
 [push]
 	default = upstream
 	gpgSign = if-asked
