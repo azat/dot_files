@@ -36,7 +36,10 @@ fi
 simpleColoredPrompt=$simpleColoredPromptBegin$currentUserPostfix' '
 
 # git
-# If REPO/.git/.repository_is_quite_big is exist, than don't request git-status or something like this.
+#
+# Disable heavy part of the prompt iff:
+# - .git/.repository_is_quite_big is exists
+# - git config prompt.disabled isset
 function _custom_prompt_colored_git()
 {
 	GIT_DIR="$(git rev-parse --git-dir 2>/dev/null)"
@@ -47,6 +50,7 @@ function _custom_prompt_colored_git()
 	fi
 
 	if [ -f $GIT_DIR/.repository_is_quite_big ] ||
+		[[ "$(git config --type bool prompt.disabled 2>/dev/null)" == true ]] ||
 		[[ $GIT_PS =~ ^\ \(BARE: ]] ||
 		[[ $GIT_PS = " (GIT_DIR!)" ]]; then
 		echo -en $Purple$GIT_PS$Color_Off
