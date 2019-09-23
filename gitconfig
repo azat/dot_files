@@ -67,7 +67,6 @@
 
 	# from http://heipei.net/linux/files/configs/gitconfig
 	llog = log --date=short --format=\"%C(94)--------------------------------------------------------------------------------%n%C(24)%h %C(124)%ad %C(34)%an %C(22)<%ae>%C(130)%d%n%C(178)%s%+b\"
-	last = log -1
 	oneline = log --oneline
 	# Ahead
 	changes = !sh -c 'git log --oneline `git rev-parse --symbolic-full-name --abbrev-ref @{u}`...${u}'
@@ -82,7 +81,6 @@
 	deb-changelog = !sh -c 'git --no-pager log --format=%ai\\ %aN\\ %n%n%x09*\\ %s%d%n'
 
 	staged = diff --cached
-	both = diff HEAD
 
 	# sha1 of the current branch's HEAD
 	sha1 = !sh -c 'git rev-parse ${1-`echo HEAD`}' -
@@ -93,8 +91,7 @@
 	ams = am -s
 	amks = am -s --keep-non-patch
 
-	fm = format-patch
-	format-one-patch = !sh -c \"git fm $1^...$1\"
+	fp = format-patch
 
 	purr = pull --rebase
 	puff = pull --ff-only
@@ -109,8 +106,6 @@
 
 	sp = stash pop
 	ss = stash
-
-	push-up-to = !sh -c \"test -n '$1' -a -n '$2' && git push $1 $2:$(git rev-parse --abbrev-ref HEAD)\"
 
 	tarball = !sh -c 'git archive --format tar.gz --prefix `basename $PWD`-`git abbrev`/ HEAD > `basename $PWD`-`git abbrev`.tgz'
 
