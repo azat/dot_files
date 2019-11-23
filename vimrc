@@ -49,6 +49,7 @@ Plug 'elzr/vim-json'
 Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
 Plug 'sjl/gundo.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'lepture/vim-jinja'
@@ -299,7 +300,6 @@ Shortcut! :TlistToggle<return> Toggle tags (current buffer)
 " vim-fugitive
 Shortcut! :Gblame<return>           git blame
 Shortcut! :Gstatus<return>          git status
-Shortcut! :Gdiff<return>            git diff
 Shortcut! :Gcommit<return>          git commit
 Shortcut! :Gread<return>            git checkout: revert buffer to repository
 Shortcut! :Gread!<return>           git checkout: revert buffer to repository (force)
@@ -308,6 +308,18 @@ Shortcut! :Gwrite!<return>          git add: stage all changes in buffer (force)
 Shortcut! :Gremove<return>          git rm: delete file from repository
 Shortcut! :Gremove!<return>         git rm: delete file from repository (force)
 Shortcut! :Gedit<return>            return to editing git buffer
+" git conflict resolution
+Shortcut! :Gdiff<return>            git diff
+Shortcut! :Gvdiff<return>           git diff (vertical)
+Shortcut! :Gdiff!<return>           git diff (3-way)
+Shortcut! :Gvdiff!<return>          git diff (vertical, 3-way)
+Shortcut Update diff noremap <leader>du :diffupdate<return>
+" 2-way diff (cherry-pick)
+Shortcut diffget noremap <leader>do :diffget<return>
+Shortcut diffput noremap <leader>dP :diffput<return>
+" 3-way diff (merge)
+Shortcut diffget from target noremap <leader>dg :diffget //2<return>
+Shortcut diffget from merge  noremap <leader>dG :diffget //3<return>
 
 command! -bang -nargs=0 GAmend :Gcommit --amend
 Shortcut! :GAmend<return> git commit amend
