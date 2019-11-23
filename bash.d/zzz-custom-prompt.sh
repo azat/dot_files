@@ -93,8 +93,21 @@ function _date_prompt()
 
 function _render_prompt_preamble()
 {
-    CUSTOM_PROMPT_LAST_COMMAND_STATUS=$?
+	CUSTOM_PROMPT_LAST_COMMAND_STATUS=$?
 }
+
+
+function _prompt_timer_start()
+{
+	PROMPT_TIMER=${PROMPT_TIMER:-$SECONDS}
+}
+trap _prompt_timer_start DEBUG
+function _prompt_timer_stop()
+{
+	PROMPT_COMMAND_ELAPSED=$(($SECONDS - $PROMPT_TIMER))
+	unset PROMPT_TIMER
+}
+
 function _render_prompt()
 {
 	PS1=
@@ -108,6 +121,10 @@ function _render_prompt()
 	PS1+=$(_jobs_prompt)
 	if (( $DATE_PROMPT )); then
 		PS1+=$(_date_prompt)
+	fi
+	_prompt_timer_stop
+	if [ $PROMPT_COMMAND_ELAPSED -gt 3 ]; then
+		PS1+=" $Yellow{elapsed: ${PROMPT_COMMAND_ELAPSED}s}$Color_Off"
 	fi
 	PS1+=$currentUserPostfix' '
 }
