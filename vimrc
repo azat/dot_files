@@ -138,6 +138,7 @@ let g:ale_linters = {
   \ 'cpp':    [],
   \ 'c':      [],
   \ }
+let g:ale_open_list = 1
 
 "
 " vim-tags
@@ -335,8 +336,6 @@ Shortcut! :PlugStatus<return>  Plugins status
 Shortcut! :GundoToggle<return> undo tree
 
 " ale
-Shortcut [ale] Next error     noremap <C-j> :ALENextWrap<return>
-Shortcut [ale] Previous error noremap <C-k> :ALEPreviousWrap<return>
 Shortcut! :ALELint<return> Run ALE linters
 Shortcut! :ALEInfo<return> Show ALE info (current buffer)
 Shortcut! :ALEDetail<return> Show ALE details
@@ -348,6 +347,7 @@ Shortcut! :ALEToggle<return> Toggle ALE
 
 
 " ycm/YouCompleteMe
+let g:ycm_always_populate_location_list=1
 Shortcut! :YcmRestartServer<return> YcmRestartServer
 Shortcut! :YcmForceCompileAndDiagnostics<return> YcmForceCompileAndDiagnostics
 Shortcut! :YcmDiags<return> YcmDiags
