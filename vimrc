@@ -138,7 +138,6 @@ let g:ale_linters = {
   \ 'cpp':    [],
   \ 'c':      [],
   \ }
-let g:ale_open_list = 1
 
 "
 " vim-tags
