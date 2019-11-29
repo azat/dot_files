@@ -124,7 +124,7 @@ function _render_prompt()
 	fi
 	_prompt_timer_stop
 	if [ $PROMPT_COMMAND_ELAPSED -gt 3 ]; then
-		PS1+=" $Yellow{elapsed: ${PROMPT_COMMAND_ELAPSED}s}$Color_Off"
+		PS1+=" $White{elapsed: ${PROMPT_COMMAND_ELAPSED}s}$Color_Off"
 	fi
 	PS1+=$currentUserPostfix' '
 }
