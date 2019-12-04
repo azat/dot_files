@@ -10,6 +10,9 @@
 	#
 	# This is for repositories with source codes.
 	whitespace = blank-at-eol,-blank-at-eof,tab-in-indent,tabwidth=4
+[sequence]
+	# https://github.com/MitMaro/git-interactive-rebase-tool
+	editor = interactive-rebase-tool
 [log]
 	mailmap = true
 [sendemail]
