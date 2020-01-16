@@ -271,6 +271,7 @@ Shortcut Fuzzy git grep
 
 Shortcut Explorer noremap <leader>E :Ex<return>
 Shortcut Save buffer (force) noremap <leader>w :w!<return>
+Shortcut Save buffer and exit (force) noremap <leader>x :x!<return>
 Shortcut Quit noremap <leader>q :q<return>
 Shortcut Close buffer noremap <leader>d :bd<return>
 Shortcut Close buffer (force) noremap <leader>D :bd!<return>
