@@ -4,8 +4,17 @@ SERVER_VERSION="$1"
 SELF=${0%/*}
 FILES="$SELF/bash.bashrc"
 
+#add git prompt
 if [ "$SERVER_VERSION" ]; then
-	FILES+=" /usr/lib/git-core/git-sh-prompt"
+	if [ -f /usr/lib/git-core/git-sh-prompt ]; then
+		FILES+=" /usr/lib/git-core/git-sh-prompt"
+	elif [ -f /usr/share/git/completion/git-prompt.sh ]; then
+		FILES+=" /usr/share/git/completion/git-prompt.sh"
+	elif [ -f /usr/share/git/completion/git-prompt.sh ]; then
+		FILES+=" /usr/share/git/git-prompt.sh"
+	else
+		echo "No git prompt" >&2
+	fi
 fi
 
 for FILE in $SELF/bash.d/*.sh; do
