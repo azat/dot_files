@@ -387,6 +387,7 @@ Shortcut [ycm] FixIt
 " syntax
 command! -bang -nargs=0 ShowSyntaxList :syntax list
 Shortcut! :ShowSyntaxList<return> Show syntax list
+set synmaxcol=256
 
 set pastetoggle=<leader>p
 
