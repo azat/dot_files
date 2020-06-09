@@ -22,6 +22,8 @@
 [push]
 	default = upstream
 	gpgSign = if-asked
+[pull]
+	ff = only
 [color]
 	branch = auto
 	diff = auto
