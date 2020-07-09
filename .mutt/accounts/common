@@ -61,6 +61,7 @@ set quit=no
 set confirmappend=no
 set recall=no # use recall command instead
 set postpone=ask-yes
+set sleep_time=0
 
 set read_inc=20
 set write_inc=20
