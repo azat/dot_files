@@ -57,6 +57,7 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'pearofducks/ansible-vim' " , { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'mmarchini/bpftrace.vim'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'sakshamgupta05/vim-todo-highlight'
 call plug#end()
 
 "
@@ -399,6 +400,19 @@ let g:detectindent_max_lines_to_analyse=1024
 let g:is_bash=1
 
 "
+" vim-todo-highlight
+"
+let g:todo_highlight_config = {
+  \   'REVIEW': {},
+  \   'NOTE': {
+  \     'gui_fg_color': '#ffffff',
+  \     'gui_bg_color': '#ffbd2a',
+  \     'cterm_fg_color': 'white',
+  \     'cterm_bg_color': '214'
+  \   }
+  \ }
+
+"
 " filetype plugin
 "
 filetype plugin on
@@ -426,4 +440,3 @@ map <C-right> :tabnext<return>
 " toggle *pointer*
 noremap  <C-C>  :set cursorline! <bar> set cursorcolumn!<return>
 inoremap <C-C>  <C-O>:set cursorline! <bar> set cursorcolumn!<return>
-
