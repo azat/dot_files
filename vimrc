@@ -351,6 +351,8 @@ Shortcut! :ALEToggle<return> Toggle ALE
 " ycm/YouCompleteMe
 let g:ycm_always_populate_location_list=1
 let g:ycm_auto_trigger=0
+" TODO: disable only for python? (since it show popup even for regular str)
+let g:ycm_auto_hover=''
 Shortcut! :YcmRestartServer<return> YcmRestartServer
 Shortcut! :YcmForceCompileAndDiagnostics<return> YcmForceCompileAndDiagnostics
 Shortcut! :YcmDiags<return> YcmDiags
