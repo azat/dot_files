@@ -36,7 +36,7 @@ function configure_screen_saver()
 }
 function configure_keyboard()
 {
-    xset r rate 200 35
+    xset r rate 200 50
     xkbcomp ~/.xkeymap.xkb $DISPLAY
 }
 

@@ -46,7 +46,7 @@ function main()
             # - the configuration has finished, and
             # - the display is :0.0
             # It's time for xset, eventually.
-            xset -display :0.0 r rate 200 35
+            xset -display :0.0 r rate 200 50
             logger "$0 -- auto repeat rate configured"
             ;;
     esac
