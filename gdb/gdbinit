@@ -38,6 +38,8 @@ source /etc/gdb/gdb_cmake.py
 source /etc/gdb/gdb_git.py
 source /etc/gdb/gdb_ninja.py
 source /etc/gdb/gdb_linux_kernel.py
+# XXX: check for existence, since this is in archlinux only
+# /usr/lib/python3.8/site-packages/Cython/Debugger/libpython.py
 
 # The \001 and \002 tell libreadline to ignore the color codes
 set prompt \001\033[01;34m\002(gdb) \001\033[0m\002
