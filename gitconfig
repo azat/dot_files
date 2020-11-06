@@ -46,6 +46,8 @@
 	log = 1000
 [tag]
 	sort = -v:refname
+[branch]
+	sort = -authordate
 [help]
 	# $ git lgo
 	# You called a Git command named 'lgo', which does not exist.
