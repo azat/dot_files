@@ -87,7 +87,7 @@ set show-changes		= yes		# Show changes commits in the main view?
 set show-untracked		= yes		# Show also untracked changes?
 set wrap-lines			= no		# Wrap long lines in pager views?
 set tab-size			= 8		# Number of spaces to use when expanding tabs
-set line-graphics		= default	# Enum: ascii, default, utf-8
+set line-graphics		= default	# Enum: ascii, default, utf-8, auto
 set truncation-delimiter	= ~		# Character drawn for truncations, or "utf-8"
 
 # Format reference names based on type.
@@ -139,6 +139,7 @@ set history-size		= 500		# Size of persistent history, 0 to disable
 set mouse			= no		# Enable mouse support?
 set mouse-scroll		= 3		# Number of lines to scroll via the mouse
 set mouse-wheel-cursor		= no		# Prefer moving the cursor to scrolling the view?
+set pgrp			= no		# Make tig process-group leader
 
 # User-defined commands
 # ---------------------
@@ -152,7 +153,7 @@ set mouse-wheel-cursor		= no		# Prefer moving the cursor to scrolling the view?
 #   !	Run the command in the foreground with output shown.
 #   @	Run the command in the background with no output.
 #   ?	Prompt the user before executing the command.
-#   +   Run the command synchronously, and echo the first line of output to the status bar.
+#   +	Run the command synchronously, and echo the first line of output to the status bar.
 #   <	Exit Tig after executing the command.
 #   >	Re-open Tig instantly in the last displayed view after executing the command.
 #
@@ -235,20 +236,23 @@ bind generic	<C-C>	quit			# Close all views and quit
 bind status	u	status-update		# Stage/unstage changes in file
 bind status	!	status-revert		# Revert changes in file
 bind status	M	status-merge		# Open git-mergetool(1)
-#bind status	???	:toggle status		# Show short or long status labels
+# bind status	???	:toggle status		# Show short or long status labels
 bind stage	u	status-update		# Stage/unstage current diff (c)hunk
 bind stage	1	stage-update-line	# Stage/unstage current line
+bind stage	2	stage-update-part	# Stage/unstage part of chunk
 bind stage	!	status-revert		# Revert current diff (c)hunk
 bind stage	\	stage-split-chunk	# Split current diff (c)hunk
 bind stage	@	:/^@@			# Jump to next (c)hunk
 bind stage	[	:toggle diff-context -1	# Decrease the diff context
 bind stage	]	:toggle diff-context +1	# Increase the diff context
 bind diff	@	:/^@@			# Jump to next (c)hunk
-bind diff	[	:toggle diff-context -1
-bind diff	]	:toggle diff-context +1
-bind main	H	:goto HEAD
+bind diff	[	:toggle diff-context -1	# Decrease the diff context
+bind diff	]	:toggle diff-context +1	# Increase the diff context
+bind pager	@	:/^@@			# Jump to next (c)hunk
+bind main	H	:goto HEAD		# Jump to HEAD commit
 bind main	G	:toggle commit-title-graph # Toggle revision graph visualization
 bind main	F	:toggle commit-title-refs  # Toggle reference display (tags/branches)
+bind reflog	F	:toggle commit-title-refs  # Toggle reference display (tags/branches)
 
 # Cursor navigation
 bind generic	j	move-down
@@ -272,6 +276,8 @@ bind generic	<Del>	scroll-line-down
 bind generic	<C-E>	scroll-line-down
 bind generic	<SBack>	scroll-page-up
 bind generic	<SFwd>	scroll-page-down
+# bind generic	???	scroll-half-page-up
+# bind generic	???	scroll-half-page-down
 
 # Searching
 bind generic	/	search
@@ -297,9 +303,9 @@ bind generic	D	:toggle date		# Toggle date display
 bind generic	A	:toggle author		# Toggle author display
 bind generic	~	:toggle line-graphics	# Toggle (line) graphics mode
 bind generic	F	:toggle file-name	# Toggle file name display
-# bind generic	???	:toogle show-changes	# Toggle local changes display in the main view
+# bind generic	???	:toggle show-changes	# Toggle local changes display in the main view
 bind generic	W	:toggle ignore-space	# Toggle ignoring whitespace in diffs
-# bind generic	?	:toggle commit-order	# Toggle commit ordering
+# bind generic	???	:toggle commit-order	# Toggle commit ordering
 bind generic	X	:toggle id		# Toggle commit ID display
 bind generic	$	:toggle commit-title-overflow
 						# Toggle highlighting of commit title overflow
@@ -326,7 +332,7 @@ bind generic	v	show-version		# Show Tig version
 #
 # Prefix the name of a view to set a color only for that view, e.g.
 #
-#	color grep.file blue default
+#	color grep.file			blue	default
 #
 # As an example, this setting will to color Signed-off-by lines with a
 # yellow foreground color and use the default background color.
@@ -355,6 +361,7 @@ color "rename from "		yellow	default
 color "rename to "		yellow	default
 color "similarity "		yellow	default
 color "dissimilarity "		yellow	default
+color "\ No newline at end of file"	blue	default
 color "diff-tree "		blue	default
 color "Author: "		cyan	default
 color "Commit: "		magenta	default
