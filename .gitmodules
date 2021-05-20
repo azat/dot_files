@@ -1,3 +1,6 @@
 [submodule "tpm"]
 	path = tpm
 	url = https://github.com/tmux-plugins/tpm.git
+[submodule "fzf-plugins/history-exec"]
+	path = fzf-plugins/history-exec
+	url = https://github.com/4z3/fzf-plugins
