@@ -1,7 +1,12 @@
 export HISTSIZE=100000
 export HISTFILESIZE=100000
 export HISTCONTROL="ignoreboth:erasedups"
-export HISTIGNORE="&:ls:[bf]g:exit:history:cat:l:ll:ps:history *:pwd:free:w:jobs:* --help:* -help:* -version:* --version:[^0-9a-zA-Z_[{(#./~]*"
+
+HISTIGNORE="&:ls:[bf]g:exit:history:cat:l:ll:ps:history *:pwd:free:w:jobs"
+HISTIGNORE=":* --help:* -help:* -version:* --version:[^0-9a-zA-Z_[{(#./~]*"
+HISTIGNORE="reboot:poweroff:* reboot:* shutdown"
+HISTIGNORE=":[^0-9a-zA-Z_[{(#./~]*"
+export HISTIGNORE
 
 shopt -s histappend
 shopt -s cmdhist
