@@ -1,0 +1,1 @@
+/usr/share/zsh/plugins/forgit-git/forgit.plugin.zsh
