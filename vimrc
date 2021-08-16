@@ -21,7 +21,7 @@ function! BuildYCM(info)
   " - status: 'installed', 'updated', or 'unchanged'
   " - force:  set on PlugInstall! or PlugUpdate!
   if a:info.status == 'installed' || a:info.force
-    !./install.py --system-boost --system-libclang --clang-completer
+    !./install.py --system-libclang --clang-completer
   endif
 endfunction
 
