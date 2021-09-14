@@ -302,15 +302,6 @@ Shortcut! :TlistToggle<return> Toggle tags (current buffer)
 
 " vim-fugitive
 Shortcut! :Gblame<return>           git blame
-Shortcut! :Gstatus<return>          git status
-Shortcut! :Gcommit<return>          git commit
-Shortcut! :Gread<return>            git checkout: revert buffer to repository
-Shortcut! :Gread!<return>           git checkout: revert buffer to repository (force)
-Shortcut! :Gwrite<return>           git add: stage all changes in buffer
-Shortcut! :Gwrite!<return>          git add: stage all changes in buffer (force)
-Shortcut! :Gremove<return>          git rm: delete file from repository
-Shortcut! :Gremove!<return>         git rm: delete file from repository (force)
-Shortcut! :Gedit<return>            return to editing git buffer
 " git conflict resolution
 Shortcut! :Gdiff<return>            git diff
 Shortcut! :Gvdiff<return>           git diff (vertical)
