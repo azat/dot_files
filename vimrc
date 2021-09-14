@@ -301,7 +301,10 @@ Shortcut! :TagsGenerate!<return> Generate tags (force)
 Shortcut! :TlistToggle<return> Toggle tags (current buffer)
 
 " vim-fugitive
-Shortcut! :Gblame<return>           git blame
+command! -bang -nargs=0 GBlame :Git blame
+Shortcut! :GBlame<return> git blame
+command! -bang -nargs=0 GAmend :Git commit --amend
+Shortcut! :GAmend<return> git commit amend
 " git conflict resolution
 Shortcut! :Gdiff<return>            git diff
 Shortcut! :Gvdiff<return>           git diff (vertical)
@@ -314,9 +317,6 @@ Shortcut diffput noremap <leader>dP :diffput<return>
 " 3-way diff (merge)
 Shortcut diffget from target noremap <leader>dg :diffget //2<return>
 Shortcut diffget from merge  noremap <leader>dG :diffget //3<return>
-
-command! -bang -nargs=0 GAmend :Gcommit --amend
-Shortcut! :GAmend<return> git commit amend
 
 
 " Plug
