@@ -49,11 +49,7 @@
 [branch]
 	sort = -authordate
 [help]
-	# $ git lgo
-	# You called a Git command named 'lgo', which does not exist.
-	# Continuing under the assumption that you meant 'log'
-	# in 1.0 seconds automatically...
-	autocorrect = 10
+	autoCorrect = prompt
 [alias]
 	di = diff
 	ci = commit
