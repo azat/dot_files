@@ -3,9 +3,9 @@ export HISTFILESIZE=100000
 export HISTCONTROL="ignoreboth:erasedups"
 
 HISTIGNORE="&:ls:[bf]g:exit:history:cat:l:ll:ps:history *:pwd:free:w:jobs"
-HISTIGNORE=":* --help:* -help:* -version:* --version:[^0-9a-zA-Z_[{(#./~]*"
-HISTIGNORE="reboot:poweroff:* reboot:* shutdown"
-HISTIGNORE=":[^0-9a-zA-Z_[{(#./~]*"
+HISTIGNORE+=":* --help:* -help:* -version:* --version:[^0-9a-zA-Z_[{(#./~]*"
+HISTIGNORE+="reboot:poweroff:* reboot:* shutdown"
+HISTIGNORE+=":[^0-9a-zA-Z_[{(#./~]*"
 export HISTIGNORE
 
 shopt -s histappend
