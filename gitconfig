@@ -24,6 +24,10 @@
 	gpgSign = if-asked
 [pull]
 	ff = only
+[fetch]
+	parallel = 100
+[submodule]
+	fetchJobs = 100
 [color]
 	branch = auto
 	diff = auto
