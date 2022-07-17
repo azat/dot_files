@@ -1,10 +1,3 @@
-
-# clean make
-function cm()
-{
-    make $* > /dev/null
-}
-
 function c_const_generate()
 {
     local headers=$(cat <<-EOL
@@ -27,5 +20,3 @@ function c_const()
     c_const_generate $@ | g++ -E -dM -xc++ - | fgrep $const | fgrep define
     c_const_generate $@ | g++ -E -xc++ - | fgrep $const | fgrep typedef
 }
-
-alias gdb='gdb -q'
