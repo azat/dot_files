@@ -58,6 +58,8 @@ Plug 'pearofducks/ansible-vim' " , { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'mmarchini/bpftrace.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'sakshamgupta05/vim-todo-highlight'
+Plug 'mattn/webapi-vim'
+Plug 'mattn/vim-gist'
 call plug#end()
 
 "
@@ -338,6 +340,19 @@ Shortcut! :ALEDisable<return> Disable ALE
 Shortcut! :ALEEnable<return> Enable ALE
 Shortcut! :ALEToggle<return> Toggle ALE
 
+" vimgist
+"
+" Do not forget to put "token XXX" into ~/.gist-vim
+let g:gist_detect_filetype = 1
+let g:gist_open_browser_after_post = 1
+let g:gist_per_page_limit = 100
+command! -bang -nargs=0 PrivateGist :Gist -p
+command! -bang -nargs=0 PublicGist :Gist -P
+command! -bang -nargs=0 ListGist :Gist -l
+Shortcut! :PrivateGist<return> Private gist
+Shortcut! :PublicGist<return> Public gist
+Shortcut! :ListGist<return> List gist
+Shortcut! :'<,'>Gist<return> Selected gist
 
 " ycm/YouCompleteMe
 let g:ycm_always_populate_location_list=1
