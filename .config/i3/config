@@ -3,16 +3,18 @@ set $mod Mod4
 font pango:DejaVu Sans Mono 8
 
 # Locker
-exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/assets/i3lock.sh --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock --notifier 'xset dpms force off' -- ~/assets/i3lock.sh --nofork
 exec_always --no-startup-id feh --bg-scale ~/assets/wallpapers/bg.jpg
-exec_always --no-startup-id pasystray
-bindsym Control+Shift+l exec ~/assets/i3lock.sh
+exec --no-startup-id pasystray
+bindsym Control+Shift+l exec xset s activate
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+grave exec urxvt.fullhd urxvt-fullhd-1
+bindsym $mod+Return exec urxvt.fullhd urxvt-fullhd-2
+bindsym $mod+Shift+Return exec urxvt.4k urxvt-4k
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -150,3 +152,12 @@ bar {
 
 hide_edge_borders both
 for_window [class="^.*"] border pixel 1
+
+# This is for my 3-monitor setup:
+# assign [class="TelegramDesktop"] 9
+# assign [class="Google-chrome"] 9
+# assign [class="st-fullhd"] 2
+# assign [instance="urxvt-fullhd-1"] 1
+# assign [instance="urxvt-fullhd-2"] 2
+# assign [class="URxvt"] 3
+# assign [instance="urxvt-4k"] 3
