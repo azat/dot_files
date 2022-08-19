@@ -10,6 +10,10 @@
 // As usual, archlinux wiki has extensive description [1].
 //
 //   [1]: https://wiki.archlinux.org/title/Xorg/Keyboard_configuration
+//
+// Note, to reload do not forget to pass the display:
+//
+//     xkbcomp ~/.xkeymap.xkb :0
 
 xkb_keymap {
   xkb_keycodes      { include "evdev+aliases(qwerty)" };
