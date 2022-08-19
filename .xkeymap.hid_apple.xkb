@@ -10,7 +10,12 @@ xkb_keymap {
   xkb_types         { include "complete" };
   xkb_compatibility { include "complete" };
   xkb_symbols {
-    include "pc+us+ru:2+inet(evdev)+capslock(grouplock)+keypad(pointerkeys)"
+    include "pc"
+    include "us"
+    include "ru:2"
+    include "inet(evdev)"
+    include "capslock(grouplock)"
+    include "keypad(pointerkeys)"
 
     key <LCTL> { [         Super_L ] };
     key <RCTL> { [         Super_R ] };
@@ -24,5 +29,10 @@ xkb_keymap {
     modifier_map Control { <RWIN> };
     modifier_map Mod4 { <RCTL> };
     modifier_map Control { <SUPR> };
+
+    // NOTE: order is important, this should be done *after* modifier_map/replace,
+    // othewise will not work.
+    include "level3(ralt_switch)"
+    include "eurosign(e)"
   };
 };

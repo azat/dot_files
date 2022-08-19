@@ -12,7 +12,11 @@ xkb_keymap {
   xkb_types         { include "complete" };
   xkb_compatibility { include "complete" };
   xkb_symbols {
-    include "pc+us+ru:2+inet(evdev)+capslock(grouplock)"
+    include "pc"
+    include "us"
+    include "ru:2"
+    include "inet(evdev)"
+    include "capslock(grouplock)"
 
     // replace is required, otherwise modifier_map will not do what I want
     replace key <LCTL> { [         Super_L ] };
@@ -32,5 +36,10 @@ xkb_keymap {
     modifier_map Control { <LALT> };
     modifier_map Control { <RALT> };
     modifier_map Control { <ALT> };
+
+    // NOTE: order is important, this should be done *after* modifier_map/replace,
+    // othewise will not work.
+    include "level3(ralt_switch)"
+    include "eurosign(e)"
   };
 };
