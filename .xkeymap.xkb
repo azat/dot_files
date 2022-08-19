@@ -48,6 +48,9 @@ xkb_keymap {
     // NOTE: order is important, this should be done *after* modifier_map/replace,
     // othewise will not work.
     include "level3(ralt_switch)"
-    include "eurosign(e)"
+    // NOTE: do not use eurosign(e) since this will break C-E:
+    // - readline go to end-of-line
+    // - fzf edit before execute
+    include "eurosign(5)"
   };
 };
