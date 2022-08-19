@@ -6,6 +6,10 @@
 // - key Win is not act as Alt
 // - key Ctrl is not act as Win
 // It was done because of readline bindings
+//
+// As usual, archlinux wiki has extensive description [1].
+//
+//   [1]: https://wiki.archlinux.org/title/Xorg/Keyboard_configuration
 
 xkb_keymap {
   xkb_keycodes      { include "evdev+aliases(qwerty)" };

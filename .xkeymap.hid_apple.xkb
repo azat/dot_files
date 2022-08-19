@@ -4,6 +4,10 @@
 // All it does, is swap Ctrl <-> Cmd
 //
 // Load it with "xkbcomp -i 13 .xkeymap.hid_apple.xkb $DISPLAY"
+//
+// As usual, archlinux wiki has extensive description [1].
+//
+//   [1]: https://wiki.archlinux.org/title/Xorg/Keyboard_configuration
 
 xkb_keymap {
   xkb_keycodes      { include "evdev+aliases(qwerty)" };
