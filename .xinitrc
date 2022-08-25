@@ -39,12 +39,40 @@ function configure_keyboard()
     xset r rate 200 50
     xkbcomp ~/.xkeymap.xkb $DISPLAY
 }
+function configure_trackpad()
+{
+    xinput set-prop 'Synaptics TM3512-010' 'libinput Accel Speed' 0.5
+}
+function configure_mouse()
+{
+    xset mouse 6/1 3
+}
+function configure_pc_speaker()
+{
+    xset -b
+}
+
+function configure_outputs()
+{
+    if ! xrandr --listproviders | grep -F -q NVIDIA; then
+        return 0
+    fi
+
+    # https://wiki.gentoo.org/wiki/NVIDIA/Optimus#xorg.conf
+    xrandr --setprovideroutputsource NVIDIA-G0 Intel
+    ~/assets/hotplug-monitor.sh
+}
 
 function main()
 {
+    configure_outputs
+
     xrdb_merge /etc/X11/xinit/.Xresources
     configure_screen_saver
     configure_keyboard
+    configure_trackpad
+    configure_mouse
+    configure_pc_speaker
     xrdb_merge $HOME/.Xresources
     load_xinitd
     xbindkeys
