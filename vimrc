@@ -52,7 +52,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'sjl/gundo.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'lepture/vim-jinja'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'pearofducks/ansible-vim' " , { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'mmarchini/bpftrace.vim'
