@@ -450,9 +450,13 @@ inoremap <C-C>  <C-O>:set cursorline! <bar> set cursorcolumn!<return>
 
 " clang-format
 if has('python')
-  map <C-K> :pyf /usr/share/clang/clang-format.py<cr>
-  imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
+  map <C-K> :pyf /usr/share/clang/clang-format.py<return>
+  imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<return>
+  Shortcut clang-format
+    \ noremap <leader>k :pyf /usr/share/clang/clang-format.py<return>
 elseif has('python3')
-  map <C-K> :py3f /usr/share/clang/clang-format.py<cr>
-  imap <C-K> <c-o>:py3f /usr/share/clang/clang-format.py<cr>
+  map <C-K> :py3f /usr/share/clang/clang-format.py<return>
+  imap <C-K> <c-o>:py3f /usr/share/clang/clang-format.py<return>
+  Shortcut clang-format
+    \ noremap <leader>k :py3f /usr/share/clang/clang-format.py<return>
 endif
