@@ -447,3 +447,12 @@ map <C-right> :tabnext<return>
 " toggle *pointer*
 noremap  <C-C>  :set cursorline! <bar> set cursorcolumn!<return>
 inoremap <C-C>  <C-O>:set cursorline! <bar> set cursorcolumn!<return>
+
+" clang-format
+if has('python')
+  map <C-K> :pyf /usr/share/clang/clang-format.py<cr>
+  imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
+elseif has('python3')
+  map <C-K> :py3f /usr/share/clang/clang-format.py<cr>
+  imap <C-K> <c-o>:py3f /usr/share/clang/clang-format.py<cr>
+endif
