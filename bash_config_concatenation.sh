@@ -18,7 +18,7 @@ if [ "$SERVER_VERSION" ]; then
 fi
 
 for FILE in $SELF/bash.d/*.sh; do
-	if [[ $FILE =~ (autojump|remark).sh ]]; then
+	if [[ $FILE =~ (zoxide|remark).sh ]]; then
 		continue
 	fi
 
