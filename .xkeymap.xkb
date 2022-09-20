@@ -20,11 +20,12 @@ xkb_keymap {
   xkb_types         { include "complete" };
   xkb_compatibility { include "complete" };
   xkb_symbols {
+    # setxkbmap us,ru -option grp:caps_toggle -print
     include "pc"
     include "us"
     include "ru:2"
     include "inet(evdev)"
-    include "capslock(grouplock)"
+    include "group(caps_toggle)"
 
     // replace is required, otherwise modifier_map will not do what I want
     replace key <LCTL> { [         Super_L ] };

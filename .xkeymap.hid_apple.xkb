@@ -18,12 +18,13 @@ xkb_keymap {
   xkb_types         { include "complete" };
   xkb_compatibility { include "complete" };
   xkb_symbols {
+    # setxkbmap us,ru -option grp:caps_toggle -print
     include "pc"
     include "us"
     include "ru:2"
     include "inet(evdev)"
-    include "capslock(grouplock)"
     include "keypad(pointerkeys)"
+    include "group(caps_toggle)"
 
     key <LCTL> { [         Super_L ] };
     key <RCTL> { [         Super_R ] };
