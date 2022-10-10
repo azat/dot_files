@@ -3,6 +3,7 @@
 	email = a3at.mail@gmail.com
 [core]
 	autocrlf = input
+	safecrlf = true
 	pager = delta
 	# This is not for dot_files repository.
 	# Because it may contain different _generated_ configs,
