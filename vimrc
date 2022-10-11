@@ -51,6 +51,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-dispatch'
 Plug 'sjl/gundo.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'tmux-plugins/vim-tmux'
@@ -353,6 +354,13 @@ Shortcut! :PrivateGist<return> Private gist
 Shortcut! :PublicGist<return> Public gist
 Shortcut! :ListGist<return> List gist
 Shortcut! :'<,'>Gist<return> Selected gist
+
+" make via vim-dispatch
+:set makeprg=ninja
+" NOTE: :Make+makeprg over :Dispatch
+" (see https://github.com/tpope/vim-dispatch/issues/41#issuecomment-20555488)
+Shortcut [make] noremap <leader>m :Make! -C $(git rev-parse --show-toplevel)/.cmake<return>
+Shortcut [errors] noremap <leader>e :Copen<return>
 
 " ycm/YouCompleteMe
 let g:ycm_always_populate_location_list=1
