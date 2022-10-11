@@ -14,6 +14,8 @@
 // Note, to reload do not forget to pass the display:
 //
 //     xkbcomp ~/.xkeymap.xkb :0
+//
+// And to see the key code you can use xev.
 
 xkb_keymap {
   xkb_keycodes      { include "evdev+aliases(qwerty)" };
