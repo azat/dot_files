@@ -31,6 +31,7 @@ let g:plug_timeout=600
 call plug#begin('~/.vim/bundle')
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'w0rp/ale'
+Plug 'junegunn/fzf' " dependency of fzf.vim
 Plug 'junegunn/fzf.vim'
 Plug 'sunaku/vim-shortcut'
 Plug 'szw/vim-tags'
