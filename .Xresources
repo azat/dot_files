@@ -1,0 +1,35 @@
+!
+! URxvt
+!
+
+! https://github.com/BobuSumisu/urxvt-solarized
+URxvt.perl-ext-common:      default,solarized
+! URxvt.keysym.Mod4-c:        perl:solarized:toggle
+URxvt.solarized.default:    dark
+
+! Fonts
+URxvt.allow_bold:           false
+URxvt.font: xft:xos4 Terminus:pixelsize=18:antialias=false:autohint=false
+URxvt.boldFont: xft:xos4 Terminus:pixelsize=18:antialias=false:autohint=false
+
+! Scrollbar
+URxvt.scrollStyle:          rxvt
+URxvt.scrollBar:            false
+
+! Copy-paste
+! https://unix.stackexchange.com/questions/294337/rebinding-ctrl-alt-cv-to-ctrl-shift-cv-in-urxvt-9-20/294552#294552
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.keysym.Control-Meta-c: builtin-string:
+URxvt.keysym.Control-Meta-v: builtin-string:
+
+! Font size (https://gist.github.com/mbbx6spp/bee78b6b4964c9d151db8e1aa838f0d2)
+! Ensure font-size is included in your URxvt.perl-ext comma separated list of extensions, like below
+URxvt.perl-ext: default,matcher,font-size,selection-to-clipboard
+! specify the step font-size for incrementing and decrementing
+URxvt.font-size.step: 1
+! Bind Ctrl+Up and Ctrl+Down to font increment and decrement respectively
+URxvt.keysym.C-Up:   perl:font-size:incglobal
+URxvt.keysym.C-Down:   perl:font-size:decglobal
