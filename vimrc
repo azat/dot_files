@@ -94,6 +94,9 @@ if &term =~ '^screen'
   execute "set <xRight>=\e[1;*C"
   execute "set <xLeft>=\e[1;*D"
 endif
+if $TERM =~ '^\(xterm\|tmux\|rxvt\)'
+  set termguicolors
+endif
 syntax enable
 colorscheme monokai
 
