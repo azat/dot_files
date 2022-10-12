@@ -25,13 +25,6 @@ function! BuildYCM(info)
   endif
 endfunction
 
-function! PlugLoaded(name)
-  return (
-    \ has_key(g:plugs, a:name) &&
-    \ isdirectory(g:plugs[a:name].dir) &&
-    \ stridx(&rtp, g:plugs[a:name].dir) >= 0)
-endfunction
-
 " for YouCompleteMe
 let g:plug_timeout=600
 
@@ -64,6 +57,14 @@ Plug 'mattn/vim-gist'
 Plug 'crusoexia/vim-monokai'
 " Plug 'ericbn/vim-solarized'
 call plug#end()
+
+function! PlugLoaded(name)
+    " FIXME: take into account stridx(&rtp, g:plugs[a:name].dir) >= 0)
+    " (but now it does not work)
+    return (
+        \ has_key(g:plugs, a:name) &&
+        \ isdirectory(g:plugs[a:name].dir))
+endfunction
 
 "
 " basic
@@ -443,7 +444,9 @@ let g:todo_highlight_config = {
 filetype plugin on
 filetype plugin indent on
 autocmd BufEnter    * if &filetype == "" | setlocal ft=sh | endif
-autocmd BufReadPost * :DetectIndent
+if PlugLoaded('detectindent')
+  autocmd BufReadPost * :DetectIndent
+endif
 
 "
 " bindings (other shortcut)
