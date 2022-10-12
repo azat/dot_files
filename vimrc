@@ -61,6 +61,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'sakshamgupta05/vim-todo-highlight'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/vim-gist'
+Plug 'crusoexia/vim-monokai'
+" Plug 'ericbn/vim-solarized'
 call plug#end()
 
 "
@@ -93,7 +95,7 @@ if &term =~ '^screen'
   execute "set <xLeft>=\e[1;*D"
 endif
 syntax enable
-colorscheme desert
+colorscheme monokai
 
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 set list
