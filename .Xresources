@@ -6,6 +6,8 @@
 URxvt.perl-ext-common:      default,solarized
 ! URxvt.keysym.Mod4-c:        perl:solarized:toggle
 URxvt.solarized.default:    dark
+! https://bbs.archlinux.org/viewtopic.php?id=164108
+URxvt.intensityStyles: false
 
 ! Fonts
 URxvt.allow_bold:           false
