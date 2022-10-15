@@ -55,6 +55,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'sakshamgupta05/vim-todo-highlight'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/vim-gist'
+Plug 'easymotion/vim-easymotion'
 Plug 'crusoexia/vim-monokai'
 " Plug 'ericbn/vim-solarized'
 call plug#end()
