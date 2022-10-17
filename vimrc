@@ -259,7 +259,7 @@ endif
 
 " vim-shortcut bindings
 Shortcut show shortcut menu and run chosen shortcut
-  \ noremap <silent> <leader><leader> :Shortcuts<return>
+  \ noremap <silent> \|\| :Shortcuts<return>
 Shortcut fallback to shortcut menu on partial entry
   \ noremap <silent> <leader> :Shortcuts<return>
 " fzf bindings
