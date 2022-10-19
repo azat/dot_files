@@ -62,7 +62,7 @@ function _custom_prompt_colored_git()
 	AHEAD_BEHIND="${AHEAD_BEHIND%|0}"
 
 	HAVE_CHANGES=1
-	if $(git branch &> /dev/null) && $(git status | grep -q "nothing to commit"); then
+	if $(git branch &> /dev/null) && $(git status --ignore-submodules | grep -q "nothing to commit"); then
 		HAVE_CHANGES=0
 	fi
 
