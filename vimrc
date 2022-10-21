@@ -58,6 +58,7 @@ Plug 'mattn/vim-gist'
 Plug 'easymotion/vim-easymotion'
 Plug 'crusoexia/vim-monokai'
 " Plug 'ericbn/vim-solarized'
+Plug 'hashivim/vim-terraform'
 call plug#end()
 
 function! PlugLoaded(name)
