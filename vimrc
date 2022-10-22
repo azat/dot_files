@@ -55,7 +55,6 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'sakshamgupta05/vim-todo-highlight'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/vim-gist'
-Plug 'easymotion/vim-easymotion'
 Plug 'crusoexia/vim-monokai'
 " Plug 'ericbn/vim-solarized'
 Plug 'hashivim/vim-terraform'
@@ -260,7 +259,7 @@ endif
 
 " vim-shortcut bindings
 Shortcut show shortcut menu and run chosen shortcut
-  \ noremap <silent> \|\| :Shortcuts<return>
+  \ noremap <silent> <leader><leader> :Shortcuts<return>
 Shortcut fallback to shortcut menu on partial entry
   \ noremap <silent> <leader> :Shortcuts<return>
 " fzf bindings
