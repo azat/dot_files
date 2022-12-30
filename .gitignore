@@ -66,3 +66,4 @@
 !/.yamllint
 !/.fehbg
 !/.Xresources
+!/.*yml
