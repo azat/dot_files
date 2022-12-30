@@ -4,7 +4,6 @@
 [core]
 	autocrlf = input
 	safecrlf = true
-	pager = delta
 	# This is not for dot_files repository.
 	# Because it may contain different _generated_ configs,
 	# and I don't think that it is a good idea to change indent in all configs.
@@ -14,13 +13,8 @@
 [sequence]
 	# https://github.com/MitMaro/git-interactive-rebase-tool
 	editor = interactive-rebase-tool
-[interactive]
-	diffFilter = delta --color-only
 [add.interactive]
 	useBuiltin = false # required for git 2.37.0
-[delta]
-	navigate = true    # use n and N to move between diff sections
-	light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 [log]
 	mailmap = true
 [sendemail]
