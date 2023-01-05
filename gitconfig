@@ -55,8 +55,6 @@
 	sort = -v:refname
 [branch]
 	sort = -authordate
-[help]
-	autoCorrect = prompt
 [alias]
 	di = diff
 	ci = commit
