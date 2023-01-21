@@ -75,7 +75,6 @@ endfunction
 set tags=tags;/
 set mouse=
 set guicursor=
-set autowrite
 set autochdir
 set number
 set hidden
@@ -107,6 +106,20 @@ try
 catch
   colorscheme desert
 endtry
+
+" autoread/autowrite
+set autowrite
+set autoread
+if has('nvim')
+  " Apparently autoread does not always works in nvim, in particular I need
+  " after SIGSTOP/SIGCONT (C-z/fg) - VimResume.
+  "
+  " See also:
+  " - https://github.com/neovim/neovim/issues/1380
+  " - https://github.com/neovim/neovim/issues/1936
+  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI,VimResume *
+      \ if mode() != 'c' | checktime | endif
+endif
 
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 set list
