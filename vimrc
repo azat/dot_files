@@ -129,7 +129,7 @@ highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
 " ignores
-set wildignore+=*/.git/**,*/.hg/**,*/.svn/**,*/.cmake**
+set wildignore+=*/.git/**,*/.hg/**,*/.svn/**,*/.cmake**,*/.bld**
 set wildignore+=*/build/**,*/__pycache__/**,*/.egg-info/**
 set wildignore+=*.exe,*.so,*.dll,*.a,*.o
 set wildignore+=*.la,*.lo,*.pc,*.in
