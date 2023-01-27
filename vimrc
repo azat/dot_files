@@ -21,7 +21,7 @@ function! BuildYCM(info)
   " - status: 'installed', 'updated', or 'unchanged'
   " - force:  set on PlugInstall! or PlugUpdate!
   if a:info.status == 'installed' || a:info.force
-    !./install.py --system-libclang --clang-completer --rust-completer
+    !./install.py --clangd-completer --rust-completer
   endif
 endfunction
 
@@ -391,6 +391,11 @@ Shortcut [errors] noremap <leader>e :Copen<return>
 " ycm/YouCompleteMe
 let g:ycm_always_populate_location_list=1
 let g:ycm_auto_trigger=0
+" Let clangd fully control code completion -- works faster
+let g:ycm_clangd_uses_ycmd_caching = 0
+" Use installed clangd, not YCM-bundled clangd which doesn't get updates that
+" frequently.
+let g:ycm_clangd_binary_path = exepath("clangd")
 " TODO: disable only for python? (since it show popup even for regular str)
 let g:ycm_auto_hover=''
 Shortcut! :YcmRestartServer<return> YcmRestartServer
