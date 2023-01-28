@@ -390,7 +390,7 @@ Shortcut [errors] noremap <leader>e :Copen<return>
 
 " ycm/YouCompleteMe
 let g:ycm_always_populate_location_list=1
-let g:ycm_auto_trigger=0
+let g:ycm_auto_trigger=1
 " Let clangd fully control code completion -- works faster
 let g:ycm_clangd_uses_ycmd_caching = 0
 " Use installed clangd, not YCM-bundled clangd which doesn't get updates that
