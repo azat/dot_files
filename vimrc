@@ -446,11 +446,14 @@ let g:detectindent_preferred_indent=4
 let g:detectindent_max_lines_to_analyse=1024
 let g:detectindent_preferred_expandtab=1
 let g:is_bash=1
-" Default indent
+" Default indent is with spaces
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+" Always Tab for Makefile
+au FileType make set noexpandtab
+au FileType make let detectindent_preferred_expandtab=0
 
 "
 " vim-todo-highlight
