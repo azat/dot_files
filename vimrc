@@ -445,6 +445,7 @@ set pastetoggle=<leader>p
 let g:detectindent_preferred_indent=4
 let g:detectindent_max_lines_to_analyse=1024
 let g:is_bash=1
+let g:detectindent_preferred_expandtab=1
 
 "
 " vim-todo-highlight
