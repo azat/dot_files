@@ -1,6 +1,8 @@
 [user]
 	name = Azat Khuzhin
 	email = a3at.mail@gmail.com
+[init]
+	defaultBranch = main
 [core]
 	autocrlf = input
 	safecrlf = true
