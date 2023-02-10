@@ -2,8 +2,8 @@ set input-meta on
 set output-meta on
 set bell-style none
 set show-all-if-ambiguous on
-set completion-ignore-case on
-set completion-map-case On
+set completion-ignore-case off
+set completion-map-case off
 set page-completions On
 set visible-stats On
 set mark-symlinked-directories On
