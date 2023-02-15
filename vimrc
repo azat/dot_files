@@ -106,6 +106,9 @@ try
 catch
   colorscheme desert
 endtry
+" Transparent background
+highlight Normal guibg=NONE ctermbg=NONE
+highlight EndOfBuffer guibg=NONE ctermbg=NONE
 
 " autoread/autowrite
 set autowrite
