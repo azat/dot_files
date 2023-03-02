@@ -152,10 +152,7 @@ augroup NoSimultaneousEdits
 augroup END
 
 " fold
-autocmd FileType c setlocal foldmethod=syntax
-autocmd FileType cpp setlocal foldmethod=syntax
-autocmd FileType h setlocal foldmethod=syntax
-autocmd FileType json setlocal foldmethod=syntax
+set foldmethod=syntax
 set foldenable!
 set foldlevel=1000
 hi Folded ctermbg=5 " color scheme dark reset can't handle folded info
