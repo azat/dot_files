@@ -59,6 +59,7 @@ Plug 'mattn/vim-gist'
 Plug 'crusoexia/vim-monokai'
 " Plug 'ericbn/vim-solarized'
 Plug 'hashivim/vim-terraform'
+Plug 'tmhedberg/SimpylFold' " fold for python
 call plug#end()
 
 function! PlugLoaded(name)
