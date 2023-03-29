@@ -383,7 +383,7 @@ Shortcut! :ListGist<return> List gist
 Shortcut! :'<,'>Gist<return> Selected gist
 
 " make via vim-dispatch
-:set makeprg=ninja
+set makeprg=nice\ -n100\ ninja
 " NOTE: :Make+makeprg over :Dispatch
 " (see https://github.com/tpope/vim-dispatch/issues/41#issuecomment-20555488)
 Shortcut [make] noremap <leader>m :Make! -C $(git rev-parse --show-toplevel)/.cmake<return>
