@@ -387,6 +387,7 @@ set makeprg=nice\ -n100\ ninja
 " NOTE: :Make+makeprg over :Dispatch
 " (see https://github.com/tpope/vim-dispatch/issues/41#issuecomment-20555488)
 Shortcut [make] noremap <leader>m :Make! -C $(git rev-parse --show-toplevel)/.cmake<return>
+Shortcut [make] noremap <leader>M :Make! -C $(git rev-parse --show-toplevel)/.cmake-debug<return>
 Shortcut [errors] noremap <leader>e :Copen<return>
 
 " ycm/YouCompleteMe
