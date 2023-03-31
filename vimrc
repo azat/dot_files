@@ -430,6 +430,9 @@ Shortcut [ycm GetDocImprecise] Displays the doc
   \ noremap <leader>gd :YcmCompleter GetDocImprecise<return>
 Shortcut [ycm] FixIt
   \ noremap <leader>F :YcmCompleter FixIt<return>
+Shortcut [ycm] Rename
+  \ noremap <leader>r :exe 'YcmCompleter RefactorRename '.input('refactor \"'.expand('<cword>').'\" to:')<return>
+
 " TODO: make shortcuts works from menu and not only via <leader>
 
 " syntax
