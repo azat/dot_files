@@ -417,6 +417,10 @@ Shortcut [ycm GoToDeclaration] Looks up the symbol under the cursor and jumps to
   \ noremap <leader>jd :YcmCompleter GoToDeclaration<return>
 Shortcut [ycm GoToDefinition] Looks up the symbol under the cursor and jumps to its definition
   \ noremap <leader>jD :YcmCompleter GoToDefinition<return>
+Shortcut [ycm GoToCallers]
+  \ noremap <leader>jc :YcmCompleter GoToCallers<return>
+Shortcut [ycm GoToCallees]
+  \ noremap <leader>jC :YcmCompleter GoToCallees<return>
 " Semantic Information Commands
 Shortcut [ycm GetType] Echos the type of the variable or method under the cursor
   \ noremap <leader>gT :YcmCompleter GetType<return>
