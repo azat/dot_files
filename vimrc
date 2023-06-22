@@ -421,6 +421,8 @@ Shortcut [ycm GoToCallers]
   \ noremap <leader>jc :YcmCompleter GoToCallers<return>
 Shortcut [ycm GoToCallees]
   \ noremap <leader>jC :YcmCompleter GoToCallees<return>
+Shortcut [ycm GoToAlternateFile (header/module)]
+  \ noremap <leader>ja :YcmCompleter GoToAlternateFile<return>
 " Semantic Information Commands
 Shortcut [ycm GetType] Echos the type of the variable or method under the cursor
   \ noremap <leader>gT :YcmCompleter GetType<return>
