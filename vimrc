@@ -60,6 +60,7 @@ Plug 'crusoexia/vim-monokai'
 " Plug 'ericbn/vim-solarized'
 Plug 'hashivim/vim-terraform'
 Plug 'tmhedberg/SimpylFold' " fold for python
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 function! PlugLoaded(name)
@@ -76,7 +77,6 @@ endfunction
 set tags=tags;/
 set mouse=
 set guicursor=
-set autochdir
 set number
 set hidden
 set termencoding=utf-8
@@ -382,12 +382,13 @@ Shortcut! :PublicGist<return> Public gist
 Shortcut! :ListGist<return> List gist
 Shortcut! :'<,'>Gist<return> Selected gist
 
+let g:cargo_makeprg_params = 'build'
+au filetype cpp setlocal makeprg=nice\ -n100\ ninja\ -k0\ -C\ $(git\ rev-parse\ --show-toplevel)/.cmake
+au filetype c setlocal makeprg=ninja\ -k0\ -C\ $(git\ rev-parse\ --show-toplevel)/.cmake
 " make via vim-dispatch
-set makeprg=nice\ -n100\ ninja\ -k0
 " NOTE: :Make+makeprg over :Dispatch
 " (see https://github.com/tpope/vim-dispatch/issues/41#issuecomment-20555488)
-Shortcut [make] noremap <leader>m :Make! -C $(git rev-parse --show-toplevel)/.cmake<return>
-Shortcut [make] noremap <leader>M :Make! -C $(git rev-parse --show-toplevel)/.cmake-debug<return>
+Shortcut [make] noremap <leader>m :Make!<return>
 Shortcut [errors] noremap <leader>e :Copen<return>
 
 " ycm/YouCompleteMe
