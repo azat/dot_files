@@ -445,9 +445,9 @@ Shortcut [ycm GetTypeImprecise] Echos the type of the variable or method under t
 Shortcut [ycm GetParent] Echos the semantic parent of the point under the cursor
   \ noremap <leader>gp :YcmCompleter GetParent<return>
 Shortcut [ycm GetDoc] Displays the doc (force)
-  \ noremap <leader>gD :rightbelow vertical 80YcmShowDocWithSize<return>
+  \ noremap <leader>gd :rightbelow vertical 80YcmShowDocWithSize<return>
 Shortcut [ycm GetDocImprecise] Displays the doc
-  \ noremap <leader>gd :rightbelow vertical 80YcmShowDocImpreciseWithSize<return>
+  \ noremap <leader>gD :rightbelow vertical 80YcmShowDocImpreciseWithSize<return>
 Shortcut [ycm] FixIt
   \ noremap <leader>F :YcmCompleter FixIt<return>
 Shortcut [ycm] Rename
