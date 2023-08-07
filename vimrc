@@ -399,8 +399,21 @@ let g:ycm_clangd_uses_ycmd_caching = 0
 " Use installed clangd, not YCM-bundled clangd which doesn't get updates that
 " frequently.
 let g:ycm_clangd_binary_path = exepath("clangd")
-" TODO: disable only for python? (since it show popup even for regular str)
 let g:ycm_auto_hover=''
+" Only explicitly via <leader>gD/gd (to preview from the right, not from the
+" botton)
+set completeopt-=preview
+" Preview from the right and adjust the width
+command -count YcmShowDocWithSize
+  \ let g:ph=&previewheight
+  \ <bar> set previewheight=<count>
+  \ <bar> <mods> YcmCompleter GetDoc
+  \ <bar> let &previewheight=g:ph
+command -count YcmShowDocImpreciseWithSize
+  \ let g:ph=&previewheight
+  \ <bar> set previewheight=<count>
+  \ <bar> <mods> YcmCompleter GetDocImprecise
+  \ <bar> let &previewheight=g:ph
 Shortcut! :YcmRestartServer<return> YcmRestartServer
 Shortcut! :YcmForceCompileAndDiagnostics<return> YcmForceCompileAndDiagnostics
 Shortcut! :YcmDiags<return> YcmDiags
@@ -432,9 +445,9 @@ Shortcut [ycm GetTypeImprecise] Echos the type of the variable or method under t
 Shortcut [ycm GetParent] Echos the semantic parent of the point under the cursor
   \ noremap <leader>gp :YcmCompleter GetParent<return>
 Shortcut [ycm GetDoc] Displays the doc (force)
-  \ noremap <leader>gD :YcmCompleter GetDoc<return>
+  \ noremap <leader>gD :rightbelow vertical 80YcmShowDocWithSize<return>
 Shortcut [ycm GetDocImprecise] Displays the doc
-  \ noremap <leader>gd :YcmCompleter GetDocImprecise<return>
+  \ noremap <leader>gd :rightbelow vertical 80YcmShowDocImpreciseWithSize<return>
 Shortcut [ycm] FixIt
   \ noremap <leader>F :YcmCompleter FixIt<return>
 Shortcut [ycm] Rename
