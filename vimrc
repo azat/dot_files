@@ -399,6 +399,7 @@ let g:ycm_clangd_uses_ycmd_caching = 0
 " Use installed clangd, not YCM-bundled clangd which doesn't get updates that
 " frequently.
 let g:ycm_clangd_binary_path = exepath("clangd")
+let g:ycm_rust_toolchain_root = fnamemodify(exepath("rust-analyzer"), ":p:h:h")
 let g:ycm_auto_hover=''
 " Only explicitly via <leader>gD/gd (to preview from the right, not from the
 " botton)
