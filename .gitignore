@@ -67,3 +67,5 @@
 !/.fehbg
 !/.Xresources
 !/.*yml
+
+!/.docker**
