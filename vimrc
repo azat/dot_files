@@ -392,6 +392,7 @@ Shortcut [make] noremap <leader>m :Make!<return>
 Shortcut [errors] noremap <leader>e :Copen<return>
 
 " ycm/YouCompleteMe
+let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 let g:ycm_always_populate_location_list=1
 let g:ycm_auto_trigger=1
 " Let clangd fully control code completion -- works faster
