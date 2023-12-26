@@ -8,6 +8,7 @@
 # - LSP out of the box
 # - sane default theme
 # - embedded unimpaired [2]
+# - builtin fuzzy finder
 #
 # Cons:
 # - no leader key (though there is <space>)
