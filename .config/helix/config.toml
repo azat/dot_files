@@ -31,6 +31,7 @@ scroll-lines = 1
 completion-trigger-len = 1 # my machine is fast enough
 rulers = [120]
 color-modes = true
+auto-save = true
 
 [editor.statusline]
 left = ["mode", "spinner", "file-name", "file-type", "total-line-numbers"]
@@ -51,6 +52,8 @@ C-p = "file_picker"
 C-6 = "goto_previous_buffer"
 Q = ":quit"
 X = ":write-quit-all"
+# NOTE: without no_op it does not work
+C-z = [":write-all", "no_op", "suspend"]
 
 # Some nice Helix stuff
 C-h = "select_prev_sibling"
