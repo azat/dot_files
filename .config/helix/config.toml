@@ -1,4 +1,27 @@
+#
 # Based on https://github.com/LGUG2Z/helix-vim
+#
+# Helix vs vim (my issues for the 1-day of using helix):
+#
+# Pros:
+# - looks faster
+# - LSP out of the box
+# - sane default theme
+# - embedded unimpaired [2]
+#
+# Cons:
+# - no leader key (though there is <space>)
+# - no visual mode (though there is multi cursors[1], but it is not complete replacement)
+# - tons of bindings should be reviewed
+# - no j/k support in file_picker [3]
+#
+#   [1]: https://github.com/helix-editor/helix/discussions/1824
+#   [2]: https://docs.helix-editor.com/keymap.html#unimpaired
+#   [3]: https://github.com/helix-editor/helix/issues/2820
+#
+# See also [4].
+#
+#   [4]: https://www.reddit.com/r/HelixEditor/comments/11sj8vo/a_month_with_helix/
 
 [keys.normal]
 C-p = "file_picker"
