@@ -1,6 +1,3 @@
-#
-# Based on https://github.com/LGUG2Z/helix-vim
-#
 # Helix vs vim (my issues for the 1-day of using helix):
 #
 # Pros:
@@ -23,6 +20,31 @@
 # See also [4].
 #
 #   [4]: https://www.reddit.com/r/HelixEditor/comments/11sj8vo/a_month_with_helix/
+#
+# Based on:
+# - https://github.com/LGUG2Z/helix-vim
+# - https://github.com/phaazon/config/blob/master/helix/config.toml
+#
+
+[editor]
+scroll-lines = 1
+completion-trigger-len = 1 # my machine is fast enough
+rulers = [120]
+color-modes = true
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "file-type", "total-line-numbers"]
+center = []
+right = ["selections", "primary-selection-length", "position", "position-percentage", "spacer", "diagnostics", "workspace-diagnostics", "version-control"]
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
 
 [keys.normal]
 C-p = "file_picker"
