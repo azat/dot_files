@@ -1,0 +1,23 @@
+import = ["/home/azat/.config/alacritty/themes/themes/breeze.toml"]
+
+[font]
+size = 10
+
+[font.bold]
+family = "Liberation Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "Liberation Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "Liberation Mono"
+style = "Italic"
+
+[font.normal]
+family = "Liberation Mono"
+style = "Regular"
+
+[window]
+opacity = 0.9
