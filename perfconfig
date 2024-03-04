@@ -1,0 +1,8 @@
+# vim: ft=config
+[annotate]
+    # tools from binutils are too slow, if your perf version does not support
+    # this, you can use this wrapper:
+    #
+    #     https://gist.github.com/azat/c6f808cc7d270142ed3f3eb297646a15
+    addr2line = "/usr/bin/llvm-addr2line"
+    objdump = "/usr/bin/llvm-objdump"
