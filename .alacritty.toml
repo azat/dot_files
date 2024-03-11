@@ -1,7 +1,7 @@
 import = ["/home/azat/.config/alacritty/themes/themes/breeze.toml"]
 
 [font]
-size = 10
+size = 16
 
 [font.bold]
 family = "Liberation Mono"
