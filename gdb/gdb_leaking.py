@@ -52,10 +52,9 @@ class leaking(gdb.Command):
     def memory(self):
         # VmSize:   111784 kB
         mem = gdb.execute("info proc status", False, True)
-        return int(re.search("VmSize:\s*([0-9]*) kB", mem).group(1))*1024
+        return int(re.search("VmSize:\\s*([0-9]*) kB", mem).group(1))*1024
     def mallocUsableSize(self, ptr):
         mem = gdb.execute("p malloc_usable_size(%lu)" % ptr, False, True)
         return int(re.search("= ([0-9]*)", mem).group(1))
 
 leaking()
-
