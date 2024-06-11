@@ -61,6 +61,7 @@ Plug 'crusoexia/vim-monokai'
 Plug 'hashivim/vim-terraform'
 Plug 'tmhedberg/SimpylFold' " fold for python
 Plug 'rust-lang/rust.vim'
+Plug 'pedrohdz/vim-yaml-folds'
 call plug#end()
 
 function! PlugLoaded(name)
