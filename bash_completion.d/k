@@ -1,0 +1,2 @@
+_comp_load -D -- kubectl
+eval "$(complete -p kubectl | sed 's/ kubectl$/ k/')"
