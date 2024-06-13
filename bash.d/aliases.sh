@@ -18,3 +18,5 @@ alias mosh='MOSH_ESCAPE_KEY="" mosh'
 alias xargs='xargs -r'
 
 alias gsutil='PYTHONWARNINGS=ignore gsutil'
+
+alias k='kubectl'
