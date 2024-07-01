@@ -124,6 +124,9 @@ if has('nvim')
   " - https://github.com/neovim/neovim/issues/1936
   autocmd FocusGained,BufEnter,CursorHold,CursorHoldI,VimResume *
       \ if mode() != 'c' | checktime | endif
+
+  " mostly due to trim_trailing_whitespace
+  let g:editorconfig = v:false
 endif
 
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
