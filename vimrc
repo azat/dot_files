@@ -371,6 +371,8 @@ noremap <leader>jC <Plug>(coc-references-used)
 noremap <leader>ji <Plug>(coc-implementation)
 noremap <leader>jd <Plug>(coc-declaration)
 noremap <leader>jt <Plug>(coc-type-definition)
+noremap <silent> [g <Plug>(coc-diagnostic-prev)
+noremap <silent> ]g <Plug>(coc-diagnostic-next)
 " coc formats (reat all JSON as JSONC to support comments)
 augroup JsonToJsonc
     autocmd! FileType json set filetype=jsonc
