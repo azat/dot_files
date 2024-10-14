@@ -45,8 +45,6 @@ Plug 'pearofducks/ansible-vim' " , { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'mmarchini/bpftrace.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'sakshamgupta05/vim-todo-highlight'
-Plug 'mattn/webapi-vim'
-Plug 'mattn/vim-gist'
 Plug 'crusoexia/vim-monokai'
 " Plug 'ericbn/vim-solarized'
 Plug 'hashivim/vim-terraform'
