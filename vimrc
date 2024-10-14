@@ -22,6 +22,7 @@ Plug 'yaegassy/coc-pylsp', {'do': 'yarn install --frozen-lockfile'}
 Plug 'yaegassy/coc-ansible', {'do': 'yarn install --frozen-lockfile'}
 " has additional commands
 Plug 'clangd/coc-clangd', {'do': 'yarn install --frozen-lockfile'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'junegunn/fzf' " dependency of fzf.vim
 Plug 'junegunn/fzf.vim'
 Plug 'sunaku/vim-shortcut'
@@ -47,9 +48,7 @@ Plug 'sakshamgupta05/vim-todo-highlight'
 Plug 'crusoexia/vim-monokai'
 " Plug 'ericbn/vim-solarized'
 Plug 'hashivim/vim-terraform'
-Plug 'tmhedberg/SimpylFold' " fold for python
 Plug 'rust-lang/rust.vim'
-Plug 'pedrohdz/vim-yaml-folds'
 call plug#end()
 
 function! PlugLoaded(name)
@@ -90,7 +89,6 @@ endif
 if $TERM =~ '^\(xterm\|tmux\|rxvt\)' && has('nvim')
   set termguicolors
 endif
-syntax enable
 try
   colorscheme monokai
 catch
@@ -143,12 +141,6 @@ augroup NoSimultaneousEdits
   autocmd SwapExists * let v:swapchoice = 'o'
   autocmd SwapExists * echoerr 'Duplicate edit session (readonly)'
 augroup END
-
-" fold
-set foldmethod=syntax
-set foldenable!
-set foldlevel=1000
-hi Folded ctermbg=5 " color scheme dark reset can't handle folded info
 
 "
 " vim-tags
@@ -360,8 +352,6 @@ if has('nvim')
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
-" FIXME: support fold from coc
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " coc shortcuts
 Shortcut! :CocDiagnostics<return> CoC diagnostics
 Shortcut! :CocInfo<return> CoC info
@@ -401,10 +391,25 @@ function! ShowDocumentation()
   endif
 endfunction
 
-" syntax
-command! -bang -nargs=0 ShowSyntaxList :syntax list
-Shortcut! :ShowSyntaxList<return> Show syntax list
-set synmaxcol=256
+if PlugLoaded('nvim-treesitter')
+  " nvim-treesitter
+  lua << EOF
+  require'nvim-treesitter.configs'.setup {
+    auto_install = true,
+    highlight = {
+      enable = true,
+    },
+  }
+
+  vim.wo.foldmethod = 'expr'
+  vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+EOF
+else
+  set foldmethod=syntax
+  set foldenable!
+  hi Folded ctermbg=5 " color scheme dark reset can't handle folded info
+endif
+set foldlevel=1000
 
 set pastetoggle=<leader>p
 
