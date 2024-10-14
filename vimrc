@@ -12,25 +12,16 @@ if empty(glob("~/.vim/autoload/plug.vim"))
   execute '!curl --create-dirs -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 
-"
-" Plugins
-"
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --clangd-completer --rust-completer --go-completer
-  endif
-endfunction
-
-" for YouCompleteMe
-let g:plug_timeout=600
-
 call plug#begin('~/.vim/bundle')
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-Plug 'w0rp/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+Plug 'yaegassy/coc-ruff', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+" for now ruff does not support completion
+Plug 'yaegassy/coc-pylsp', {'do': 'yarn install --frozen-lockfile'}
+Plug 'yaegassy/coc-ansible', {'do': 'yarn install --frozen-lockfile'}
+" has additional commands
+Plug 'clangd/coc-clangd', {'do': 'yarn install --frozen-lockfile'}
 Plug 'junegunn/fzf' " dependency of fzf.vim
 Plug 'junegunn/fzf.vim'
 Plug 'sunaku/vim-shortcut'
@@ -163,19 +154,6 @@ set foldlevel=1000
 hi Folded ctermbg=5 " color scheme dark reset can't handle folded info
 
 "
-" ale
-"
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_fixers = {
-  \ '*':      [ 'trim_whitespace', ],
-  \ 'python': [ 'autopep8', 'isort', ],
-  \ }
-let g:ale_linters = {
-  \ 'cpp':    [],
-  \ 'c':      [],
-  \ }
-
-"
 " vim-tags
 "
 let g:vim_tags_directories = [ ".git/.." ]
@@ -185,35 +163,12 @@ let g:vim_tags_project_tags_command = "flock -n /tmp/vim-ctags.lock {CTAGS} -R {
 "
 " lightline
 "
-function! ALEStatus() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-
-  return l:counts.total == 0 ? 'ALE: OK' : printf(
-  \   'ALE: %dW %dE',
-  \   all_non_errors,
-  \   all_errors
-  \)
-endfunction
-function! YCMStatus() abort
-  let l:warnings = youcompleteme#GetWarningCount()
-  let l:errors   = youcompleteme#GetErrorCount()
-  let l:total    = warnings + errors
-
-  return total == 0 ? 'YCM: OK' : printf(
-  \   'YCM: %dW %dE',
-  \   warnings,
-  \   errors
-  \)
-endfunction
 function! LinterStatus() abort
-  let l:ale_enabled = exists('b:ale_linted')
-  if ale_enabled
-    return ALEStatus()
+  if exists('b:coc_enabled')
+    return coc#status()
   else
-    return YCMStatus()
+    return ""
+  endif
 endfunction
 function! StatusFileName()
   return expand('%:p')
@@ -362,16 +317,6 @@ Shortcut! :PlugStatus<return>  Plugins status
 " gundo
 Shortcut! :GundoToggle<return> undo tree
 
-" ale
-Shortcut! :ALELint<return> Run ALE linters
-Shortcut! :ALEInfo<return> Show ALE info (current buffer)
-Shortcut! :ALEDetail<return> Show ALE details
-Shortcut! :ALEFix<return> Run ALE fixers
-Shortcut! :ALEFixSuggest<return> Show ALE suggest fixes
-Shortcut! :ALEDisable<return> Disable ALE
-Shortcut! :ALEEnable<return> Enable ALE
-Shortcut! :ALEToggle<return> Toggle ALE
-
 " vimgist
 "
 " Do not forget to put "token XXX" into ~/.gist-vim
@@ -395,70 +340,66 @@ au filetype c setlocal makeprg=ninja\ -k0\ -C\ $(git\ rev-parse\ --show-toplevel
 Shortcut [make] noremap <leader>m :Make!<return>
 Shortcut [errors] noremap <leader>e :Copen<return>
 
-" ycm/YouCompleteMe
-let g:ycm_always_populate_location_list=1
-let g:ycm_auto_trigger=1
-" Let clangd fully control code completion -- works faster
-let g:ycm_clangd_uses_ycmd_caching = 0
-" Use installed clangd, not YCM-bundled clangd which doesn't get updates that
-" frequently.
-let g:ycm_clangd_binary_path = exepath("clangd")
-let g:ycm_rust_toolchain_root = fnamemodify(exepath("rust-analyzer"), ":p:h:h")
-let g:ycm_auto_hover=''
-" Only explicitly via <leader>gD/gd (to preview from the right, not from the
-" botton)
-set completeopt-=preview
-" Preview from the right and adjust the width
-command -count YcmShowDocWithSize
-  \ let g:ph=&previewheight
-  \ <bar> set previewheight=<count>
-  \ <bar> <mods> YcmCompleter GetDoc
-  \ <bar> let &previewheight=g:ph
-command -count YcmShowDocImpreciseWithSize
-  \ let g:ph=&previewheight
-  \ <bar> set previewheight=<count>
-  \ <bar> <mods> YcmCompleter GetDocImprecise
-  \ <bar> let &previewheight=g:ph
-Shortcut! :YcmRestartServer<return> YcmRestartServer
-Shortcut! :YcmForceCompileAndDiagnostics<return> YcmForceCompileAndDiagnostics
-Shortcut! :YcmDiags<return> YcmDiags
-Shortcut! :YcmShowDetailedDiagnostic<return> YcmShowDetailedDiagnostic
-Shortcut! :YcmDebugInfo<return> YcmDebugInfo
-Shortcut! :YcmToggleLogs<return> YcmToggleLogs
-" GoTo
-Shortcut [ycm GoTo] GoTo (force)
-  \ noremap <leader>jt :YcmCompleter GoTo<return>
-Shortcut [ycm GoTo] GoTo
-  \ noremap <C-\> :YcmCompleter GoTo<return>
-Shortcut [ycm GoToInclude] Looks up the current line for a header and jumps to it
-  \ noremap <leader>jI :YcmCompleter GoToInclude<return>
-Shortcut [ycm GoToDeclaration] Looks up the symbol under the cursor and jumps to its declaration
-  \ noremap <leader>jd :YcmCompleter GoToDeclaration<return>
-Shortcut [ycm GoToDefinition] Looks up the symbol under the cursor and jumps to its definition
-  \ noremap <leader>jD :YcmCompleter GoToDefinition<return>
-Shortcut [ycm GoToCallers]
-  \ noremap <leader>jc :YcmCompleter GoToCallers<return>
-Shortcut [ycm GoToCallees]
-  \ noremap <leader>jC :YcmCompleter GoToCallees<return>
-Shortcut [ycm GoToAlternateFile (header/module)]
-  \ noremap <leader>ja :YcmCompleter GoToAlternateFile<return>
-" Semantic Information Commands
-Shortcut [ycm GetType] Echos the type of the variable or method under the cursor
-  \ noremap <leader>gT :YcmCompleter GetType<return>
-Shortcut [ycm GetTypeImprecise] Echos the type of the variable or method under the cursor (force)
-  \ noremap <leader>gt :YcmCompleter GetTypeImprecise<return>
-Shortcut [ycm GetParent] Echos the semantic parent of the point under the cursor
-  \ noremap <leader>gp :YcmCompleter GetParent<return>
-Shortcut [ycm GetDoc] Displays the doc (force)
-  \ noremap <leader>gd :rightbelow vertical 80YcmShowDocWithSize<return>
-Shortcut [ycm GetDocImprecise] Displays the doc
-  \ noremap <leader>gD :rightbelow vertical 80YcmShowDocImpreciseWithSize<return>
-Shortcut [ycm] FixIt
-  \ noremap <leader>F :YcmCompleter FixIt<return>
-Shortcut [ycm] Rename
-  \ noremap <leader>r :exe 'YcmCompleter RefactorRename '.input('refactor \"'.expand('<cword>').'\" to:')<return>
-
-" TODO: make shortcuts works from menu and not only via <leader>
+"
+" coc
+"
+set updatetime=300 " default 4s
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+" FIXME: support fold from coc
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+" coc shortcuts
+Shortcut! :CocDiagnostics<return> CoC diagnostics
+Shortcut! :CocInfo<return> CoC info
+Shortcut! :CocOpenLog<return> CoC logs
+Shortcut! :CocCommand<space>yaml.selectSchema<return> YAML select schema
+Shortcut! :CocCommand<space>clangd.ast<return> clangd AST
+Shortcut Alternate file (header/module) noremap <leader>ja :CocCommand clangd.switchSourceHeader<return>
+Shortcut Format noremap <C-k> <Plug>(coc-format)<return>
+Shortcut Displays the doc noremap K :call ShowDocumentation()<return>
+Shortcut FixIt noremap <leader>F <Plug>(coc-fix-current)<return>
+" FIXME: by some reason via "Shortcuts" it does not work, apparently it goes
+" to the next line before executing command!
+noremap <leader>r <Plug>(coc-rename)
+noremap <C-\> <Plug>(coc-definition)
+noremap <leader>jc <Plug>(coc-references)
+noremap <leader>jC <Plug>(coc-references-used)
+noremap <leader>ji <Plug>(coc-implementation)
+noremap <leader>jd <Plug>(coc-declaration)
+noremap <leader>jt <Plug>(coc-type-definition)
+" coc formats (reat all JSON as JSONC to support comments)
+augroup JsonToJsonc
+    autocmd! FileType json set filetype=jsonc
+augroup END
+" coc helpers
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
 
 " syntax
 command! -bang -nargs=0 ShowSyntaxList :syntax list
@@ -526,16 +467,3 @@ map <C-right> :tabnext<return>
 " toggle *pointer*
 noremap  <C-C>  :set cursorline! <bar> set cursorcolumn!<return>
 inoremap <C-C>  <C-O>:set cursorline! <bar> set cursorcolumn!<return>
-
-" clang-format
-if has('python')
-  map <C-K> :pyf /usr/share/clang/clang-format.py<return>
-  imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<return>
-  Shortcut clang-format
-    \ noremap <leader>k :pyf /usr/share/clang/clang-format.py<return>
-elseif has('python3')
-  map <C-K> :py3f /usr/share/clang/clang-format.py<return>
-  imap <C-K> <c-o>:py3f /usr/share/clang/clang-format.py<return>
-  Shortcut clang-format
-    \ noremap <leader>k :py3f /usr/share/clang/clang-format.py<return>
-endif
