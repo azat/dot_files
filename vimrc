@@ -43,7 +43,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'pearofducks/ansible-vim' " , { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'mmarchini/bpftrace.vim'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi'
 Plug 'sakshamgupta05/vim-todo-highlight'
 Plug 'crusoexia/vim-monokai'
 " Plug 'ericbn/vim-solarized'
