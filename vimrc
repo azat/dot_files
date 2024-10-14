@@ -14,7 +14,7 @@ endif
 
 call plug#begin('~/.vim/bundle')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+Plug 'azat-archive/coc-yaml', {'branch': 'next', 'do': 'yarn install --frozen-lockfile'}
 Plug 'yaegassy/coc-ruff', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 " for now ruff does not support completion
