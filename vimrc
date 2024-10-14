@@ -385,6 +385,9 @@ noremap <leader>jt <Plug>(coc-type-definition)
 augroup JsonToJsonc
     autocmd! FileType json set filetype=jsonc
 augroup END
+let g:coc_filetype_map = {
+  \ 'yaml.ansible': 'ansible',
+  \ }
 " coc helpers
 function! CheckBackspace() abort
   let col = col('.') - 1
