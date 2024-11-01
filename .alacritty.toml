@@ -1,3 +1,4 @@
+[general]
 import = ["/home/azat/.config/alacritty/themes/themes/breeze.toml"]
 
 [font]
