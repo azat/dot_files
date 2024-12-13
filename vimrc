@@ -46,8 +46,9 @@ Plug 'pearofducks/ansible-vim' " , { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'mmarchini/bpftrace.vim'
 Plug 'mg979/vim-visual-multi'
 Plug 'sakshamgupta05/vim-todo-highlight'
-Plug 'crusoexia/vim-monokai'
+" Plug 'crusoexia/vim-monokai'
 " Plug 'ericbn/vim-solarized'
+Plug 'folke/tokyonight.nvim'
 Plug 'hashivim/vim-terraform'
 Plug 'rust-lang/rust.vim'
 call plug#end()
@@ -91,7 +92,7 @@ if $TERM =~ '^\(xterm\|tmux\|rxvt\)' && has('nvim')
   set termguicolors
 endif
 try
-  colorscheme monokai
+  colorscheme tokyonight-night
 catch
   colorscheme desert
 endtry
