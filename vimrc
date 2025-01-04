@@ -19,6 +19,17 @@ Plug 'yaegassy/coc-ruff', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 " for now ruff does not support completion
 Plug 'yaegassy/coc-pylsp', {'do': 'yarn install --frozen-lockfile'}
+" note, it requires release file, i.e.:
+"
+"     # convert "21.0.5+11" to "21.0.5.11"
+"     java_version=$(java --version | grep 'OpenJDK Runtime Environment' | awk -F'[ ()]' '{print $(NF-1)}' | tr + .)
+"     java_home=$(java -XshowSettings:properties -version |& grep java.home | awk '{print $NF}')
+"     echo "JAVA_VERSION=\"$java_version\"" > ${java_home:?}/release
+"
+" see:
+" - https://github.com/microsoft/vscode-java-debug/issues/1212#issuecomment-1250932155
+" - https://github.com/eclipse-jdt/eclipse.jdt.core/issues/405#issuecomment-1249082357
+Plug 'neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'}
 Plug 'yaegassy/coc-ansible', {'do': 'yarn install --frozen-lockfile'}
 " has additional commands
 Plug 'clangd/coc-clangd', {'do': 'yarn install --frozen-lockfile'}
