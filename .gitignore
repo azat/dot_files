@@ -71,3 +71,6 @@
 !/*.toml
 
 !/.docker**
+
+!/.clickhouse-client
+!/.clickhouse-client/*

@@ -1,0 +1,5 @@
+---
+prompt_by_server_display_name:
+  default: "\x1b[01;32m{display_name}$\x1b[0m "
+
+ignore_shell_suspend: false
