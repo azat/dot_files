@@ -406,7 +406,7 @@ function! ShowDocumentation()
   endif
 endfunction
 
-if PlugLoaded('nvim-treesitter')
+if PlugLoaded('nvim-treesitter') && has('nvim')
   " nvim-treesitter
   lua << EOF
   require'nvim-treesitter.configs'.setup {
