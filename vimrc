@@ -42,7 +42,9 @@ Plug 'szw/vim-tags'
 Plug 'vim-scripts/taglist.vim'
 Plug 'ciaranm/detectindent'
 Plug 'godlygeek/tabular'
-Plug 'svermeulen/vim-easyclip'
+if exists('+pastetoggle')
+  Plug 'svermeulen/vim-easyclip'
+endif
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
@@ -80,7 +82,9 @@ set mouse=
 set guicursor=
 set number
 set hidden
-set termencoding=utf-8
+if exists('+termencoding')
+  set termencoding=utf-8
+endif
 set fileencodings=utf8,cp1251
 set encoding=utf8
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯЖ;ABCDEFGHIJKLMNOPQRSTUVWXYZ:,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
@@ -426,7 +430,9 @@ else
 endif
 set foldlevel=1000
 
-set pastetoggle=<leader>p
+if exists('+pastetoggle')
+  set pastetoggle=<leader>p
+endif
 
 "
 " detectindent
