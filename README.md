@@ -1,7 +1,7 @@
 ### Aliases
 
-- http://tinyurl.com/azat-tmux
-- http://tinyurl.com/azat-gitconfig
-- http://tinyurl.com/azat-gdbinit
-- http://tinyurl.com/azat-vimrc
-- http://tinyurl.com/azat-bashrc
+- https://tinyurl.com/azat-tmux
+- https://tinyurl.com/azat-gitconfig
+- https://tinyurl.com/azat-gdbinit
+- https://tinyurl.com/azat-nvim
+- https://tinyurl.com/azat-bashrc
