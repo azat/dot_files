@@ -166,5 +166,3 @@
 	insteadOf = me.sr:
 [url "git@git.sr.ht:~azat/"]
 	pushInsteadOf = me.sr:
-[url "git@github.com:"]
-	insteadOf = https://github.com/
