@@ -355,6 +355,18 @@ require('lazy').setup({
               },
             })
           end,
+          ["lua_ls"] = function()
+            require('lspconfig')["lua_ls"].setup({
+              settings = {
+                Lua = {
+                  -- make the language server recognize "vim" global
+                  diagnostics = {
+                    globals = { "vim" },
+                  },
+                },
+              },
+            })
+          end,
         }
       }
     end,
