@@ -340,7 +340,22 @@ require('lazy').setup({
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,
-        },
+          ["rust_analyzer"] = function()
+            require('lspconfig')["rust_analyzer"].setup({
+              settings = {
+                ["rust-analyzer"] = {
+                  cargo = {
+                    allFeatures = true,
+                  },
+                  -- checkOnSave = {
+                  --   allFeatures = true,
+                  --   command = "clippy",
+                  -- },
+                },
+              },
+            })
+          end,
+        }
       }
     end,
   },
