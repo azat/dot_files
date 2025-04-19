@@ -86,7 +86,7 @@ vim.keymap.set('n', '<F1>', '<cmd>setlocal spell!<CR>', { desc = 'Enable spell c
 vim.keymap.set('i', '<F1>', '<cmd>setlocal spell!<CR>', { desc = 'Enable spell check' })
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('n', 'oq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', 'Q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set('n', '<leader>n', '<cmd>set number!<CR>', { desc = 'Exit terminal mode' })
 
