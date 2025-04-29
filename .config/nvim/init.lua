@@ -2,11 +2,9 @@
 -- See `:help vim.opt`
 
 -- TODO:
--- - strict bindings for go to next error/todo/...
+-- - strict bindings for go to next error/todo/... (:Telescope jumplist)
 -- - s/kickstart/sensible/
--- - suppress "Undefined global `vim`." in this file
 -- - move shortcuts to where plugin is initialized
--- - telescope is slower then plain fzf (via GFiles)
 
 vim.g.mapleader = '\\'
 vim.g.maplocalleader = '\\'
@@ -105,6 +103,50 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
+  -- telescope is slower then fzf, so for now fzf will be used for hot path,
+  -- at least until the following will be resolved:
+  --
+  -- - https://github.com/nvim-telescope/telescope.nvim/issues/1423
+  -- - https://github.com/nvim-telescope/telescope.nvim/pull/1491
+  {
+    'junegunn/fzf.vim',
+    dependencies = {
+      {
+        'junegunn/fzf',
+        build = function()
+          vim.fn['fzf#install']()
+        end,
+      }
+    },
+    config = function()
+      vim.keymap.set('n', '<C-p>', ':GFiles<CR>', { desc = '[S]earch [F]iles in Git index' })
+      vim.keymap.set('n', 'sf', ':Files<CR>', { desc = '[S]earch [F]iles' })
+
+      vim.api.nvim_create_user_command("GGrep", function(opts)
+        local query
+
+        if #opts.fargs > 0 then
+          query = table.concat(opts.fargs, " ")
+        else
+          query = vim.fn.expand("<cword>")
+        end
+
+        local escaped = vim.fn["fzf#shellescape"](query)
+        local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+
+        vim.fn["fzf#vim#grep"](
+          "git grep --line-number -- " .. escaped,
+          vim.fn["fzf#vim#with_preview"]({ dir = git_root }),
+          opts.bang and 1 or 0
+        )
+      end, {
+        bang = true,
+        nargs = "*"
+      })
+      vim.keymap.set('n', '<S-F>', ':GGrep<CR>', { desc = '[S]earch current [W]ord' })
+    end
+  },
+
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -119,9 +161,6 @@ require('lazy').setup({
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-
-      -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       require('telescope').setup {
@@ -136,7 +175,6 @@ require('lazy').setup({
             },
           },
         },
-        -- pickers = {}
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -150,18 +188,9 @@ require('lazy').setup({
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<C-p>',      builtin.git_files, { desc = '[S]earch [F]iles in Git index' })
       vim.keymap.set('n', 'sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', 'sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', 'sf', builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', 'ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-      -- For "part->setName(part->getNewName(part->info))"
-      --            ^^^^^^^                                   -> matches setName
-      vim.keymap.set('n', 'sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<S-F>', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      -- For "part->setName(part->getNewName(part->info))"
-      --            ^^^^^^^                                   -> matches the whole line
-      vim.keymap.set('n', 'sW', function() local word = vim.fn.expand("<cWORD>") builtin.grep_string({ search = word }) end, {desc = "[S]earch current [W]ord (more precise)"})
       vim.keymap.set('n', 'sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', 'sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', 'sr', builtin.resume, { desc = '[S]earch [R]esume' })
