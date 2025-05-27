@@ -4,7 +4,6 @@
 [init]
 	defaultBranch = main
 [core]
-	autocrlf = input
 	safecrlf = true
 	# This is not for dot_files repository.
 	# Because it may contain different _generated_ configs,
