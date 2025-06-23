@@ -147,6 +147,7 @@ require('lazy').setup({
         nargs = "*"
       })
       vim.keymap.set('n', '<S-F>', ':GGrep<CR>', { desc = '[S]earch current [W]ord' })
+      vim.keymap.set('n', '<leader>b', ':Buffers<CR>', { desc = 'Search current [b]uffers' })
     end
   },
 
@@ -199,8 +200,6 @@ require('lazy').setup({
       vim.keymap.set('n', 'sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', 's.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', 'sb', function() builtin.buffers({ sort_lastused = true, ignore_current_buffer = false }) end, { desc = '[ ] Find existing buffers' })
-      -- For compatiblity
-      vim.keymap.set('n', '<leader>b', function() builtin.buffers({ sort_lastused = true, ignore_current_buffer = false }) end, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader><leader>', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
 
       -- Slightly advanced example of overriding default behavior and theme
