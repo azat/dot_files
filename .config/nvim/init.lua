@@ -74,7 +74,6 @@ vim.opt.foldlevel = 1000
 
 vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit' })
 vim.keymap.set('n', '<leader>d', '<cmd>bdelete<CR>', { desc = 'Close buffer' })
-vim.keymap.set('n', '<leader>D', '<cmd>bdelete!<CR>', { desc = 'Close buffer (forcefully)' })
 vim.keymap.set('n', '<leader>c', '<cmd>close<CR>', { desc = 'Close window' })
 vim.keymap.set('n', '<leader>C', '<cmd>close!<CR>', { desc = 'Close window (forcefully)' })
 vim.keymap.set('n', '<leader>w', '<cmd>write!<CR>', { desc = 'Save buffer forcefully' })
@@ -254,11 +253,7 @@ require('lazy').setup({
           map('gh', '<cmd>ClangdSwitchSourceHeader<cr>', 'Switch header/module (.h/.cpp/.c)')
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          -- NOTE: should I use <leader> here?
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-          map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-          -- FIXME: does not work
-          -- map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
 
