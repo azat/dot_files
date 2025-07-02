@@ -413,6 +413,18 @@ require('lazy').setup({
     },
     config = function()
       local dap = require("dap")
+      local rtmin = vim.fn.system("kill -l SIGRTMIN"):gsub("%s+", "");
+      -- Disable auto breakpoints for exceptions
+      local pre_run_commands = {
+        'breakpoint name configure --disable cpp_exception',
+      }
+      local post_run_commands = {
+        'process handle -p false -s false SIGWINCH',
+        -- For ClickHouse
+        'process handle -p false -s false SIGUSR1',
+        'process handle -p false -s false SIGUSR2',
+        ('process handle -p false -s false %s'):format(rtmin),
+      };
 
       dap.adapters.lldb = {
         type = 'executable',
@@ -430,8 +442,8 @@ require('lazy').setup({
           cwd = '${workspaceFolder}',
           stopOnEntry = false,
           args = {},
-          -- Disable auto breakpoints for exceptions
-          preRunCommands = { 'breakpoint name configure --disable cpp_exception' },
+          preRunCommands = pre_run_commands,
+          postRunCommands = post_run_commands,
         },
       }
       -- Optional for C and Rust to reuse same config
@@ -496,7 +508,8 @@ require('lazy').setup({
                         pid = tonumber(selection.value.pid),
                         name = "Attach to process",
                         -- Disable auto breakpoints for exceptions
-                        preRunCommands = { 'breakpoint name configure --disable cpp_exception' },
+                        preRunCommands = pre_run_commands,
+                        postRunCommands = post_run_commands,
                       })
                     end
                     -- Only close after we’ve safely accessed the selection
