@@ -9,7 +9,6 @@
 vim.g.mapleader = '\\'
 vim.g.maplocalleader = '\\'
 
-vim.opt.mouse = ""
 vim.opt.guicursor = ""
 vim.opt.number = true
 vim.opt.fileencodings = "default"
@@ -400,6 +399,155 @@ require('lazy').setup({
         }
       }
     end,
+  },
+
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+      "nvim-neotest/nvim-nio",
+    },
+    config = function()
+      local dap = require("dap")
+
+      dap.adapters.lldb = {
+        type = 'executable',
+        command = 'codelldb',
+        name = "lldb"
+      }
+      dap.configurations.cpp = {
+        {
+          name = "Launch",
+          type = "lldb",
+          request = "launch",
+          program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+          end,
+          cwd = '${workspaceFolder}',
+          stopOnEntry = false,
+          args = {},
+        },
+      }
+      -- Optional for C and Rust to reuse same config
+      dap.configurations.c = dap.configurations.cpp
+      dap.configurations.rust = dap.configurations.cpp
+
+      vim.keymap.set('n', 'du', dap.up, { desc = "DAP: Up" })
+      vim.keymap.set('n', 'dU', dap.down, { desc = "DAP: Down" })
+      vim.keymap.set('n', 'dc', dap.continue, { desc = "DAP: Continue" })
+      vim.keymap.set('n', 'dn', dap.step_over, { desc = "DAP: Step Over / Next" })
+      vim.keymap.set('n', 'dS', dap.step_into, { desc = "DAP: Step Into" })
+      vim.keymap.set('n', 'do', dap.step_out, { desc = "DAP: Step Out" })
+      vim.keymap.set('n', 'db', dap.toggle_breakpoint, { desc = "DAP: Toggle breakpoint" })
+      vim.keymap.set("n", 'dB', function()
+        dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+      end, { desc = "DAP: Conditional Breakpoint" })
+
+      -- Function written with ChatGPT
+      vim.keymap.set("n", "da", function()
+        local Job = require("plenary.job")
+        local pickers = require("telescope.pickers")
+        local finders = require("telescope.finders")
+        local conf = require("telescope.config").values
+        local actions = require("telescope.actions")
+        local action_state = require("telescope.actions.state")
+
+        Job:new({
+          command = "pgrep",
+          args = { "-u", os.getenv("USER"), "-a" },
+          on_exit = function(j)
+            local output = j:result()
+            local processes = {}
+
+            for _, line in ipairs(output) do
+              local pid, cmd = line:match("^(%d+)%s+(.+)$")
+              if pid and cmd then
+                table.insert(processes, { pid = pid, cmd = cmd })
+              end
+            end
+
+            vim.schedule(function()
+              pickers.new({}, {
+                prompt_title = "Attach to Process",
+                finder = finders.new_table({
+                  results = processes,
+                  entry_maker = function(entry)
+                    return {
+                      value = entry,
+                      display = entry.pid .. " - " .. entry.cmd,
+                      ordinal = entry.cmd,
+                    }
+                  end,
+                }),
+                sorter = conf.generic_sorter({}),
+                attach_mappings = function(prompt_bufnr, map)
+                  actions.select_default:replace(function()
+                    local selection = action_state.get_selected_entry()
+                    if selection then
+                      require("dap").run({
+                        type = "lldb",
+                        request = "attach",
+                        pid = tonumber(selection.value.pid),
+                        name = "Attach to process",
+                      })
+                    end
+                    -- Only close after we’ve safely accessed the selection
+                    actions.close(prompt_bufnr)
+                  end)
+                  return true
+                end,
+              }):find()
+            end)
+          end,
+        }):start()
+      end, { desc = "DAP: Attach to Process (fuzzy)" })
+
+      local dapui = require("dapui")
+
+      dapui.setup({
+        mappings = {
+          expand = "+",
+          open = { "<CR>", "<2-LeftMouse>" },
+          remove = "d",
+          edit = "e",
+          repl = "r",
+        },
+        layouts = {
+          {
+            -- You can change the order of elements in the sidebar
+            elements = {
+              -- Provide as ID strings or tables with "id" and "size" keys
+              {
+                id = "scopes",
+                size = 0.25,
+              },
+              { id = "breakpoints", size = 0.25 },
+              { id = "stacks", size = 0.25 },
+              -- { id = "watches", size = 00.25 },
+            },
+            size = 100,
+            position = "left",
+          },
+          -- {
+          --   elements = { "repl", "console" },
+          --   size = 80,
+          --   position = "right",
+          -- },
+        },
+      })
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
+
+      require("nvim-dap-virtual-text").setup()
+    end
   },
 
   { -- Autocompletion
