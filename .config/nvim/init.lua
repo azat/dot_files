@@ -432,7 +432,6 @@ require('lazy').setup({
           args = {},
           -- Disable auto breakpoints for exceptions
           preRunCommands = { 'breakpoint name configure --disable cpp_exception' },
-          postRunCommands = { 'breakpoint name configure --disable cpp_exception' },
         },
       }
       -- Optional for C and Rust to reuse same config
@@ -498,7 +497,6 @@ require('lazy').setup({
                         name = "Attach to process",
                         -- Disable auto breakpoints for exceptions
                         preRunCommands = { 'breakpoint name configure --disable cpp_exception' },
-                        postRunCommands = { 'breakpoint name configure --disable cpp_exception' },
                       })
                     end
                     -- Only close after we’ve safely accessed the selection
