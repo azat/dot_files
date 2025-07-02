@@ -529,7 +529,7 @@ require('lazy').setup({
               -- { id = "watches", size = 00.25 },
             },
             size = 100,
-            position = "left",
+            position = "right",
           },
           -- {
           --   elements = { "repl", "console" },
