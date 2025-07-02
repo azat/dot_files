@@ -537,10 +537,14 @@ require('lazy').setup({
           {
             -- You can change the order of elements in the sidebar
             elements = {
-              { id = "stacks", size = 0.7 },
+              { id = "repl", size = 0.2 },
+              { id = "stacks", size = 0.5 },
               { id = "scopes", size = 0.2 },
               { id = "breakpoints", size = 0.1 },
-              -- { id = "watches", size = 00.25 },
+              -- Watches are not regular thing
+              { id = "watches", size = 00.01 },
+              -- Useless
+              -- { id = "console", size = 0.1 },
             },
             size = 100,
             position = "right",
