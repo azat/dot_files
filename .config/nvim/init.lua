@@ -406,6 +406,7 @@ require('lazy').setup({
   {
     "mfussenegger/nvim-dap",
     dependencies = {
+      -- Known issues: https://github.com/rcarriga/nvim-dap-ui/issues/429#issuecomment-3029327715
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
       "nvim-neotest/nvim-nio",
