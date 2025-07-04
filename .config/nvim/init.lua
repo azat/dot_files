@@ -413,6 +413,8 @@ require('lazy').setup({
     },
     config = function()
       local dap = require("dap")
+      local dapui = require("dapui")
+
       local rtmin = vim.fn.system("kill -l SIGRTMIN"):gsub("%s+", "");
       -- Disable auto breakpoints for exceptions
       local pre_run_commands = {
@@ -455,7 +457,12 @@ require('lazy').setup({
       vim.keymap.set('n', 'dc', dap.continue, { desc = "DAP: Continue" })
       vim.keymap.set('n', 'dn', dap.step_over, { desc = "DAP: Step Over / Next" })
       vim.keymap.set('n', 'dS', dap.step_into, { desc = "DAP: Step Into" })
-      vim.keymap.set('n', 'do', dap.step_out, { desc = "DAP: Step Out" })
+      vim.keymap.set('n', 'dr', dap.step_out, { desc = "DAP: Step Out / Return" })
+      vim.keymap.set('n', 'dD', function ()
+          dap.terminate()
+          -- by some reason events does not work
+          dapui.close()
+      end, { desc = "DAP: Detach/Disconnect/Terminate" })
       vim.keymap.set('n', 'db', dap.toggle_breakpoint, { desc = "DAP: Toggle breakpoint" })
       vim.keymap.set("n", 'dB', function()
         dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
@@ -522,8 +529,6 @@ require('lazy').setup({
           end,
         }):start()
       end, { desc = "DAP: Attach to Process (fuzzy)" })
-
-      local dapui = require("dapui")
 
       dapui.setup({
         mappings = {
