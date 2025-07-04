@@ -575,45 +575,6 @@ require('lazy').setup({
     end
   },
 
-  {
-    'Civitasv/cmake-tools.nvim',
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "stevearc/overseer.nvim",
-    },
-    config = function ()
-      local nproc = vim.fn.system("nproc"):gsub("%s+", "");
-      local cmake_tools = require("cmake-tools")
-
-      cmake_tools.setup {
-        cmake_generate_options = {
-          ("-DPARALLEL_COMPILE_JOBS=%s"):format(nproc),
-          "-DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo",
-          "-DOMIT_HEAVY_DEBUG_SYMBOLS=OFF",
-          "-DENABLE_BUILD_PATH_MAPPING=OFF",
-          "-DDISABLE_OMIT_FRAME_POINTER=ON",
-          "-DCHECK_LARGE_OBJECT_SIZES=OFF",
-          "-DENABLE_TESTS=OFF",
-          "-DENABLE_THINLTO=OFF",
-        },
-        cmake_build_directory = "build",
-        -- Note, relies on cmake-variants.json/yaml for -DCMAKE_BUILD_TYPE, ugh.
-        cmake_use_preset = true,
-        cmake_compile_commands_options = {
-          action = "none",
-        },
-        cmake_runner = {
-          name = "overseer",
-        },
-        cmake_executor = {
-          name = "overseer",
-        },
-      }
-
-      vim.keymap.set("n", "<leader>m", "<cmd>CMakeBuild<CR>", { desc = "CMake: Build project" })
-    end
-  },
-
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
