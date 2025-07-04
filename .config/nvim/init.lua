@@ -456,7 +456,7 @@ require('lazy').setup({
       vim.keymap.set('n', 'dU', dap.down, { desc = "DAP: Down" })
       vim.keymap.set('n', 'dc', dap.continue, { desc = "DAP: Continue" })
       vim.keymap.set('n', 'dn', dap.step_over, { desc = "DAP: Step Over / Next" })
-      vim.keymap.set('n', 'dS', dap.step_into, { desc = "DAP: Step Into" })
+      vim.keymap.set('n', 'ds', dap.step_into, { desc = "DAP: Step Into" })
       vim.keymap.set('n', 'dr', dap.step_out, { desc = "DAP: Step Out / Return" })
       vim.keymap.set('n', 'dD', function ()
           dap.terminate()
