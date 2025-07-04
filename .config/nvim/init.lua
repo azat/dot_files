@@ -459,7 +459,7 @@ require('lazy').setup({
       vim.keymap.set('n', 'ds', dap.step_into, { desc = "DAP: Step Into" })
       vim.keymap.set('n', 'dr', dap.step_out, { desc = "DAP: Step Out / Return" })
       vim.keymap.set('n', 'dD', function ()
-          dap.terminate()
+          dap.disconnect()
           -- by some reason events does not work
           dapui.close()
       end, { desc = "DAP: Detach/Disconnect/Terminate" })
