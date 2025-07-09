@@ -421,11 +421,10 @@ require('lazy').setup({
         'breakpoint name configure --disable cpp_exception',
       }
       local post_run_commands = {
-        'process handle -p false -s false SIGWINCH',
-        -- For ClickHouse
-        'process handle -p false -s false SIGUSR1',
-        'process handle -p false -s false SIGUSR2',
-        ('process handle -p false -s false %s'):format(rtmin),
+        'process handle -p true -s false -n false SIGWINCH',
+        'process handle -p true -s false -n false SIGUSR1',
+        'process handle -p true -s false -n false SIGUSR2',
+        ('process handle -p true -s false -n false %s'):format(rtmin),
       };
 
       dap.adapters.lldb = {
