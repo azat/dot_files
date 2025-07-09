@@ -95,6 +95,21 @@ vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
 
 vim.keymap.set('n', '<C-w><C-w>', '<C-w><C-p>', { noremap = true, silent = true })
 
+
+-- Disable mouse by default
+vim.opt.mouse = ""
+vim.keymap.set('n', '<leader>m', function()
+  local current = tostring(vim.api.nvim_get_option("mouse"))
+  if current == "" then
+    vim.opt.mouse = "a"
+    print("Mouse enabled")
+  else
+    vim.opt.mouse = ""
+    print("Mouse disabled")
+  end
+end, { desc = "Toggle mouse" })
+
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
