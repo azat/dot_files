@@ -109,6 +109,37 @@ vim.keymap.set('n', '<leader>m', function()
   end
 end, { desc = "Toggle mouse" })
 
+local function smart_switch()
+  local ft = vim.bo.filetype
+  local fname = vim.api.nvim_buf_get_name(0)
+
+  if ft == 'c' or ft == 'cpp' or ft == 'objc' or ft == 'objcpp' then
+    vim.cmd('ClangdSwitchSourceHeader')
+    return
+  end
+
+  -- Handle cases with test-related paths
+  if fname:match("[/\\]tests?[/\\]") then
+    local alt_extensions = { 'sql', 'sh', 'expect', 'reference' }
+    local current_ext = fname:match("^.+%.([^.]+)$")
+    local base = fname:gsub("%.[^%.]+$", "")  -- strip current extension
+
+    for _, ext in ipairs(alt_extensions) do
+      if ext ~= current_ext then
+        local alt_file = base .. '.' .. ext
+        if vim.fn.filereadable(alt_file) == 1 then
+          vim.cmd('edit ' .. vim.fn.fnameescape(alt_file))
+          return
+        end
+      end
+    end
+  end
+
+  print("No alternative file found.")
+end
+vim.keymap.set('n', 'gh', smart_switch, { desc = 'Smart source/header or test file switch' })
+
+
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -269,8 +300,6 @@ require('lazy').setup({
 
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-          -- FIXME:
-          map('gh', '<cmd>ClangdSwitchSourceHeader<cr>', 'Switch header/module (.h/.cpp/.c)')
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
