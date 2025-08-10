@@ -20,3 +20,5 @@ function c_const()
     c_const_generate $@ | g++ -E -dM -xc++ - | fgrep $const | fgrep define
     c_const_generate $@ | g++ -E -xc++ - | fgrep $const | fgrep typedef
 }
+
+export NINJA_STATUS=$'\e[37m[\e[92m%w\e[37m][\e[92m%P\e[37m][\e[92m%f/%t\e[37m]\e[0m '
