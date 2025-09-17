@@ -88,7 +88,14 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnos
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
 
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-vim.keymap.set('n', '<leader>n', '<cmd>set number!<CR>', { desc = 'Exit terminal mode' })
+vim.keymap.set('n', '<leader>n', function()
+  vim.wo.number = not vim.wo.number
+  if vim.wo.number then
+    vim.wo.signcolumn = "yes"
+  else
+    vim.wo.signcolumn = "no"
+  end
+end, { desc = 'Toggle line number and sign column' })
 -- Keep visual selection after indenting
 vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true })
 vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
