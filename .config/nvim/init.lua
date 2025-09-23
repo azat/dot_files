@@ -380,19 +380,23 @@ require('lazy').setup({
         pyright = {},
         rust_analyzer = {},
         lua_ls = {},
-        bashls = {},
-        dockerls = {},
         -- I do not know or want to know go, but occasionally I have to read it, and without LSP I cannot even do it
         gopls = {},
 
-        yamlls = {
-          yaml = {
-            schemas = {
-              ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.31.1-standalone-strict/all.json"] = "/*.yaml",
-              ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-            }
-          },
-        },
+        -- Enable it once it will be presented in archlinux repo
+        -- docker_language_server = {},
+
+        -- Banned due to written in TypeScript
+        --
+        -- bashls = {},
+        -- yamlls = {
+        --   yaml = {
+        --     schemas = {
+        --       ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.31.1-standalone-strict/all.json"] = "/*.yaml",
+        --       ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+        --     }
+        --   },
+        -- },
       }
 
       -- Ensure the servers and tools above are installed
