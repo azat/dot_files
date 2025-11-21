@@ -1,0 +1,17 @@
+*.c merge=mergiraf
+*.cxx merge=mergiraf
+*.c++ merge=mergiraf
+*.cpp merge=mergiraf
+*.h merge=mergiraf
+*.hpp merge=mergiraf
+*.hxx merge=mergiraf
+*.h++ merge=mergiraf
+*.py merge=mergiraf
+*.rs merge=mergiraf
+*.html merge=mergiraf
+*.xml merge=mergiraf
+*.yaml merge=mergiraf
+*.yml merge=mergiraf
+*.json merge=mergiraf
+*.cmake merge=mergiraf
+CMakeLists.txt merge=mergiraf
