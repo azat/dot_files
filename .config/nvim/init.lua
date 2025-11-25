@@ -471,6 +471,7 @@ require('lazy').setup({
     config = function()
       local dap = require("dap")
       local dapui = require("dapui")
+      local original_mouse_dap = vim.o.mouse
 
       local rtmin = vim.fn.system("kill -l SIGRTMIN"):gsub("%s+", "");
       -- Disable auto breakpoints for exceptions
@@ -527,6 +528,7 @@ require('lazy').setup({
           dap.disconnect()
           -- by some reason events does not work
           dapui.close()
+          vim.o.mouse = original_mouse_dap
       end, { desc = "DAP: Detach/Disconnect/Terminate" })
       vim.keymap.set('n', 'db', dap.toggle_breakpoint, { desc = "DAP: Toggle breakpoint" })
       vim.keymap.set("n", 'dB', function()
@@ -628,12 +630,16 @@ require('lazy').setup({
       })
       dap.listeners.after.event_initialized["dapui_config"] = function()
         dapui.open()
+        original_mouse_dap = vim.o.mouse
+        vim.o.mouse = 'a'
       end
       dap.listeners.before.event_terminated["dapui_config"] = function()
         dapui.close()
+        vim.o.mouse = original_mouse_dap
       end
       dap.listeners.before.event_exited["dapui_config"] = function()
         dapui.close()
+        vim.o.mouse = original_mouse_dap
       end
 
       require("nvim-dap-virtual-text").setup()
@@ -774,7 +780,32 @@ require('lazy').setup({
   {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
-    config = true,
+    config = function()
+      require('claudecode').setup()
+
+      local original_mouse = vim.o.mouse
+      local claude_buf = nil
+
+      vim.api.nvim_create_autocmd("TermOpen", {
+        callback = function(ev)
+          local cmd = vim.api.nvim_buf_get_name(ev.buf)
+          if cmd:match("claude") then
+            original_mouse = vim.o.mouse
+            vim.o.mouse = 'a'
+            claude_buf = ev.buf
+          end
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("TermClose", {
+        callback = function(ev)
+          if ev.buf == claude_buf then
+            vim.o.mouse = original_mouse
+            claude_buf = nil
+          end
+        end,
+      })
+    end,
     keys = {
       { "<leader>a", nil, desc = "AI/Claude Code" },
       { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
