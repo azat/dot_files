@@ -249,7 +249,6 @@ require('lazy').setup({
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', 'sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', 'sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', 'ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', 'sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -809,7 +808,6 @@ require('lazy').setup({
     keys = {
       { "<leader>a", nil, desc = "AI/Claude Code" },
       { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-      { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
       { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
       { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
       { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
