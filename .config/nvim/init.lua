@@ -128,15 +128,27 @@ local function smart_switch()
   -- Handle cases with test-related paths
   if fname:match("[/\\]tests?[/\\]") then
     local alt_extensions = { 'sql', 'sh', 'expect', 'reference' }
-    local current_ext = fname:match("^.+%.([^.]+)$")
-    local base = fname:gsub("%.[^%.]+$", "")  -- strip current extension
+
+    -- Strip .j2 suffix if present to get the actual extension
+    local has_j2 = fname:match("%.j2$") ~= nil
+    local fname_without_j2 = fname:gsub("%.j2$", "")
+    local current_ext = fname_without_j2:match("^.+%.([^.]+)$")
+    local base = fname_without_j2:gsub("%.[^%.]+$", "")  -- strip current extension
 
     for _, ext in ipairs(alt_extensions) do
       if ext ~= current_ext then
-        local alt_file = base .. '.' .. ext
-        if vim.fn.filereadable(alt_file) == 1 then
-          vim.cmd('edit ' .. vim.fn.fnameescape(alt_file))
-          return
+        -- Try both with and without .j2 suffix
+        local alt_file_plain = base .. '.' .. ext
+        local alt_file_j2 = base .. '.' .. ext .. '.j2'
+
+        -- Try the opposite suffix first (if current has .j2, try without first and vice versa)
+        local candidates = has_j2 and {alt_file_plain, alt_file_j2} or {alt_file_j2, alt_file_plain}
+
+        for _, alt_file in ipairs(candidates) do
+          if vim.fn.filereadable(alt_file) == 1 then
+            vim.cmd('edit ' .. vim.fn.fnameescape(alt_file))
+            return
+          end
         end
       end
     end
