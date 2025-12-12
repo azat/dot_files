@@ -790,33 +790,11 @@ require('lazy').setup({
 
   {
     "coder/claudecode.nvim",
-    dependencies = { "folke/snacks.nvim" },
-    config = function()
-      require('claudecode').setup()
-
-      local original_mouse = vim.o.mouse
-      local claude_buf = nil
-
-      vim.api.nvim_create_autocmd("TermOpen", {
-        callback = function(ev)
-          local cmd = vim.api.nvim_buf_get_name(ev.buf)
-          if cmd:match("claude") then
-            original_mouse = vim.o.mouse
-            vim.o.mouse = 'a'
-            claude_buf = ev.buf
-          end
-        end,
-      })
-
-      vim.api.nvim_create_autocmd("TermClose", {
-        callback = function(ev)
-          if ev.buf == claude_buf then
-            vim.o.mouse = original_mouse
-            claude_buf = nil
-          end
-        end,
-      })
-    end,
+    opts = {
+      terminal = {
+        provider = "none",
+      },
+    },
     keys = {
       { "<leader>a", nil, desc = "AI/Claude Code" },
       { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
