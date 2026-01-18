@@ -1,0 +1,53 @@
+k9s:
+  view:
+    active: pods
+  liveViewAutoRefresh: false
+  screenDumpDir: /home/azat/.local/state/k9s/screen-dumps
+  refreshRate: 2
+  maxConnRetry: 5
+  readOnly: false
+  noExitOnCtrlC: false
+  ui:
+    enableMouse: false
+    headless: false
+    logoless: false
+    crumbsless: false
+    reactive: false
+    noIcons: false
+    defaultsToFullScreen: false
+  skipLatestRevCheck: false
+  disablePodCounting: false
+  # find ~/.xdg-ch/k9s/clusters/ -name config.yaml | xargs -n1 yq -i '.k9s.featureGates.nodeShell = true'
+  # or "K9S_FEATURE_GATE_NODE_SHELL=true" env
+  shellPod:
+    image: busybox:1.35.0
+    namespace: default
+    limits:
+      cpu: 100m
+      memory: 100Mi
+    volumeMounts:
+    - name: host-root
+      mountPath: /host
+    volumes:
+    - name: host-root
+      hostPath:
+        path: /
+        type: Directory
+  imageScans:
+    enable: false
+    exclusions:
+      namespaces: []
+      labels: {}
+  logger:
+    tail: 100
+    buffer: 5000
+    sinceSeconds: -1
+    textWrap: false
+    showTime: false
+  thresholds:
+    cpu:
+      critical: 90
+      warn: 70
+    memory:
+      critical: 90
+      warn: 70
