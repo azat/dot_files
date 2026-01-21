@@ -484,17 +484,20 @@ require('lazy').setup({
       local dapui = require("dapui")
       local original_mouse_dap = vim.o.mouse
 
-      local rtmin = vim.fn.system("kill -l SIGRTMIN"):gsub("%s+", "");
       -- Disable auto breakpoints for exceptions
       local pre_run_commands = {
         'breakpoint name configure --disable cpp_exception',
       }
+      -- NOTE: this is likely does not work
       local post_run_commands = {
         'process handle -p true -s false -n false SIGWINCH',
         'process handle -p true -s false -n false SIGUSR1',
         'process handle -p true -s false -n false SIGUSR2',
-        ('process handle -p true -s false -n false %s'):format(rtmin),
       };
+      if vim.fn.has("linux") == 1 then
+        local rtmin = vim.fn.system("kill -l SIGRTMIN"):gsub("%s+", "");
+        table.insert(post_run_commands, ('process handle -p true -s false -n false %s'):format(rtmin))
+      end
 
       dap.adapters.lldb = {
         type = 'executable',
