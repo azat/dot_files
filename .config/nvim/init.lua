@@ -556,14 +556,14 @@ require('lazy').setup({
         local action_state = require("telescope.actions.state")
 
         Job:new({
-          command = "pgrep",
-          args = { "-u", os.getenv("USER"), "-a" },
+          command = "ps",
+          args = { "-U", os.getenv("USER"), "-o", "pid=,command=" },
           on_exit = function(j)
             local output = j:result()
             local processes = {}
 
             for _, line in ipairs(output) do
-              local pid, cmd = line:match("^(%d+)%s+(.+)$")
+              local pid, cmd = line:match("^%s*(%d+)%s+(.+)$")
               if pid and cmd then
                 table.insert(processes, { pid = pid, cmd = cmd })
               end
