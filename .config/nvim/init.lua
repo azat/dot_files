@@ -292,6 +292,7 @@ require('lazy').setup({
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
+    version = 'v1.*',
     dependencies = {
       {
         'williamboman/mason.nvim', opts = {
@@ -387,12 +388,9 @@ require('lazy').setup({
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       local servers = {
-        clangd = {},
         pyright = {},
         rust_analyzer = {},
         lua_ls = {},
-        -- I do not know or want to know go, but occasionally I have to read it, and without LSP I cannot even do it
-        gopls = {},
 
         -- Enable it once it will be presented in archlinux repo
         -- docker_language_server = {},
@@ -468,6 +466,14 @@ require('lazy').setup({
           end,
         }
       }
+
+      -- Add other plugins that should be installed system-widely
+      require('lspconfig').clangd.setup({
+        cmd = { "clangd" },
+      })
+      require('lspconfig').gopls.setup({
+        cmd = { "gopls" },
+      })
     end,
   },
 
