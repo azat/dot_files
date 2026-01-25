@@ -752,7 +752,7 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+    -- main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     opts = {
       ensure_installed = { 'bash', 'c', 'cmake', 'diff', 'sql', 'python', 'rust', 'lua', 'markdown', 'markdown_inline', 'vim', 'vimdoc' },
       auto_install = true,
