@@ -9,4 +9,4 @@ FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS:+" "}--no-mouse"
 if command -v fd >& /dev/null; then
     export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 fi
-source /etc/fzf-plugins/history-exec/history-exec.bash
+source "${BASH_SOURCE[0]}"/fzf-history-exec.bash
