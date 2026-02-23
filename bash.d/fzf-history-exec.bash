@@ -47,7 +47,7 @@ bind '"\C-x\C-p": ""'
 bind -x '"\C-x\C-o": __fzf_rebind_ctrl_x_ctrl_p__'
 
 if [[ ! -o vi ]]; then
-  bind '"\C-r": " \C-e\C-u\C-y\ey\C-u`__fzf_history__`\e\C-e\er\e^\C-x\C-o\C-x\C-p"'
+  bind '"\C-r": " \C-e\C-u\C-y\ey\C-u`__fzf_history__`\e\C-e\e^\C-x\C-o\C-x\C-p"'
 else
   bind '"\C-x\C-a": vi-movement-mode'
   bind '"\C-x\C-e": shell-expand-line'
