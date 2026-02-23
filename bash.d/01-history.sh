@@ -28,4 +28,4 @@ PROMPT_COMMAND+='[ -v CUSTOM_PROMPT_LAST_COMMAND_STATUS ] && [[ $CUSTOM_PROMPT_L
 # - it will not be enough to edit $HISTFILE and remove some entry from this
 #   (i.e. entry with the password), since now it first reads the file.
 # - this will overlap history from different shells (and this is not what I want)
-PROMPT_COMMAND+='history -a ;'
+PROMPT_COMMAND+='history -a'

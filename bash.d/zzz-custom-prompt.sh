@@ -142,4 +142,4 @@ case $TERM in
 		PROMPT_COMMAND+='printf "\033]0;%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"; '
 	;;
 esac
-PROMPT_COMMAND="_render_prompt_preamble; $PROMPT_COMMAND _render_prompt; "
+PROMPT_COMMAND="_render_prompt_preamble; $PROMPT_COMMAND _render_prompt"
