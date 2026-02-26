@@ -6,4 +6,4 @@
 # Refs: https://github.com/derailed/k9s/issues/1001
 export K9S_FEATURE_GATE_NODE_SHELL=true
 
-alias k9s='k9s --namespace $(kubectl config view --minify --output "jsonpath={..namespace}")'
+alias k9s='k9s --namespace $(kubectl config view --minify --output "jsonpath={..namespace}") --command pods'
