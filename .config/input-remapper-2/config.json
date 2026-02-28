@@ -1,0 +1,6 @@
+{
+    "version": "2.2.0",
+    "autoload": {
+        "ERGO 860B Mouse": "main"
+    }
+}
