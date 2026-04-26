@@ -9,8 +9,9 @@ PATH="/opt/homebrew/opt/rustup/bin:$PATH"
 PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 # ch
 PATH=~/src/ch/ClickHouse/build/programs:$PATH
-# chdig
 PATH=~/src/ch/chdig/target/release:$PATH
+# codelldb
+PATH=$PATH:/opt/codelldb/adapter
 
 alias gg='git grep'
 alias k=kubectl
@@ -62,16 +63,13 @@ fzf-history-widget() {
 # disable history sharing (default in oh-my-zsh)
 setopt nosharehistory
 
-# Notes:
 # remove "/" to avoid splitting by it in readline (to match the bash behavior for zsh)
 # remove ";" to make it bash compatible
 # remove "." to make it bash compatible
 export WORDCHARS='*?_-[]~=&!#$%^(){}<>'
-# And make it more identical
+# And now apply WORDCHARS for Ctrl-W and others
 autoload -U select-word-style
-select-word-style bash
-# P.S. This is not enough at least for Ctrl-W, and nothing from [1] helps.
-#   [1]: https://unix.stackexchange.com/questions/250690/how-to-configure-ctrlw-as-delete-word-in-zsh
+select-word-style standard
 
 export EDITOR=nvim
 alias vim=nvim
