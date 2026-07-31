@@ -25,6 +25,27 @@
 [delta]
 	navigate = true    # use n and N to move between diff sections
 	light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+
+	# tell delta your background explicitly instead of letting it guess
+	dark = true            # or: light = true
+	
+	# higher-contrast syntax theme (list: delta --list-syntax-themes)
+	syntax-theme = Monokai Extended
+	
+	# override the diff styles with explicit, non-dim colors
+	minus-style = syntax "#4b0000"
+	minus-emph-style = syntax bold "#7a0000"
+	plus-style = syntax "#003c00"
+	plus-emph-style = syntax bold "#006400"
+	
+	# context/line-numbers are the usual "too faint" offenders
+	line-numbers = true
+	line-numbers-minus-style = brightred
+	line-numbers-plus-style = brightgreen
+	line-numbers-zero-style = white     # default is a dim gray
+	
+	hunk-header-style = bold syntax
+	file-style = bold yellow
 [log]
 	mailmap = true
 [sendemail]
