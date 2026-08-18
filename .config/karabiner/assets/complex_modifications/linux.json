@@ -1,6 +1,37 @@
 {
-  "title": "Cmd Word Navigation and Deletion Complete Override",
+  "title": "Linux navigation",
   "rules": [
+    {
+      "description": "Remap Option + Left/Right to Cmd + [ / ] for Linux-style browser back/forward",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_arrow",
+            "modifiers": { "mandatory": ["option"] }
+          },
+          "to": [
+            {
+              "key_code": "open_bracket",
+              "modifiers": ["command"]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "right_arrow",
+            "modifiers": { "mandatory": ["option"] }
+          },
+          "to": [
+            {
+              "key_code": "close_bracket",
+              "modifiers": ["command"]
+            }
+          ]
+        }
+      ]
+    },
     {
       "description": "Remap Cmd + Arrows/Backspace to Option equivalents (Word navigation & deletion)",
       "manipulators": [
@@ -75,6 +106,59 @@
             "modifiers": { "mandatory": ["command"] }
           },
           "to": [{ "key_code": "down_arrow", "modifiers": ["option"] }]
+        }
+      ]
+    },
+    {
+      "description": "Remap Cmd + Option + Arrows/Backspace to native macOS line start/end and line deletion",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_arrow",
+            "modifiers": {
+              "mandatory": ["command", "option"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow",
+              "modifiers": ["command"]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "right_arrow",
+            "modifiers": {
+              "mandatory": ["command", "option"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": ["command"]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "delete_or_backspace",
+            "modifiers": {
+              "mandatory": ["command", "option"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_or_backspace",
+              "modifiers": ["command"]
+            }
+          ]
         }
       ]
     }
