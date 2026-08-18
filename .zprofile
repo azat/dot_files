@@ -75,3 +75,5 @@ export EDITOR=nvim
 alias vim=nvim
 
 export K9S_FEATURE_GATE_NODE_SHELL=true
+
+export LESS=FRSX
