@@ -69,7 +69,7 @@ setopt nosharehistory
 export WORDCHARS='*?_-[]~=&!#$%^(){}<>'
 # And now apply WORDCHARS for Ctrl-W and others
 autoload -U select-word-style
-select-word-style standard
+select-word-style bash
 
 export EDITOR=nvim
 alias vim=nvim
