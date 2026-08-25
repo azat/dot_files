@@ -22,6 +22,30 @@ vim.opt.wildmenu = true
 vim.opt.laststatus = 2
 vim.opt.updatetime = 250
 
+-- Current namespace/class/function (treesitter-based, no extra plugins)
+function _G.ts_statusline_context()
+  local ok, ts_statusline = pcall(require, 'nvim-treesitter.statusline')
+  if not ok then
+    return ''
+  end
+  return ts_statusline.statusline {
+    indicator_size = 80,
+    type_patterns = { 'namespace', 'class', 'struct', 'impl_item', 'mod_item', 'function', 'method' },
+  } or ''
+end
+
+-- Statusline colors have to be derived from the active colorscheme:
+-- a raw group like Function has Normal's bg, which would render as a box
+local function statusline_context_hl()
+  local sl = vim.api.nvim_get_hl(0, { name = 'StatusLine', link = false })
+  local fn = vim.api.nvim_get_hl(0, { name = 'Function', link = false })
+  vim.api.nvim_set_hl(0, 'StatusLineContext', { fg = fn.fg, bg = sl.bg, bold = true })
+end
+statusline_context_hl()
+vim.api.nvim_create_autocmd('ColorScheme', { callback = statusline_context_hl })
+
+vim.opt.statusline = "%<%f %h%m%r %#StatusLineContext#%{v:lua.ts_statusline_context()}%*%=%-14.(%l,%c%V%) %P"
+
 -- It is already in status line
 vim.opt.showmode = false
 -- vim.opt.wildcharm = "<Tab>"
