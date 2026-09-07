@@ -31,6 +31,15 @@ function _G.ts_statusline_context()
   return ts_statusline.statusline {
     indicator_size = 80,
     type_patterns = { 'namespace', 'class', 'struct', 'impl_item', 'mod_item', 'function', 'method' },
+    -- The node text is the whole signature, keep only the name
+    transform_fn = function(line)
+      return (line
+        :gsub('%(.*$', '')      -- arguments
+        :gsub('%s:[^:].*$', '') -- base classes (but not Foo::bar)
+        :gsub('[%s{]+$', '')
+        :gsub('^.*[%s%*&]', '') -- return type, keywords
+      )
+    end,
   } or ''
 end
 
