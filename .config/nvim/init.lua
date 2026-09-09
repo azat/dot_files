@@ -107,10 +107,10 @@ vim.opt.foldlevel = 1000
 vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit' })
 -- `:bdelete` closes the window unless it is the only one (e.g. with a terminal
 -- split open), so switch every window to another listed buffer first.
-local function delete_buffer()
-  local buf = vim.api.nvim_get_current_buf()
+local function delete_buffer(buf)
+  buf = buf or vim.api.nvim_get_current_buf()
   if vim.bo[buf].modified then
-    vim.cmd.bdelete()
+    vim.cmd.bdelete(tostring(buf))
     return
   end
   for _, win in ipairs(vim.fn.win_findbuf(buf)) do
@@ -272,7 +272,34 @@ require('lazy').setup({
         nargs = "*"
       })
       vim.keymap.set('n', '<S-F>', ':GGrep<CR>', { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>b', ':Buffers<CR>', { desc = 'Search current [b]uffers' })
+      -- :Buffers hardcodes its sink, so wrap it to add ctrl-d (delete selected buffers)
+      local buffer_actions = { ['ctrl-t'] = 'tab split', ['ctrl-x'] = 'split', ['ctrl-v'] = 'vsplit' }
+      local function pick_buffer()
+        vim.fn['fzf#vim#buffers']('', {
+          ['sink*'] = function(lines)
+            local key = table.remove(lines, 1)
+            local bufs = vim.tbl_map(function(line)
+              return tonumber(vim.split(line, '\t')[3]:match('%[(%d+)%]'))
+            end, lines)
+            if key == 'ctrl-d' then
+              for _, buf in ipairs(bufs) do
+                delete_buffer(buf)
+              end
+              vim.schedule(pick_buffer)
+              return
+            end
+            if #bufs == 0 then
+              return
+            end
+            if buffer_actions[key] then
+              vim.cmd(buffer_actions[key])
+            end
+            vim.cmd.buffer(tostring(bufs[1]))
+          end,
+          options = { '--multi', '--expect', 'ctrl-d,ctrl-t,ctrl-x,ctrl-v' },
+        })
+      end
+      vim.keymap.set('n', '<leader>b', pick_buffer, { desc = 'Search current [b]uffers' })
     end
   },
 
