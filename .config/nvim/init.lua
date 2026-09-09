@@ -105,7 +105,30 @@ vim.opt.foldlevel = 1000
 --  See `:help vim.keymap.set()`
 
 vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit' })
-vim.keymap.set('n', '<leader>d', '<cmd>bdelete<CR>', { desc = 'Close buffer' })
+-- `:bdelete` closes the window unless it is the only one (e.g. with a terminal
+-- split open), so switch every window to another listed buffer first.
+local function delete_buffer()
+  local buf = vim.api.nvim_get_current_buf()
+  if vim.bo[buf].modified then
+    vim.cmd.bdelete()
+    return
+  end
+  for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+    vim.api.nvim_win_call(win, function()
+      local alt = vim.fn.bufnr('#')
+      if alt > 0 and alt ~= buf and vim.fn.buflisted(alt) == 1 then
+        vim.cmd.buffer(tostring(alt))
+      else
+        pcall(vim.cmd.bprevious)
+      end
+    end)
+  end
+  -- 'bufhidden' (e.g. netrw) may have already taken care of it
+  if vim.api.nvim_buf_is_loaded(buf) or vim.bo[buf].buflisted then
+    vim.cmd.bdelete(tostring(buf))
+  end
+end
+vim.keymap.set('n', '<leader>d', delete_buffer, { desc = 'Close buffer' })
 vim.keymap.set('n', '<leader>c', '<cmd>close<CR>', { desc = 'Close window' })
 vim.keymap.set('n', '<leader>C', '<cmd>close!<CR>', { desc = 'Close window (forcefully)' })
 vim.keymap.set('n', '<leader>w', '<cmd>write!<CR>', { desc = 'Save buffer forcefully' })
