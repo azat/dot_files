@@ -884,7 +884,11 @@ require('lazy').setup({
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
     config = function()
-      require('claudecode').setup()
+      require('claudecode').setup({
+        terminal_cmd = "opencode",
+        -- opencode skips the lock file (and its authToken) when the port comes from env
+        env = { CLAUDE_CODE_SSE_PORT = "" },
+      })
 
       local original_mouse = vim.o.mouse
       local claude_buf = nil
@@ -892,7 +896,7 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd("TermOpen", {
         callback = function(ev)
           local cmd = vim.api.nvim_buf_get_name(ev.buf)
-          if cmd:match("claude") then
+          if cmd:match("claude") or cmd:match("opencode") then
             original_mouse = vim.o.mouse
             vim.o.mouse = 'a'
             claude_buf = ev.buf
