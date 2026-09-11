@@ -884,11 +884,7 @@ require('lazy').setup({
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
     config = function()
-      require('claudecode').setup({
-        terminal_cmd = "opencode",
-        -- opencode skips the lock file (and its authToken) when the port comes from env
-        env = { CLAUDE_CODE_SSE_PORT = "" },
-      })
+      require('claudecode').setup()
 
       local original_mouse = vim.o.mouse
       local claude_buf = nil
@@ -914,8 +910,24 @@ require('lazy').setup({
       })
     end,
     keys = {
-      { "<leader>a", nil, desc = "AI/Claude Code" },
-      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+      { "<leader>a", nil, desc = "AI agents" },
+      {
+        "<leader>ac",
+        function()
+          require('claudecode.terminal').setup(nil, nil, nil)
+          vim.cmd.ClaudeCode()
+        end,
+        desc = "Toggle Claude",
+      },
+      {
+        "<leader>ao",
+        function()
+          -- opencode skips the lock file (and its authToken) when the port comes from env
+          require('claudecode.terminal').setup(nil, "opencode", { CLAUDE_CODE_SSE_PORT = "" })
+          vim.cmd.ClaudeCode()
+        end,
+        desc = "Toggle opencode",
+      },
       { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
       { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
       { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
