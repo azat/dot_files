@@ -114,6 +114,13 @@ local function delete_buffer(buf)
     return
   end
   for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+    if vim.wo[win].winfixbuf then
+      if #vim.api.nvim_tabpage_list_wins(vim.api.nvim_win_get_tabpage(win)) > 1 then
+        vim.api.nvim_win_close(win, false)
+        goto continue
+      end
+      vim.wo[win].winfixbuf = false
+    end
     vim.api.nvim_win_call(win, function()
       local alt = vim.fn.bufnr('#')
       if alt > 0 and alt ~= buf and vim.fn.buflisted(alt) == 1 then
@@ -122,9 +129,10 @@ local function delete_buffer(buf)
         pcall(vim.cmd.bprevious)
       end
     end)
+    ::continue::
   end
-  -- 'bufhidden' (e.g. netrw) may have already taken care of it
-  if vim.api.nvim_buf_is_loaded(buf) or vim.bo[buf].buflisted then
+  -- 'bufhidden' (e.g. netrw, blame) may have already taken care of it
+  if vim.api.nvim_buf_is_valid(buf) and (vim.api.nvim_buf_is_loaded(buf) or vim.bo[buf].buflisted) then
     vim.cmd.bdelete(tostring(buf))
   end
 end
