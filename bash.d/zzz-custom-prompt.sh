@@ -42,7 +42,7 @@ simpleColoredPrompt=$simpleColoredPromptBegin$currentUserPostfix' '
 # - git config prompt.disabled isset
 function _custom_prompt_colored_git()
 {
-	GIT_DIR="$(git rev-parse --git-dir 2>/dev/null)"
+	GIT_DIR="$(git rev-parse --git-common-dir 2>/dev/null)"
 	GIT_PS="$(__git_ps1 " (%s)")"
 
 	if [ -z $GIT_DIR ]; then
