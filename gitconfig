@@ -60,7 +60,7 @@
 [fetch]
 	parallel = 100
 [submodule]
-	fetchJobs = 100
+	fetchJobs = 500
 [color]
 	branch = auto
 	diff = auto
